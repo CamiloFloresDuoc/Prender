@@ -6,9 +6,9 @@ function validar() {
     username = document.getElementById("username").Value;
     password = document.getElementById("password").Value;
     confirmpassword = document.getElementById("confirmpassword").Value;
-    
+    //falta agarrar elemento del radio button!!!
 
-    if (email === "" || nombre === "" || apellido === "" || ussername === "" || password === "" || confirmpassword === "") {
+    if (email === "" || nombre === "" || apellido === "" || username === "" || password === "" || confirmpassword === "") {
         alert("Todos los campos son obligatorios");
         return false;
     } else if (email.length > 100) {
@@ -21,8 +21,8 @@ function validar() {
     } else if (apellido.length > 30) {
         alert("El apellido ingresado es muy largo");
         return false;
-    } else if (password.length > 14) {
-        alert("La contraseña es muy larga");
+    } else if (password.length < 6) {
+        alert("La contraseña es muy corta, debe tener minimo 6 carácteres");
         return false;
     }
 

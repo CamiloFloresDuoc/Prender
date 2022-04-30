@@ -1,8 +1,17 @@
 @import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
 
 * {box-sizing: border-box;}
+body,
 html {
     background-color: rgba(199, 199, 199, 0.082);
+    
+}
+
+.card-body{
+    background-color: #fff !important;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 8px;
 }
 .nav-login {
     width: 100%;
@@ -116,15 +125,15 @@ nav {
 }
 
 #navi{
-    background-color: white;
+    background-color: #f69a40;
 }
 #navi a{
-    color: black; 
-    background-color: white;   
+    color: white;
+    background-color: #f69a40;   
 }
 #navi a:hover{
-    background-color: black;
-    color: white; 
+    background-color: #fff;
+    color: #000; 
     transition: 0.5s;  
     border-radius: 5px;
 }
@@ -132,23 +141,7 @@ nav {
     justify-content: center;
     padding-top: 20px;
 }
-
-@keyframes spin {
-    60% {
-        -webkit-transform: rotate(-90deg);
-    }
-
-    50% {
-        -webkit-transform: rotate(90deg);
-    }
-}
-
-@media (max-width: 690px) {
-    .logo_full {
-        display: none;
-    }
-
-    .logo_mobile {
-        display: block;
-    }
+.navbar-toggler-icon, .navbar-toggler{
+    color: #fff !important;
+    border-color: #fff !important;
 }

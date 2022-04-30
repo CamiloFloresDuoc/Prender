@@ -43,6 +43,9 @@ html {
     margin-top: 40px;
     margin-bottom: 40px;
 }
+.card-body {
+    border-radius: 8px;
+}
 .card-title{
     margin-bottom: 20px;
 }
@@ -113,41 +116,21 @@ nav {
 }
 
 #navi{
-    background-color: white;
+    background-color: #f69a40;
 }
 #navi a{
-    color: black; 
-    background-color: white;   
+    color: white;
+    background-color: #f69a40;   
 }
 #navi a:hover{
-    background-color: black;
-    color: white; 
+    background-color: #fff;
+    color: #000; 
     transition: 0.5s;  
     border-radius: 5px;
 }
 .reglog{
     justify-content: center;
     padding-top: 20px;
-}
-
-@keyframes spin {
-    60% {
-        -webkit-transform: rotate(-90deg);
-    }
-
-    50% {
-        -webkit-transform: rotate(90deg);
-    }
-}
-
-@media (max-width: 690px) {
-    .logo_full {
-        display: none;
-    }
-
-    .logo_mobile {
-        display: block;
-    }
 }
 
 footer{
@@ -164,3 +147,25 @@ footer p {
     color:#fff;
     text-align: center;
   }
+
+  .btn1, .btn2 {
+      background-color: #fff;
+      border: solid;
+      border-color: #f69a40;
+      color: #f69a40;
+  }
+ .formularioReg{
+     display: flex;
+     justify-content: center;
+ }
+
+ .navbar-nav .nav-link{
+    margin-left: 20px;
+    margin-right: 10px;
+    padding-left: 10px;
+    background-color: #f69a40;
+}
+.navbar-toggler-icon, .navbar-toggler{
+    color: #fff !important;
+    border-color: #fff !important;
+}

@@ -16,12 +16,36 @@
     <div class="container-fluid">
 <!--Nav-->
         <nav class="row" id="navi">
-            <div class="col-9">
+            <div class="col-8">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <img src="{% static 'core/img/letra1.png' %}" height="45px" class="navbar-brand" alt="">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <div class="input-group mb-3">
+                                    <input type="input" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                      <span class="input-group-text" id="basic-addon2"><i class="fas fa-search"></i></span>
+                                    </div>
+                                </div>
+                            </li>  
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                                      Categorias
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <a class="dropdown-item" href="#">Action</a>
+                                      <a class="dropdown-item" href="#">Another action</a>
+                                      <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                  </div>
+                            </li>                                                      
+                        </ul>
+                    </div>
                 </nav>
             </div>
             <div class="col reglog">
@@ -52,12 +76,39 @@
             <div class="row">
                 <h1>Descubre Nuevos Sabores!!</h1>
             </div>
+            <div class="row"></div>
         </div>
         <br>
+        <div class="card-group">
+            <div class="card">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+            <div class="card">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+            <div class="card">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
 
-<!--noticias cards-->
-<!-- {% for n in noticias %} -->
-<div class="row">
+<!--productos cards-->
+<!-- {% for n in producto %} -->
+<!-- <div class="row">
     <div class="col-1"></div>
     <div class="col">
         <div class="card mb-3" style="max-width: 100%;">
@@ -78,7 +129,7 @@
     </div>
     <div class="col-1"></div>
 </div>
-<br>
+<br> -->
 <!-- {% endfor %} -->
         <br>
         <br>
@@ -139,8 +190,8 @@
                 </div>
                 <div class="form-row">
                     <div class="col">
-                        <button type="submit" class="btn btn-dark">Enviar</button>
-                        <button type="reset" class="btn btn-outline-dark">Limpiar</button>
+                        <button type="submit" class="btn btn-outline-dark send">Enviar</button>
+                        <button type="reset" class="btn btn-dark">Limpiar</button>
                     </div>
                 </div>
             </form>
