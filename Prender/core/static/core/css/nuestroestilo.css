@@ -108,8 +108,9 @@ nav {
     border-radius: 5px;
 }
 .reglog{
-    justify-content: center;
-    padding-top: 20px;
+    justify-content: right;
+    margin: 5px 10px 5px 15px;
+    padding-left: 5px;
 }
 
 #busqueda {
