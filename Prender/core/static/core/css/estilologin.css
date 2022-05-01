@@ -145,3 +145,7 @@ nav {
     color: #fff !important;
     border-color: #fff !important;
 }
+.btn-dark{
+    background-color: #f69a40;
+    border: #f69a40;
+}
