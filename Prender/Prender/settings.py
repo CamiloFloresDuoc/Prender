@@ -82,11 +82,11 @@ WSGI_APPLICATION = 'Prender.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': ‘<db_name>’,
-        'USER': '<db_username>',
-        'PASSWORD': '<password>',
-        'HOST': '<db_hostname_or_ip>',
-        'PORT': '<db_port>',
+        'NAME': 'prender-db',
+        'USER': 'postgres',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
