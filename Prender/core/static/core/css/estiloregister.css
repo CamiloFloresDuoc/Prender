@@ -8,7 +8,7 @@ body {
     height: 100%;   
     
 }
-.container-fluid{
+.allButFooter{
     min-height: calc(100vh - 80px);
 }
 .nav-login {

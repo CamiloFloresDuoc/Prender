@@ -5,7 +5,7 @@ body,
 html {
     background-color: rgba(199, 199, 199, 0.082);
 }
-.container-fluid{
+.allButFooter{
     min-height: calc(100vh - 80px);
 }
 .card-body{
