@@ -1,6 +1,6 @@
 from cgi import test
 from django.urls import path
-from .views import carrito, comprador, emprendedor, gestionEmp, index, ingPdcto, login, producto, regCompras, register 
+from .views import busqueda, carrito, comprador, emprendedor, gestionEmp, index, ingPdcto, login, producto, regCompras, register 
 
 urlpatterns = [
     path('', index,name="index"),
@@ -13,4 +13,5 @@ urlpatterns = [
     path('ingPdcto/', ingPdcto, name="ingPdcto"),
     path('gestionEmp/', gestionEmp, name="gestionEmp"),
     path('regCompras', regCompras, name="regCompras"),
+    path('busqueda/', busqueda, name="busqueda"),
 ]

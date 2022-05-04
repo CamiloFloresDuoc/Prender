@@ -4,6 +4,8 @@
 body,
 html {
     background-color: rgba(199, 199, 199, 0.082);
+    min-height:100%; 
+    height: 100%;
     
 }
 
@@ -20,11 +22,6 @@ html {
     padding: 0;
     width: 100%;
 }
-
-.container-fluid {
-    background-color: rgba(199, 199, 199, 0.082);
-}
-
 .link {
     color: black;
     font-size: 10pt;
@@ -43,6 +40,9 @@ html {
     float: right;
 }
 footer{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
     height: 80px;
     background-color: rgb(54, 54, 54);
     color: #fff;
@@ -132,8 +132,8 @@ nav {
     background-color: #f69a40;   
 }
 #navi a:hover{
-    background-color: #fff;
-    color: #000; 
+    background-color: #4f4f4f;
+    color: #fff; 
     transition: 0.5s;  
     border-radius: 5px;
 }

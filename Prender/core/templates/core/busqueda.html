@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prender</title>
     {% bootstrap_css %}
-    <link rel="stylesheet" href="{% static 'core/css/nuestroestilo.css' %} ">
+    <link rel="stylesheet" href="{% static 'core/css/busqueda.css' %} ">
 </head>
 <body>
     <div class="container-fluid">
@@ -23,7 +23,10 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav mr-auto">                            
+                        <ul class="navbar-nav mr-auto">    
+                            <li class="nav-item active ">
+                                <a class="nav-link" href="{% url 'index' %}">Inicio <span class="sr-only">(current)</span></a> 
+                            </li>                         
                             <li class="nav-item">
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
@@ -40,9 +43,7 @@
                                 <div class="input-group mb-3">
                                     <form class="form-inline my-2 my-lg-0">
                                         <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-                                        <a href="{% url 'busqueda' %}"> 
-                                            <button class="btn btn-outline-light my-2 my-sm-0" type="button">Buscar</button>
-                                        </a>
+                                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
                                       </form>
                                 </div>
                                 <!-- forma con icon -->
@@ -67,20 +68,7 @@
         </nav>
         <br>
         <br>
-<!-- jumbotron bienvenida -->
-        <div class="row" id="leban">
-            <div class="col lepopo" style="padding: 0;">
-                <div class="bannerImg"></div>
-                <img class="baner" src="{% static 'core/img/baner-prender.jpg' %}" class="img-fluid" alt="..." 
-                style="position:relative;margin-left: 0px;margin-right: 0px;">
-            </div>
-            <div class="text">
-                <p class="p1">Mejora la exposición de tu emprendimiento</p>
-                <br>
-                <p class="p2">Te ayudamos con la gestión de tu negocio</p>
-            </div>
-        </div>
-        
+        <br>
 <!--seccion destacados: carrusel con publicidad pagada-->
 
 <!--Recientes cards-->
@@ -119,6 +107,33 @@
                 <a href="{% url 'producto' %}" class="btn btn-primary">Go somewhere</a>
               </div>
             </div>
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  <a href="{% url 'producto' %}" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+              <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  <a href="{% url 'producto' %}" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+              <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  <a href="{% url 'producto' %}" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
           </div>
 
 <!--productos cards-->
@@ -148,69 +163,6 @@
 <!-- {% endfor %} -->
         <br>
         <br>
-        <hr>
-        <br>
-        <br>
-<!--Contacto-->
-        <div class="titulo-seccion">
-            <div id="contacto" class="row">
-                <h1>Contacto</h1>
-            </div>
-        </div>
-        <br>
-        <div class="row justify-content-center">
-            <form class="contacto" id="contactForm">
-                <div class="form-row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="elnombre">Nombre</label>
-                            <input type="text" class="form-control" id="elNombre"
-                                placeholder="Nombre Completo" required>
-                            <div class="invalid-feedback" id="eNombre"></div> 
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="elEmail">Email</label>
-                            <input type="email" class="form-control" id="elEmail"
-                                placeholder="nombre@email.com" required>
-                            <div class="invalid-feedback" id="eMail"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="elAsunto">Asunto</label>
-                            <input type="text" class="form-control" id="elAsunto" placeholder="Asunto" required>
-                            <div class="invalid-feedback" id="eAsunto"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="elMensaje">Mensaje</label>
-                            <textarea class="form-control" id="elMensaje" rows="3"></textarea>
-                            <div class="row">
-                                <div class="col-10">
-                                    <div class="invalid-feedback" id="eMensaje"></div>
-                                </div>
-                                <div class="col-2">
-                                    <small class="form-text text-muted text-right" id="contcaract">0</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col">
-                        <button type="submit" class="btn btn-outline-dark send">Enviar</button>
-                        <button type="reset" class="btn btn-dark">Limpiar</button>
-                    </div>
-                </div>
-            </form>
-        </div>
         <div class="row espacio"></div>
         <br>
         <br>

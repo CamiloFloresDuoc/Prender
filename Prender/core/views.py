@@ -31,3 +31,6 @@ def gestionEmp(request):
 
 def regCompras(request):
     return render(request, 'core/regCompras.html')
+
+def busqueda(request):
+    return render(request, 'core/busqueda.html')
