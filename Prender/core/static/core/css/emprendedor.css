@@ -185,3 +185,9 @@ li, .tituloLista{
     padding: 10px;
     font-size: 12pt;
 }
+
+.agreg:hover{
+    background-color: #f69a40;
+    border:#f69a40;
+}
+
