@@ -1,0 +1,172 @@
+@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
+
+* {box-sizing: border-box;}
+
+body {
+    background-color: rgba(199, 199, 199, 0.082);
+    min-height:100%; 
+    height: 100%;   
+    
+}
+.allButFooter{
+    min-height: calc(100vh - 80px);
+}
+.nav-login {
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    
+}
+
+.link {
+    color: black;
+    font-size: 10pt;
+}
+
+.link:hover {
+    color: red;
+}
+
+.nav-item {
+    display: inline;
+
+}
+
+.nav-item.der {
+    float: right;
+}
+
+.card{
+    
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.card-body {
+    border-radius: 8px;
+}
+.card-title{
+    margin-bottom: 20px;
+}
+.notice{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.account{
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.card-subtitle{
+    font-size: 15px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+.bene-reg-li{
+    margin-bottom: 30px;
+}
+.icon {
+    position: absolute;
+    padding: 10px;
+    color: black;
+    min-width: 50px;
+    margin-right: 10px;
+}
+.form-group input {
+    /* display: flex; */
+    width: 100%;
+    margin-bottom: 15px;
+}
+.form-control{
+    width: 100%;
+    border: 1px solid #E6E6E6;
+    margin: 8px 0;
+    outline: none;
+    padding: 8px 0px 8px 35px;
+    transition: 0.3s;
+} 
+.form-control:focus{
+    border: 2px solid dodgerblue;
+}
+ .form-check{
+    padding: 20px;
+    text-align: center;
+    
+} 
+.btn {
+    width: 100%;
+}
+
+.login-gira {
+    max-width: 150px;
+    width: 40%;
+    display: block;
+    margin: 50px auto;
+    animation: spin 3s infinite linear;
+    
+}
+nav {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 80px;
+}
+
+#navi{
+    background-color: #f69a40;
+}
+#navi a{
+    color: white;
+    background-color: #f69a40;   
+}
+#navi a:hover{
+    background-color: #4f4f4f;
+    color: #fff; 
+    transition: 0.5s;  
+    border-radius: 5px;
+}
+.reglog{
+    justify-content: center;
+    padding-top: 20px;
+}
+
+footer{
+    margin: 0;
+    padding: 0;
+    height: 80px;
+    background-color: rgb(54, 54, 54);
+    color: #fff;
+}
+
+footer p {
+    font-style: bold;
+    padding-top: 25px;
+    font-size: 15px;
+    margin:auto;
+    color:#fff;
+    text-align: center;
+  }
+
+  .btn1, .btn2 {
+      background-color: #fff;
+      border: solid;
+      border-color: #f69a40;
+      color: #f69a40;
+  }
+ .formularioReg{
+     display: flex;
+     justify-content: center;
+ }
+
+ .navbar-nav .nav-link{
+    margin-left: 20px;
+    margin-right: 10px;
+    padding-left: 10px;
+    background-color: #f69a40;
+}
+.navbar-toggler-icon, .navbar-toggler{
+    color: #fff !important;
+    border-color: #fff !important;
+}

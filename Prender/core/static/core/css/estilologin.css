@@ -1,0 +1,147 @@
+@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
+
+* {box-sizing: border-box;}
+body,
+html {
+    background-color: rgba(199, 199, 199, 0.082);
+}
+.allButFooter{
+    min-height: calc(100vh - 80px);
+}
+.card-body{
+    background-color: #fff !important;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 8px;
+}
+.nav-login {
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.link {
+    color: black;
+    font-size: 10pt;
+}
+
+.link:hover {
+    color: red;
+}
+
+.nav-item {
+    display: inline;
+
+}
+
+.nav-item.der {
+    float: right;
+}
+footer{
+    height: 80px;
+    background-color: rgb(54, 54, 54);
+    color: #fff;
+}
+footer p {
+    font-style: bold;
+    padding-top: 25px;
+    font-size: 15px;
+    margin:auto;
+    color:#fff;
+    text-align: center;
+  }
+.login-box {
+    padding-top: 50px;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+    color: black;
+    display: block;
+}
+
+
+.login-box h1 {
+
+    font-size: 40px;
+    margin-bottom: 40px;
+    padding: 13px 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.textbox {
+    width: 50%;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 20px;
+    padding: 10px 0;
+    border-bottom: 1px solid blue;
+    margin: 25px auto;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.textbox i {
+    width: 26px;
+    float: left;
+    text-align: center;
+}
+
+.textbox input {
+    border: none;
+    outline: none;
+    background: none;
+    color: black;
+    font-size: 18px;
+    width: 80%;
+    float: left;
+    margin: 0 0;
+}
+
+.btn {
+    width: 50%;
+}
+
+
+.login-gira {
+    max-width: 150px;
+    width: 40%;
+    display: block;
+    margin: 50px auto;
+    animation: spin 3s infinite linear;
+}
+nav {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 80px;
+}
+
+#navi{
+    background-color: #f69a40;
+}
+#navi a{
+    color: white;
+    background-color: #f69a40;   
+}
+#navi a:hover{
+    background-color: #4f4f4f;
+    color: #fff; 
+    transition: 0.5s;  
+    border-radius: 5px;
+}
+.reglog{
+    justify-content: center;
+    padding-top: 20px;
+}
+.navbar-toggler-icon, .navbar-toggler{
+    color: #fff !important;
+    border-color: #fff !important;
+}
+.btn-dark{
+    background-color: #f69a40;
+    border: #f69a40;
+}

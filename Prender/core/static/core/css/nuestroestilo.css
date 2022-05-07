@@ -1,0 +1,224 @@
+@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
+
+* {
+    padding: 0;
+    margin: 0;
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    background-color:white;
+}
+#logreg{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 10px;
+}
+.titulo-seccion{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
+    font-style: bolder;
+}
+.titulo-seccion{
+    margin: 20px 0 20px 0;
+    padding: 20px 0 0 20px;
+}
+.card{
+    box-shadow: 4px 4px 8px black;
+    max-width: 100%;
+    height: 100%;
+    margin: 15px;
+}
+
+.lista-categoria ul{
+    list-style-type: none;
+    text-decoration: none; 
+    
+}
+
+.lista-categoria li{
+    text-align: center;
+    padding: 10px;
+    font-size: 20pt;
+    
+    
+}
+.contacto{
+    width: 80%;
+}
+footer{
+    height: 80px;
+    background-color: rgb(54, 54, 54);
+    color: #fff;
+}
+footer p {
+    font-style: bold;
+    padding-top: 25px;
+    font-size: 15px;
+    margin:auto;
+    color:#fff;
+    text-align: center;
+}
+
+#elnav a{
+    color: #000 ;
+}
+#elnav a:hover{
+    color: #fff ;
+    background-color: #4f4f4f;
+}
+#indexCateg a{
+    color: #000 ;
+    border-radius: 10px;
+}
+#indexCateg a:hover{
+    color: #fff ;
+    background-color: #4f4f4f;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 2px;
+}
+.tamanonoticia img{
+    width: 100%;
+}
+nav {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 80px;
+}
+
+#navi{
+    background-color: #f69a40;
+}
+#navi a{
+    color: white;
+    background-color: #f69a40;   
+}
+#navi a:hover{
+    background-color: black;
+    color: white; 
+    transition: 0.5s;  
+    border-radius: 5px;
+}
+.reglog{
+    justify-content: right;
+    margin: 5px 10px 5px 15px;
+    padding-left: 5px;
+}
+
+#busqueda {
+    float: right;
+    justify-content: right;
+}
+
+.baner {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    background-position: center;
+}
+.baner img {
+    object-fit: cover;
+}
+#leban {
+    z-index: -99999;
+}
+
+#leban .text{
+    position: absolute;
+    z-index: 99;
+    margin: 0 0 0 50px;
+    left: 0;
+    right: 0;
+    top: 30%;
+    text-align: left;
+    width: 50%;
+    height: 28%;
+}
+#leban .p1{
+    padding: 5px;
+    background-color: #f69a40;
+    color: black;
+    font-size: 48px;
+    font-weight: bold;
+    font-style: italic;
+}
+#leban .p2{
+    padding: 5px;
+    background-color: #f69a40;
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* .bannerImg {
+    background-image: url('../img/baner-prender.jpg');
+    height: 720px;
+    width: 1200px;
+    background-size: cover; 
+} */
+
+.navbar-collapse, .dropdown{
+    background-color: #f69a40;
+}
+.dropdown-menu ,  .dropdown-toggle{
+    background-color: #f69a40;
+    border: none;
+}
+.nav-item{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 20px;
+}
+.btn-dark{
+    background-color: #4f4f4f;
+}
+.send:hover{
+    background-color: #f69a40;
+    color: #fff;
+    border: none;
+}
+.input-group-append .input-group-text, .input-group input{
+    border: none;
+    background-color: #fff;
+}
+.navbar-toggler-icon, .navbar-toggler{
+    color: #fff !important;
+    border-color: #fff !important;
+}
+.shopCart a{
+    padding: 8px;
+    border: solid #fff;
+    border-radius: 8px;
+}
+.shopCart a:hover{
+    padding: 10px;
+    background-color: #fff !important;
+    color: #000 !important;
+}
+.alHome{
+    padding-top: 17px;
+}
+.card-title{
+    margin-left: 15px;
+}
+button.carousel-control-next, button.carousel-control-prev {
+    background-color: transparent !important;
+    color: transparent !important;
+    border: none;
+}
+.alCart{
+    background-color: #f69a40;
+    color: #fff;
+}
+.precioCard{
+    font-size: 22px;
+    font-weight: bold;
+}

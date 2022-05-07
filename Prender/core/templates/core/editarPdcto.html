@@ -1,5 +1,6 @@
 {% load static %}
 {% load bootstrap4 %}
+{% load crispy_forms_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,14 +35,17 @@
                                           Herramientas Gestión
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          <a class="dropdown-item" href="{% url 'adminPdcto' %}">Administrar Productos</a>
+                                          <a class="dropdown-item" href="{% url 'emprendedor' %}">Perfil</a>
                                           <a class="dropdown-item" href="#">Inventario</a>
                                           <a class="dropdown-item" href="#">Balance</a>
                                           <a class="dropdown-item" href="#">Recetas</a>
                                           <a class="dropdown-item" href="#">Configuración Cuenta</a>
                                         </div>
                                       </div>
-                                </li>                                                 
+                                </li> 
+                                <li class="nav-item alHome">
+                                    <a class="nav-link" href="{% url 'adminPdcto' %}">Volver</a> 
+                                </li>                                                   
                             </ul>
                             <div id="nomUser">
                                 <p>Nombre Usuario</p>
@@ -57,72 +61,27 @@
             <br>
             <br>
             <br>
-    <!--perfil emprendedor-->
-    <!-- cabecera -->
+    <!-- admin productos -->
             <div class="row">
-                <div class="col-4">
-                    <img src="{% static 'core/img/baner-prender.jpg' %}" id="fotoPerfil">
-                </div>
-                <div class="col-8">
-                    <h1 id="nomTienda">Nombre tienda</h1>
-                    <br>
-                    <h4 id="descTienda">Descripcion tienda</h4>
-                </div>
-            </div>
-            <!-- cuerpo -->
-            <div class="row">
-                <div class="col-2 cate">
-                    <div class="card ">
-                        <h5 class="tituloLista">Categorias</h5>
-                    <br>
-                    <ul>
-                        <li>cate1</li>
-                        <li>cate2</li>
-                        <li>cate3</li>
-                    </ul>
-                    </div>
-                    
-                </div>
-                <!-- productos -->
+                <div class="col-1"></div>
                 <div class="col">
-                    <div class="card-group">
-                        <div class="card">
-                          <img src="{% static 'core/img/baner-prender.jpg' %}" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                          </div>
-                        </div>
-                        <div class="card">
-                          <img src="{% static 'core/img/baner-prender.jpg' %}" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                          </div>
-                        </div>
-                        <div class="card">
-                          <img src="{% static 'core/img/baner-prender.jpg' %}" class="card-img-top" alt="...">
-                          <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                            <a href="{% url 'producto' %}" class="btn btn-primary">Go somewhere</a>
-                          </div>
-                        </div>
-                      </div>
+                    <form action="" method="POST" id="formulario" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+
+                        <button type="submit" class="btn btn-dark">Editar</button>
+                    </form>
+                    <!-- <span> {{ mensaje }} </span> -->
                 </div>
+                <div class="col-1"></div>
+            </div>
+                
+            
                 <br>
                 <br>
                 <br>
                 
-            </div>
-
         </div>
-        
 
 <!--footer-->
         <footer class="row">

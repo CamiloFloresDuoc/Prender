@@ -27,27 +27,13 @@
                             <ul class="navbar-nav mr-auto">  
                                 <li class="nav-item alHome">
                                     <a class="nav-link" href="{% url 'index' %}">Inicio <span class="sr-only">(current)</span></a> 
-                                </li>                           
-                                <li class="nav-item">
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                                          Herramientas Gestión
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          <a class="dropdown-item" href="{% url 'adminPdcto' %}">Administrar Productos</a>
-                                          <a class="dropdown-item" href="#">Inventario</a>
-                                          <a class="dropdown-item" href="#">Balance</a>
-                                          <a class="dropdown-item" href="#">Recetas</a>
-                                          <a class="dropdown-item" href="#">Configuración Cuenta</a>
-                                        </div>
-                                      </div>
-                                </li>                                                 
+                                </li>                                              
                             </ul>
                             <div id="nomUser">
                                 <p>Nombre Usuario</p>
                             </div>
                             <div class="reglog">                                
-                                <a href="{% url 'index' %}"><button type="button" class="btn btn-dark">Cerrar Sesión</button></a>
+                                <a href="{% url 'register' %}"><button type="button" class="btn btn-dark">Cerrar Sesión</button></a>
                             </div>                    
                         </div>
                     </nav>
