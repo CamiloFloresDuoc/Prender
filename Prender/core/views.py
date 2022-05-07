@@ -34,3 +34,9 @@ def regCompras(request):
 
 def busqueda(request):
     return render(request, 'core/busqueda.html')
+
+def empPublico(request):
+    return render(request, 'core/empPublico.html')
+
+def adminPdcto(request):
+    return render(request, 'core/adminPdcto.html')
