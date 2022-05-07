@@ -1,5 +1,6 @@
 {% load static %}
 {% load bootstrap4 %}
+{% load crispy_forms_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,19 +35,23 @@
                                           Herramientas Gestión
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" href="{% url 'emprendedor' %}">Perfil</a>
                                           <a class="dropdown-item" href="#">Inventario</a>
                                           <a class="dropdown-item" href="#">Balance</a>
                                           <a class="dropdown-item" href="#">Recetas</a>
                                           <a class="dropdown-item" href="#">Configuración Cuenta</a>
                                         </div>
                                       </div>
-                                </li>                                                 
+                                </li> 
+                                <li class="nav-item alHome">
+                                    <a class="nav-link" href="{% url 'adminPdcto' %}">Volver</a> 
+                                </li>                                                   
                             </ul>
                             <div id="nomUser">
                                 <p>Nombre Usuario</p>
                             </div>
                             <div class="reglog">                                
-                                <a href="{% url 'register' %}"><button type="button" class="btn btn-dark">Cerrar Sesión</button></a>
+                                <a href="{% url 'index' %}"><button type="button" class="btn btn-dark">Cerrar Sesión</button></a>
                             </div>                    
                         </div>
                     </nav>
@@ -56,12 +61,27 @@
             <br>
             <br>
             <br>
-<!-- Formulario -->
+    <!-- admin productos -->
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col">
+                    <form action="" method="POST" id="formulario" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form|crispy }}
 
+                        <button type="submit" class="btn btn-dark">Editar</button>
+                    </form>
+                    <!-- <span> {{ mensaje }} </span> -->
+                </div>
+                <div class="col-1"></div>
+            </div>
+                
             
-
+                <br>
+                <br>
+                <br>
+                
         </div>
-        
 
 <!--footer-->
         <footer class="row">

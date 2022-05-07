@@ -34,7 +34,7 @@
                                           Herramientas Gestión
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          <a class="dropdown-item" href="#">Administrar Productos</a>
+                                          <a class="dropdown-item" href="{% url 'emprendedor' %}">Perfil</a>
                                           <a class="dropdown-item" href="#">Inventario</a>
                                           <a class="dropdown-item" href="#">Balance</a>
                                           <a class="dropdown-item" href="#">Recetas</a>
@@ -76,19 +76,8 @@
                             <td>Nombre Emprendimiento</td>
                             <td>Descripcion</td>
                             <td>
-                                <a href="#" class='btn btn-info'>Editar</a>
-                                <a href="#" class='btn btn-danger'>Eliminar</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><img src="{% static 'core/img/baner-prender.jpg'  %}" height="60px" width="80px" alt=""> </td>
-                            <!-- <td>{{ n.titulo }}</td>
-                            <td>{{ n.cuerpo }}</td> -->
-                            <td>Nombre Emprendimiento</td>
-                            <td>Descripcion</td>
-                            <td>
-                                <a href="#" class='btn btn-info'>Editar</a>
-                                <a href="#" class='btn btn-danger'>Eliminar</a>
+                                <a href="{% url 'editarPdcto' %}" class='btn btn-info'>Editar</a>
+                                <a href="{% url 'eliminarPdcto' %}" class='btn btn-danger'>Eliminar</a>
                             </td>
                         </tr>
                     </table>
