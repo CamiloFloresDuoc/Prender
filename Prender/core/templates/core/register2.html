@@ -1,0 +1,165 @@
+{% load static %}
+{% load bootstrap4 %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'core/css/estiloregister.css' %}">
+    <link rel="icon" type="image/png" href="" />
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!--Nav-->
+        <div class="allButFooter">
+            <nav class="row" id="navi">
+                <div class="col-9">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <img src="{% static 'core/img/logo-prender.png' %}" height="45px" class="navbar-brand" alt="">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{% url 'index' %}">Inicio <span class="sr-only">(current)</span></a>  
+                                </li>                         
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </nav>
+            <br>
+            <br>
+            <br>
+    <!--formulario-->
+            <div class="row formularioReg">        
+                <div class="col-sm-auto-3"></div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title account">CREA TU CUENTA</h5>
+                            <form class="form-register" method="post">
+                                {% csrf_token %}
+                                <div class="form-group first">
+                                    <label for="email">Email</label>
+                                      {{ form.email}}
+                                </div>
+                                <div class="form-group first">
+                                    <label for="nombre">Nombre</label>
+                                      {{ form.nombre }}
+                                </div> 
+                                <div class="form-group first">
+                                    <label for="apellido">Apellido</label>
+                                      {{ form.apellido }}
+                                </div> 
+                                <div class="form-group first">
+                                    <label for="Nombre_Usuario">Nombre Usuario</label>
+                                      {{ form.Nombre_Usuario }}
+                                </div>                                  
+                                <div class="form-group last mb-4">
+                                <label for="contrasena">Contraseña</label>
+                                    {{ form.contrasena1 }}
+                                </div>
+                                <div class="form-group last mb-4">
+                                <label for="contrasena">Confirmar contraseña</label>
+                                    {{ form.contrasena2 }}
+                                </div>
+                                <!-- <div class="d-flex mb-5 align-items-center">
+                                <label class="control control--checkbox mb-0"><span class="caption">Admin</span>
+                                    {{ form.is_admin }}
+                                    <div class="control__indicator"></div>
+                                </label>
+                                </div> -->
+                                <div class="d-flex mb-5 align-items-center">
+                                <label class="control control--radio-button mb-0"><span class="caption">Comprador</span>
+                                    {{ form.is_comprador|attr:"type:radio"|attr:"name:tipo_user" }}
+                                    <div class="control__indicator"></div>
+                                </label>
+                                </div>
+                                <div class="d-flex mb-5 align-items-center">
+                                <label class="control control--radio-button mb-0"><span class="caption">Emprendedor</span>
+                                    {{ form.is_emprendedor|attr:"type:radio"|attr:"name:tipo_user" }}
+                                    <div class="control__indicator"></div>
+                                </label>
+                                </div>
+                                <span class="text-error">{{ form.errors }}</span>
+                                <input type="submit"  value="Register" class="btn btn-dark text-white btn-block btn-primary">
+                                <!-- <div>
+                                    <button type="submit" class="btn btn-dark" id="registrar">REGISTRAR</button>
+                                </div> -->
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-auto-3"></div>
+            </div>
+        </div>
+        <footer class="row">
+            <div class="col-8">
+              <span><p>Lleva tu emprendimiento al siguiente nivel en PRENDER</p></span>
+            </div>
+            <div class="col-4">
+              <p>®Prender</p>
+            </div>
+        </footer>
+    </div>
+    
+    
+    {% bootstrap_javascript jquery='full' %}
+    <script src="{% static 'core/js/validacionRegistro.js' %}"></script>
+</body>
+
+</html>
+
+<!-- <div class="form-group btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary active btn1">
+                                      <input type="radio" name="options" id="option1" checked> Comprador
+                                    </label>
+                                    <label class="btn btn-secondary btn2">
+                                      <input type="radio" name="options" id="option2"> Emprendimiento
+                                    </label>
+                                  </div>
+                                <div class="form-group">
+                                    <i class="fas fa-envelope icon"></i>
+                                    <input type="email" class="form-control" id="email"
+                                        placeholder="@Email" required>
+                                </div>
+                                <div class="form-group">
+                                    <i class="fas fa-user-edit icon"></i>
+                                    <input type="text" class="form-control" id="nombre"
+                                        placeholder="Nombre" required>
+                                </div>
+                                <div class="form-group">
+                                    <i class="fas fa-user-edit icon"></i>
+                                    <input type="text" class="form-control" id="apellido"
+                                        placeholder="Apellido" required>
+                                </div>
+                                <div class="form-group">
+                                    <i class="fas fa-user icon"></i>
+                                    <input type="text" class="form-control" id="username"
+                                        placeholder="Nombre usuario" required>
+                                </div>
+                                <div class="form-group">
+                                    <i class="fas fa-lock icon"></i>
+                                    <input type="password" class="form-control" id="password" onkeyup ="check();"
+                                        placeholder="Contraseña" required minlength="6" required>
+                                </div>
+                                <div class="form-group">
+                                    <i class="fas fa-lock icon"></i>
+                                    <input type="password" class="form-control" id="confirmPassword" onkeyup ="check();"
+                                        placeholder="Confirmar contraseña" required minlength="6" required>
+                                        <span id="message"></span>
+                                </div> -->
+                                <!-- <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="checkbox" required>
+                                    <label class="form-check-label" for="exampleCheck1" required>¿Acepta los terminos?</label>
+                                </div> -->

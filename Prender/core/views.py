@@ -1,15 +1,68 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth.forms import AuthenticationForm
+from django.views.generic import CreateView
+# from .models import User
+from .forms import CompradorRegister, ContactoForm, EmprendedorRegister
+
+# User = get_user_model()
+
 
 # Create your views here.
 
 def index(request):
     return render(request, 'core/index.html')
 
-def login(request):
-    return render(request, 'core/login.html')
+def indexUser(request):
+    return render(request, 'core/indexUser.html')
+
+def login_request(request):
+    if request.method=='POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None :
+                login(request,user)
+                return redirect('/')
+            else:
+                messages.error(request,"Nombre usuario o contraseña invalidos")
+        else:
+                messages.error(request,"Nombre usuario o contraseña invalidos")
+    return render(request, 'core/login.html',
+    context={'form':AuthenticationForm()})
+
+def logout_view(request):
+     logout(request)
+     return redirect('/')
 
 def register(request):
     return render(request, 'core/register.html')
+
+class comprador_register(CreateView):
+    model = get_user_model()
+    form_class = CompradorRegister 
+    template_name = 'core/comprador_register.html'
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('/')
+
+class emprendedor_register(CreateView):
+    model = get_user_model()
+    form_class = EmprendedorRegister 
+    template_name = 'core/emprendedor_register.html'
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('/')
+
+
+    
 
 def producto(request):
     return render(request, 'core/producto.html')

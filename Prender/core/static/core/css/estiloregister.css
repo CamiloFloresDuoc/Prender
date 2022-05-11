@@ -98,6 +98,23 @@ body {
 .btn {
     width: 100%;
 }
+.btn-block{
+    background-color: #f69a40;
+    color: #fff;
+    margin-top: 5px;
+    border-color: #f69a40;
+}
+.btn-block:hover{
+    background-color: #fff;
+    color: #000;
+    border: #f69a40;
+    border-style: solid;
+}
+
+.text-black{
+    background-color: #f69a40;
+    color: #fff;
+}
 
 .login-gira {
     max-width: 150px;

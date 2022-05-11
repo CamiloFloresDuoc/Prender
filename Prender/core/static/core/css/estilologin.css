@@ -105,6 +105,36 @@ footer p {
     width: 50%;
 }
 
+.btn-block{
+    background-color: #f69a40;
+    color: #fff;
+    margin-top: 15px;
+    border-color: #f69a40;
+    width: 100%;
+}
+.btn-block-reg{
+    background-color: #4f4f4f;
+    color: #fff;
+    margin-top: 15px;
+    border-color: #4f4f4f;
+    width: 100%;
+    border-width: 3px;
+}
+.btn-block-reg:hover{
+    background-color: #fff;
+    color: #000;
+}
+.btn-block:hover{
+    background-color: #fff;
+    color: #000;
+    border: #f69a40;
+    border-style: solid;
+}
+
+.text-black{
+    background-color: #f69a40;
+    color: #fff;
+}
 
 .login-gira {
     max-width: 150px;

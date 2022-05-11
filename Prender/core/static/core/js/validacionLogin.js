@@ -12,7 +12,7 @@ function noError(caja){
 // validaciones por campo
 
 function validaNombre(){
-    if ($("#usuario").val().trim().length == 0) {
+    if ($("#username").val().trim().length == 0) {
         mensajeError("eUsuario","Debes ingresar tu nombre")
         return false
     } else {
@@ -42,14 +42,14 @@ $(document).ready(function(){
     $(".invalid-feedback").hide();
 
     //cuando valida nombre?
-    $("#usuario").blur(function(){
+    $("#username").blur(function(){
         exito = validaNombre()
     });
     $("#password").blur(function(){
         exito = validaContrasenna(9)
     });
 
-    $("#contactForm").submit(function(){
+    $("#logForm").submit(function(){
         exito = false
 
         if (

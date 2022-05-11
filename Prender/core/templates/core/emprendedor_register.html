@@ -27,10 +27,13 @@
                     <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
+                        <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
                                 <a class="nav-link" href="{% url 'index' %}">Inicio <span class="sr-only">(current)</span></a> 
-                            </li>                        
+                            </li>    
+                            <li class="nav-item">
+                              <a class="nav-link" href="{% url 'register' %}">Atras </a> 
+                            </li>                      
                         </ul>
                     </div>
                 </nav>
@@ -43,21 +46,27 @@
                 <div class="col-md-6 mx-auto">
                   <div class="card">
                     <div class="card-header text-black">
-                      <h2>Registrate!</h2>
+                      <h2>Registro Emprendedor</h2>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                          <div class="col-lg-6">
-                            <a type="button" class="btn btn-block" href="{% url 'comprador_register' %}">Soy Comprador</a>
-                          </div>
-                          <div class="col-lg-6">
-                            <a type="button" class="btn btn-block" href="{% url 'emprendedor_register' %}">Soy Emprendedor</a>
-                          </div>
-                        </div>
+                        <form action="{% url 'emprendedor_register' %}" method="POST" novalidate>
+                          {% csrf_token %}
+                            {% for field in form.visible_fields %}
+                              <div class="form-group">
+                                  {{ field.label_tag }}
+                                      {% render_field field class="form-control" %}
+                                        {% for error in field.errors %}
+                                          <span style="color:red">{{ error }}</span>
+                                        {% endfor %}
+                            {% endfor %}
+                                <input type="submit" value="Register" class="btn btn-block btn-primary">
+                              </div>
+                        </form>
+                    </div>
+                        </div>   
                     </div>
                   </div>
                 </div>
-              </div>
             </div>
           </section>
         </div>
@@ -71,6 +80,5 @@
         </footer>  
     </div>
     {% bootstrap_javascript jquery='full' %}
-
 </body>
 </html>

@@ -1,0 +1,16 @@
+# para listar contenedores activos / en proceso
+sudo docker ps 
+
+#lo detenemos el container
+sudo docker stop prender_database_1
+
+#borrar el contenedores / se borro el contenedor pero no el volumen
+sudo docker rm prender_database_1
+
+#listamos los volumenes 
+sudo docker volume list 
+
+#borramos el volumen
+sudo docker volume rm prender_postgres_data
+
+#levantamos el docker en la bd local

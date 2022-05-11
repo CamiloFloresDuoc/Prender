@@ -17,4 +17,4 @@ pip install psycopg2-binary
 
 sudo apt-get install libpq-dev
 
-
+pip install django-widget-tweaks
