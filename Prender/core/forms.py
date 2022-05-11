@@ -2,11 +2,10 @@ from django import forms
 from django.forms import ModelForm
 from django.db import transaction
 from django.db.models import fields
-from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from .models import User, Comprador, Emprendedor, Contacto
 
-get_user_model()
+
 
 class CompradorRegister(UserCreationForm):
     nombre = forms.CharField(required=True)
@@ -15,8 +14,8 @@ class CompradorRegister(UserCreationForm):
     numero_telefono = forms.CharField(required=True)
     direccion = forms.CharField(required=True)
 
-    class meta(UserCreationForm.Meta):
-        model = get_user_model()
+    class Meta(UserCreationForm.Meta):
+        model = User
 
     @transaction.atomic
     def save(self):
@@ -39,8 +38,8 @@ class EmprendedorRegister(UserCreationForm):
     numero_telefono = forms.CharField(required=True)
     direccion = forms.CharField(required=True)
 
-    class meta(UserCreationForm.Meta):
-        model = get_user_model()
+    class Meta(UserCreationForm.Meta):
+        model = User
 
     @transaction.atomic
     def save(self):

@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import CreateView
-# from .models import User
+from .models import User
 from .forms import CompradorRegister, ContactoForm, EmprendedorRegister
 
-# User = get_user_model()
+
 
 
 # Create your views here.
@@ -42,7 +42,7 @@ def register(request):
     return render(request, 'core/register.html')
 
 class comprador_register(CreateView):
-    model = get_user_model()
+    model = User
     form_class = CompradorRegister 
     template_name = 'core/comprador_register.html'
 
@@ -52,7 +52,7 @@ class comprador_register(CreateView):
         return redirect('/')
 
 class emprendedor_register(CreateView):
-    model = get_user_model()
+    model = User
     form_class = EmprendedorRegister 
     template_name = 'core/emprendedor_register.html'
 
