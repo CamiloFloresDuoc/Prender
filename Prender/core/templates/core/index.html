@@ -1,5 +1,7 @@
 {% load static %}
 {% load bootstrap4 %}
+{% load widget_tweaks %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,216 +15,174 @@
     <link rel="stylesheet" href="{% static 'core/css/nuestroestilo.css' %} ">
 </head>
 <body>
+
     <div class="container-fluid">
-<!--Nav-->
-        <nav class="row" id="navi">
-            <div class="col">
-                <nav class="navbar navbar-expand-lg navbar-light">
-                    <img src="{% static 'core/img/logo-prender.png' %}" height="45px" class="navbar-brand" alt="">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav mr-auto">                            
-                            <li class="nav-item">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                                      Categorias
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <a class="dropdown-item" href="#">Action</a>
-                                      <a class="dropdown-item" href="#">Another action</a>
-                                      <a class="dropdown-item" href="#">Something else here</a>
+        <div class="allButFooter">
+            <nav class="row" id="navi">
+                <div class="col">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <img src="{% static 'core/img/logo-prender.png' %}" height="45px" class="navbar-brand" alt="">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav mr-auto">                            
+                                <li class="nav-item">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                                        Categorias
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
                                     </div>
-                                  </div>
-                            </li>                            
-                            <li class="nav-item">
-                                <div class="input-group mb-3">
-                                    <form class="form-inline my-2 my-lg-0">
-                                        <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-                                        <a href="{% url 'busqueda' %}"> 
-                                            <button class="btn btn-outline-light my-2 my-sm-0" type="button">Buscar</button>
-                                        </a>
-                                      </form>
-                                </div>
-                            </li>                                                    
-                        </ul>
-                        <div class="shopCart">
-                            <a href=""><i class="fas fa-shopping-cart" aria-hidden="true"></i></a>                            
-                        </div>
-                        <div class="reglog">
-                            <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-light">Login</button></a>
-                            <a href="{% url 'register' %}"><button type="button" class="btn btn-dark">Registrate</button></a>
-                        </div>                    
-                    </div>
-                </nav>
-            </div>
-        </nav>
-        <br>
-        <br>
-<!-- jumbotron bienvenida -->
-        <div class="row" id="leban">
-            <div class="col lepopo" style="padding: 0;">
-                <div class="bannerImg"></div>
-                <img class="baner" src="{% static 'core/img/baner-prender.jpg' %}" class="img-fluid" alt="..." 
-                style="position:relative;margin-left: 0px;margin-right: 0px;">
-            </div>
-            <div class="text">
-                <p class="p1">Mejora la exposición de tu emprendimiento</p>
-                <br>
-                <p class="p2">Te ayudamos con la gestión de tu negocio</p>
-            </div>
-        </div>
-        
-<!--seccion destacados: carrusel con publicidad pagada-->
-
-<!--Recientes cards-->
-        <div class="titulo-seccion">
-            <div class="row">
-                <h1>Descubre Nuevos Sabores!!</h1>
-            </div>
-            <div class="row"></div>
-        </div>
-        <br>
-        <div class="card-group">
-            <div class="card">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                <a href="{% url 'empPublico' %}" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-            <div class="card">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-            <div class="card">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                <a href="{% url 'producto' %}" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
-
-<!--productos cards-->
-<!-- {% for n in producto %} -->
-<!-- <div class="row">
-    <div class="col-1"></div>
-    <div class="col">
-        <div class="card mb-3" style="max-width: 100%;">
-            <div class="row no-gutters">
-            <div class="col-md-4">
-                <img src="{{ n.imagen.url }}" height="100%" width="100%" alt="...">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                <h5 class="card-title">{{ n.titulo }}</h5>
-                <p class="card-text"> {{ n.cuerpo }}</p>
-                <a href="{% url 'notiId' n.noticia_id %}" class="btn btn-outline-dark">Leer más ...</a>
-                <p class="card-text"><small class="text-muted">{{ n.fecha }}</small></p>
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-1"></div>
-</div>
-<br> -->
-<!-- {% endfor %} -->
-        <br>
-        <br>
-        <hr>
-        <br>
-        <br>
-<!--Contacto-->
-        <div class="titulo-seccion">
-            <div id="contacto" class="row">
-                <h1>Contacto</h1>
-            </div>
-        </div>
-        <br>
-        <div class="row justify-content-center">
-            <form class="contacto" id="contactForm">
-                <div class="form-row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="elnombre">Nombre</label>
-                            <input type="text" class="form-control" id="elNombre"
-                                placeholder="Nombre Completo" required>
-                            <div class="invalid-feedback" id="eNombre"></div> 
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="elEmail">Email</label>
-                            <input type="email" class="form-control" id="elEmail"
-                                placeholder="nombre@email.com" required>
-                            <div class="invalid-feedback" id="eMail"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="elAsunto">Asunto</label>
-                            <input type="text" class="form-control" id="elAsunto" placeholder="Asunto" required>
-                            <div class="invalid-feedback" id="eAsunto"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="elMensaje">Mensaje</label>
-                            <textarea class="form-control" id="elMensaje" rows="3"></textarea>
-                            <div class="row">
-                                <div class="col-10">
-                                    <div class="invalid-feedback" id="eMensaje"></div>
-                                </div>
-                                <div class="col-2">
-                                    <small class="form-text text-muted text-right" id="contcaract">0</small>
-                                </div>
+                                </li>                            
+                                <li class="nav-item">
+                                    <div class="input-group mb-3">
+                                        <form class="form-inline my-2 my-lg-0">
+                                            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+                                            <a href="{% url 'busqueda' %}"> 
+                                                <button class="btn btn-outline-light my-2 my-sm-0" type="button">Buscar</button>
+                                            </a>
+                                        </form>
+                                    </div>
+                                </li>                                                    
+                            </ul>
+                            <div class="shopCart">
+                                <a href=""><i class="fas fa-shopping-cart" aria-hidden="true"></i></a>                            
                             </div>
+                            <div class="reglog">
+                                <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-light">Login</button></a>
+                                <a href="{% url 'register' %}"><button type="button" class="btn btn-dark">Registrate</button></a>
+                            </div>                    
                         </div>
+                    </nav>
+                </div>
+            </nav>
+            <br>
+            <br>
+    <!-- jumbotron bienvenida -->
+            <div class="row" id="leban">
+                <div class="col lepopo" style="padding: 0;">
+                    <div class="bannerImg"></div>
+                    <img class="baner" src="{% static 'core/img/baner-prender.jpg' %}" class="img-fluid" alt="..." 
+                    style="position:relative;margin-left: 0px;margin-right: 0px;">
+                </div>
+                <div class="text">
+                    <p class="p1">Mejora la exposición de tu emprendimiento</p>
+                    <br>
+                    <p class="p2">Te ayudamos con la gestión de tu negocio</p>
+                </div>
+            </div>
+            
+    <!--seccion destacados: carrusel con publicidad pagada-->
+
+    <!--Recientes cards-->
+            <div class="titulo-seccion">
+                <div class="row">
+                    <h1>Descubre Nuevos Sabores!!</h1>
+                </div>
+                <div class="row"></div>
+            </div>
+            <br>
+            <div class="card-group">
+                <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <a href="{% url 'empPublico' %}" class="btn btn-primary">Go somewhere</a>
+                </div>
+                </div>
+                <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+                </div>
+                <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <a href="{% url 'producto' %}" class="btn btn-primary">Go somewhere</a>
+                </div>
+                </div>
+            </div>
+
+    <!--productos cards-->
+    <!-- {% for n in producto %} -->
+    <!-- <div class="row">
+        <div class="col-1"></div>
+        <div class="col">
+            <div class="card mb-3" style="max-width: 100%;">
+                <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="{{ n.imagen.url }}" height="100%" width="100%" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ n.titulo }}</h5>
+                    <p class="card-text"> {{ n.cuerpo }}</p>
+                    <a href="{% url 'notiId' n.noticia_id %}" class="btn btn-outline-dark">Leer más ...</a>
+                    <p class="card-text"><small class="text-muted">{{ n.fecha }}</small></p>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="col">
-                        <button type="submit" class="btn btn-outline-dark send">Enviar</button>
-                        <button type="reset" class="btn btn-dark">Limpiar</button>
-                    </div>
                 </div>
-            </form>
+            </div>
         </div>
-        <div class="row espacio"></div>
-        <br>
-        <br>
-<!--footer-->
+        <div class="col-1"></div>
+    </div>
+    <br> -->
+    <!-- {% endfor %} -->
+            <br>
+            <br>
+            <hr>
+            <br>
+            <br>
+    <!--Contacto-->
+            <div class="titulo-seccion">
+                <div id="contacto" class="row">
+                    <h1>Contacto</h1>
+                </div>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+                <form method="POST" class="contacto" id="contactForm">
+                    {% csrf_token %}
+                        {% for field in contactoform.visible_fields %}
+                            <div class="form-group">
+                                {{ field.label_tag }}
+                                    {% render_field field class="form-control" %}
+                        {% endfor %}
+                                <br>   
+                                <input type="submit" value="Enviar" name="{{contactoform.prefix}}" class="btn btn-outline-dark send">
+                                <button type="reset" name="{{contactoform.prefix}}" class="btn btn-dark">Limpiar</button>                                             
+                            </div>                        
+                </form>
+            </div>
+            <br>
+            <br>
+        </div>
         <footer class="row">
             <div class="col-8">
-              <span><p>Lleva tu emprendimiento al siguiente nivel en PRENDER</p></span>
+            <span><p>Lleva tu emprendimiento al siguiente nivel en PRENDER</p></span>
             </div>
-            <div class="col-2">
-              <p>®Prender</p>
+            <div class="col-4">
+            <p>®Prender</p>
             </div>
-        </footer>
+        </footer>  
     </div>
     
 
-
     {% bootstrap_javascript jquery='full' %}
-    <script src="{% static 'core/js/validacionFormIndex.js'%}"></script>
-
-
 </body>
+
 </html>

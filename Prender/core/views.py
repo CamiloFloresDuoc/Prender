@@ -5,14 +5,33 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import CreateView
 from .models import User
 from .forms import CompradorRegister, ContactoForm, EmprendedorRegister
+from django.views.generic import TemplateView
 
 
 
 
 # Create your views here.
 
-def index(request):
-    return render(request, 'core/index.html')
+def _get_form(request, formcls, prefix):
+        data = request.POST if prefix in request.POST else None
+        return formcls(data, prefix=prefix)
+
+class Index(TemplateView):
+    template_name = 'core/index.html'
+
+    def get(self, request, *args, **kwargs):
+        return self.render_to_response({'contactoform': ContactoForm(prefix='cform_pre')})
+
+    def post(self, request, *args, **kwargs):
+        contactoform = _get_form(request, ContactoForm, 'cform_pre')
+        if contactoform.is_bound and contactoform.is_valid():
+            # Process contactoform and render response
+            contactoform.save()
+            return self.render_to_response({'contactoform': contactoform})
+
+
+# def index(request):
+#     return render(request, 'core/index.html')
 
 def indexUser(request):
     return render(request, 'core/indexUser.html')

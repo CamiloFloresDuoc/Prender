@@ -1,0 +1,39 @@
+# views.py
+
+from django.views.generic import TemplateView
+
+def _get_form(request, formcls, prefix):
+    data = request.POST if prefix in request.POST else None
+    return formcls(data, prefix=prefix)
+
+class MyView(TemplateView):
+    template_name = 'mytemplate.html'
+
+    def get(self, request, *args, **kwargs):
+        return self.render_to_response({'aform': AForm(prefix='aform_pre'), 'bform': BForm(prefix='bform_pre')})
+
+    def post(self, request, *args, **kwargs):
+        aform = _get_form(request, AForm, 'aform_pre')
+        bform = _get_form(request, BForm, 'bform_pre')
+        if aform.is_bound and aform.is_valid():
+            # Process aform and render response
+        elif bform.is_bound and bform.is_valid():
+            # Process bform and render response
+        return self.render_to_response({'aform': aform, 'bform': bform})
+
+# mytemplate.html
+<form action="" method="post">
+    {% csrf_token %}
+    {{ aform.as_p }}
+    <input type="submit" name="{{aform.prefix}}" value="Submit" />
+    {{ bform.as_p }}
+    <input type="submit" name="{{bform.prefix}}" value="Submit" />
+</form>
+
+# urls.py
+from django.urls import path
+from some_app.views import AboutView
+
+urlpatterns = [
+    path('about/', AboutView.as_view()),
+]

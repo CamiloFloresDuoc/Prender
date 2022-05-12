@@ -1,12 +1,13 @@
+from ast import Index
 from cgi import test
 from django.urls import path
 from .views import (adminPdcto, busqueda, carrito, comprador, comprador_register, 
 emprendedor_register, editarPdcto, eliminarPdcto, emprendedor, empPublico, gestionEmp, 
-index, indexUser, ingPdcto, login_request, logout_view, producto, regCompras, register 
+Index, indexUser, ingPdcto, login_request, logout_view, producto, regCompras, register 
 )
 
 urlpatterns = [
-    path('', index,name="index"),
+    path('', Index.as_view(), name="index"),
     path('indexUser/', indexUser, name="indexUser"),
     path('login/', login_request, name="login"),
     path('logout/', logout_view, name='logout'),
