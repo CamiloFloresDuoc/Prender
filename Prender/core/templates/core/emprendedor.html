@@ -43,11 +43,13 @@
                                       </div>
                                 </li>                                                 
                             </ul>
-                            <div id="nomUser">
-                                <p>Nombre Usuario</p>
-                            </div>
+                            {% if user.is_authenticated %}
+                                <div id="nomUser">
+                                    <h6>Hola {{ user.username }}</h6>
+                                </div>
+                            {% endif %}
                             <div class="reglog">                                
-                                <a href="{% url 'index' %}"><button type="button" class="btn btn-dark">Cerrar Sesión</button></a>
+                                <a href="{% url 'logout' %}"><button type="button" class="btn btn-dark">Cerrar Sesión</button></a>
                             </div>                    
                         </div>
                     </nav>

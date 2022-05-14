@@ -48,15 +48,22 @@
                                             </a>
                                         </form>
                                     </div>
-                                </li>                                                    
+                                </li> 
+                                {% if user.is_authenticated %}
+                                    {% if user.is_emprendedor %}
+                                <li class="nav-item">
+                                    <a href="{% url 'emprendedor' %}"><button type="button" class="btn btn-dark">Mi Perfil</button></a>
+                                </li> 
+                                    {% endif %}    
+                                {% endif %}                                                  
                             </ul>
                             <div class="shopCart">
                                 <a href=""><i class="fas fa-shopping-cart" aria-hidden="true"></i></a>                            
                             </div>
                             <div class="row reglog">
                                 {% if user.is_authenticated%}
-                                <div class="col nombreUsuario">
-                                    <h6>{{ user.username }}</h6>
+                                <div class="col nombreUsuario"> 
+                                    <h6>Hola {{ user.username }}</h6>
                                 </div>
                                 <div class="col">
                                     <a href="{% url 'logout' %}"><button type="button" class="btn btn-dark">Logout</button></a>
