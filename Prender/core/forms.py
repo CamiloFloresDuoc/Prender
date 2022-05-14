@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django.db import transaction
 from django.db.models import fields
 from django.contrib.auth.forms import UserCreationForm
-from .models import User, Comprador, Emprendedor, Contacto
+from .models import User, Comprador, Emprendedor, Contacto, Comuna
 
 
 
@@ -13,6 +13,7 @@ class CompradorRegister(UserCreationForm):
     email = forms.EmailField(required=True)
     numero_telefono = forms.CharField(required=True)
     direccion = forms.CharField(required=True)
+    comuna = forms.ModelChoiceField(queryset = Comuna.objects.all())
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -28,6 +29,7 @@ class CompradorRegister(UserCreationForm):
         comprador = Comprador.objects.create(user=user)
         comprador.numero_telefono = self.cleaned_data.get('numero_telefono')
         comprador.direccion = self.cleaned_data.get('direccion')
+        comprador.comuna = self.cleaned_data.get('comuna')
         comprador.save()
         return user
 
@@ -37,6 +39,7 @@ class EmprendedorRegister(UserCreationForm):
     email = forms.EmailField(required=True)
     numero_telefono = forms.CharField(required=True)
     direccion = forms.CharField(required=True)
+    comuna = forms.ModelChoiceField(queryset = Comuna.objects.all())
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -52,6 +55,7 @@ class EmprendedorRegister(UserCreationForm):
         emprendedor = Emprendedor.objects.create(user=user)
         emprendedor.numero_telefono = self.cleaned_data.get('numero_telefono')
         emprendedor.direccion = self.cleaned_data.get('direccion')
+        emprendedor.comuna = self.cleaned_data.get('comuna')
         emprendedor.save()
         return user
 

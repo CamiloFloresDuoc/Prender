@@ -53,9 +53,18 @@
                             <div class="shopCart">
                                 <a href=""><i class="fas fa-shopping-cart" aria-hidden="true"></i></a>                            
                             </div>
-                            <div class="reglog">
-                                <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-light">Login</button></a>
-                                <a href="{% url 'register' %}"><button type="button" class="btn btn-dark">Registrate</button></a>
+                            <div class="row reglog">
+                                {% if user.is_authenticated%}
+                                <div class="col nombreUsuario">
+                                    <h6>{{ user.username }}</h6>
+                                </div>
+                                <div class="col">
+                                    <a href="{% url 'logout' %}"><button type="button" class="btn btn-dark">Logout</button></a>
+                                </div>                                    
+                                {% else %}                                
+                                    <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-light">Login</button></a>
+                                    <a href="{% url 'register' %}"><button type="button" class="btn btn-dark">Registrate</button></a>
+                                {% endif %}
                             </div>                    
                         </div>
                     </nav>

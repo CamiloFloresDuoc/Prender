@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 from django.db.models.deletion import CASCADE
 from django.db.models.fields import CharField, DateTimeField, IntegerField
@@ -8,9 +9,15 @@ from django.contrib.auth.models import AbstractUser
 class Region(models.Model):
     nom_region = models.CharField(max_length=40)
 
+    def __str__(self):
+        return self.nom_region
+
 class Comuna(models.Model):
     nom_comuna = models.CharField(max_length=40)
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.nom_comuna
 
 # Modelo tipos usuario para login
 class User(AbstractUser):
@@ -28,15 +35,14 @@ class Comprador(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key = True)
     numero_telefono = models.CharField(max_length=20)
     direccion = models.CharField(max_length=100)
-    comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE)
+    comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE, default=False)
 
 class Emprendedor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key = True)
     numero_telefono = models.CharField(max_length=20)
     direccion = models.CharField(max_length=100)
-    comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE)
+    comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE, default=False)
     
-
 
 #modelo formulario de contacto
 class Contacto(models.Model):
@@ -55,9 +61,15 @@ class Perfil(models.Model):
     desc_tienda = models.TextField()
     foto_perf = models.ImageField(upload_to="images")
 
+    def __str__(self):
+        return self.nom_tienda
+
 #categorias productos
 class Categoria(models.Model):
     nom_categoria = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.nom_categoria
 
 class Producto(models.Model):
     nom_prod = models.CharField(max_length=50)
@@ -67,6 +79,9 @@ class Producto(models.Model):
     user = models.ForeignKey(Perfil, on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.nom_prod
+
 #herramientas gestion
 class Inventario(models.Model):
     nom_ingred = models.CharField(max_length= 30)
@@ -74,10 +89,16 @@ class Inventario(models.Model):
     valor_ingre = models.IntegerField()
     user = models.ForeignKey(Perfil, on_delete= models.CASCADE)
 
+    def __str__(self):
+        return self.nom_ingred
+
 class Receta(models.Model):
     nom_receta = models.CharField(max_length = 50)
     desc_receta = models.TextField()
     user = models.ForeignKey(Perfil, on_delete= models.CASCADE)
+
+    def __str__(self):
+        return self.nom_receta
 
 class Balance(models.Model):
     cant_ventas = models.IntegerField() 
@@ -85,7 +106,45 @@ class Balance(models.Model):
     fecha = models.DateField()
     user = models.ForeignKey(Perfil, on_delete= models.CASCADE)
 
-# class Carrito(models.Model):
+#parte del comprador
+
+class Carrito(models.Model):
+    fecha_carro = models.DateField()
+    user = models.ForeignKey(Comprador, on_delete= models.CASCADE)
+    producto = models.ManyToManyField(Producto, through='Detalle_carro')
+
+class Detalle_carro(models.Model):
+    cantidad = models.IntegerField()
+    cod_prod = models.ForeignKey(Producto, on_delete= models.CASCADE)
+    carro = models.ForeignKey(Carrito, on_delete= models.CASCADE)
+
+class Pedido(models.Model):
+    fecha_pedido = models.DateField()
+    carro = models.ForeignKey(Carrito, on_delete= models.CASCADE)
+
+class MedioPago(models.Model):
+    desc = models.CharField(max_length=50)
+    costo = models.IntegerField()
+
+    def __str__(self):
+        return self.desc
+
+class Boleta(models.Model):
+    fecha_emision = models.DateField()
+    valor_neto = models.IntegerField()
+    iva = models.IntegerField()
+    total = models.IntegerField()
+    medio_pago = models.ForeignKey(MedioPago, on_delete= models.CASCADE)
+
+#registro compras
+class RegCompra(models.Model):
+    fechaCompra = models.DateField()
+    neto = models.IntegerField()
+    iva = models.IntegerField()
+    total = models.IntegerField()
+    user = models.ForeignKey(Comprador, on_delete= models.CASCADE)
+
+
 
 
 
