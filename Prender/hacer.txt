@@ -1,0 +1,6 @@
+1.- post registro emprendedor pasar a la creacion inmediata de perfil, asi
+    despues solo la edita y jamas se crea otro
+
+2.- Modificar boton y view para modificar perfil
+
+3.- empezar a clasificar productos

@@ -38,7 +38,7 @@
                                           <a class="dropdown-item" href="#">Inventario</a>
                                           <a class="dropdown-item" href="#">Balance</a>
                                           <a class="dropdown-item" href="#">Recetas</a>
-                                          <a class="dropdown-item" href="#">Configuración Cuenta</a>
+                                          <a class="dropdown-item" href="{% url 'editarPerfilEmp' %} ">Editar perfil</a>
                                         </div>
                                       </div>
                                 </li>                                                 
@@ -62,13 +62,14 @@
     <!--perfil emprendedor-->
     <!-- cabecera -->
             <div class="row">
-                <div class="col-4">
-                    <img src="{% static 'core/img/baner-prender.jpg' %}" id="fotoPerfil">
+                <div class="col-md-4">
+                    <img src="{% static 'core/img/baner-prender.jpg' %}" id="fotoPerfil" alt="Foto perfil">
                 </div>
-                <div class="col-8">
-                    <h1 id="nomTienda">Nombre tienda</h1>
+                <div class="col-md-8">    
+                    <br>                
+                    <h1 id="nomTienda" data-placeholder='Nombre tienda'>{{ perfil.nom_tienda }}</h1>  
                     <br>
-                    <h4 id="descTienda">Descripcion tienda</h4>
+                    <h1 id="descTienda" data-placeholder='Descripcion tienda'>{{ perfil.desc_tienda }}</h1>
                 </div>
             </div>
             <!-- cuerpo -->

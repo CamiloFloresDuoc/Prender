@@ -1,0 +1,98 @@
+{% load static %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil</title>
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'core/css/estilologin.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'core/img/l-redondo.png' %}" />
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="allButFooter">
+            <!--Nav-->
+            <nav class="row" id="navi">
+                <div class="col-9">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <img src="{% static 'core/img/logo-prender.png' %}" height="45px" class="navbar-brand" alt="">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </nav>
+                </div>
+            </nav>
+    <!-- Login Box -->
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 mx-auto">
+                            <div class="card">
+                                <div class="card-header text-black">
+                                    <h2>Crear Perfil Tienda</h2>
+
+                                </div>
+                                {% if user.is_authenticated %}
+                                <div id="nomUser">
+                                    <h6>Hola {{ user.id }}</h6>
+                                </div>
+                                {% endif %}
+                                <div class="card-body">
+                                    <h6>*Se debe crear el perfil de la tienda para acceder, datos pueden ser modificados posteriormente.</h6>
+                                    <br>
+                                    <form action="" method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                            {% for field in form.visible_fields %}
+                                                <div class="form-group">
+                                                    {{ field.label_tag }}
+                                                        {% render_field field class="form-control" %}
+                                                            {% if messages%}
+                                                                {% for message in messages %}
+                                                                    <span style="color:red">{{ message }}</span>
+                                                                {% endfor %}
+                                                            {% endif %}
+                                            {% endfor %}
+                                            <br>
+                                                    <input type="submit" value="Aceptar" class="btn btn-block btn-primary">
+                                                </div>
+                                    </form>
+                                </div>
+                            </div>   
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <footer class="row">
+            <div class="col-8">
+            <span><p>Lleva tu emprendimiento al siguiente nivel en PRENDER</p></span>
+            </div>
+            <div class="col-4">
+            <p>®Prender</p>
+            </div>
+        </footer>  
+    </div>
+    
+
+    {% bootstrap_javascript jquery='full' %}
+    <script src="{% static 'core/js/validacionLogin.js' %}"></script>
+</body>
+
+</html>
+
+

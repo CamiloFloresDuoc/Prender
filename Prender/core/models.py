@@ -56,10 +56,10 @@ class Contacto(models.Model):
 
 #modelo tienda/perfil emprendedor
 class Perfil(models.Model):
-    user = models.OneToOneField(Emprendedor, on_delete=models.CASCADE, primary_key= True)
     nom_tienda = models.CharField(max_length=50)
     desc_tienda = models.TextField()
     foto_perf = models.ImageField(upload_to="images")
+    user = models.ForeignKey(Emprendedor, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nom_tienda

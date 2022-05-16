@@ -17,8 +17,9 @@ sudo docker volume rm prender_postgres_data
 sudo docker-compose -f docker-compose.dev.yml up -d
 
 #se realiza la migracion
-python3 manage.py makemigration
+python3 manage.py makemigrations
 python3 manage.py migrate
 
 #Crea el super usuario
 python3 manage.py createsuperuser
+

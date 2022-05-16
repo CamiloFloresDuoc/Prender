@@ -3,8 +3,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import CreateView
-from .models import User
-from .forms import CompradorRegister, ContactoForm, EmprendedorRegister
+from .models import User, Perfil, Emprendedor
+from .forms import CompradorRegister, ContactoForm, Crear_perfil_form, EmprendedorRegister, Perfil_mod_form
 from django.views.generic import TemplateView
 
 
@@ -29,12 +29,6 @@ class Index(TemplateView):
             contactoform.save()
             return self.render_to_response({'contactoform': contactoform})
 
-
-# def index(request):
-#     return render(request, 'core/index.html')
-
-def indexUser(request):
-    return render(request, 'core/indexUser.html')
 
 def login_request(request):
     if request.method=='POST':
@@ -78,10 +72,42 @@ class emprendedor_register(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('/')
+        return redirect('../crearPerfil/')
 
 
-    
+
+def crearPerfil(request):
+    datos = {
+        'form': Crear_perfil_form
+    }
+    perfil = None
+    if request.method == 'POST':
+        formulario = Crear_perfil_form(request.POST, request.FILES)        
+        if formulario.is_valid:
+            perfil = formulario.save(commit=False)
+            perfil.user_id = request.user.id
+            perfil.save()
+            return redirect('/')
+
+    return render(request, 'core/crearPerfil.html', datos)
+
+def editarPerfilEmp(request):
+
+    perfil = Perfil.objects.all()
+
+    datos = {
+        'perfil': perfil,
+        'form': Perfil_mod_form
+    }
+
+    if request.method == 'POST':
+        formulario = Perfil_mod_form(request.POST, request.FILES)
+
+        if formulario.is_valid:
+            formulario.save()
+            datos['mensaje'] = "Modificado correctamenta"
+
+    return render(request, 'core/editarPerfilEmp.html', datos)
 
 def producto(request):
     return render(request, 'core/producto.html')

@@ -192,3 +192,12 @@ li, .tituloLista{
     border:#f69a40;
 }
 
+h1:empty::before {
+    color: grey;
+  }
+h1[data-placeholder]:not([data-placeholder=""]):empty::before {
+    content: attr(data-placeholder);
+  }
+h1:empty::before {
+    content: 'fallback placeholder';
+  }

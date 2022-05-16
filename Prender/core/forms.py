@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django.db import transaction
 from django.db.models import fields
 from django.contrib.auth.forms import UserCreationForm
-from .models import User, Comprador, Emprendedor, Contacto, Comuna
+from .models import Perfil, User, Comprador, Emprendedor, Contacto, Comuna
 
 
 
@@ -59,10 +59,22 @@ class EmprendedorRegister(UserCreationForm):
         emprendedor.save()
         return user
 
-
+#creacion perfil post registro
+class Crear_perfil_form(forms.ModelForm):
+    class Meta:
+        model = Perfil
+        exclude = ('user',)
+        fields = ['nom_tienda', 'desc_tienda', 'foto_perf']
 
 #para contacto
 class ContactoForm(forms.ModelForm):
     class Meta:
         model = Contacto
         fields = ['nombre','correo','asunto','mensaje']
+
+#edicion perfil
+class Perfil_mod_form(forms.ModelForm):
+    class Meta:
+        model = Perfil
+        fields = ['nom_tienda', 'desc_tienda','foto_perf']
+
