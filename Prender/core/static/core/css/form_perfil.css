@@ -1,0 +1,13 @@
+
+form{
+    border: none;
+    color: aqua;
+}
+textarea{
+    border: 0;
+    border-color: white !important;
+}
+#desc_tienda{
+    border: none !important;
+    border-color: #fff;
+}

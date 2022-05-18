@@ -71,7 +71,9 @@
                     <br>                
                     <h1 id="nomTienda" data-placeholder='Nombre tienda'>{{ form.nom_tienda|attr:"readonly:True" }}</h1>  
                     <br>
-                    <h1 id="descTienda" data-placeholder='Descripcion tienda'>{{ form.desc_tienda|attr:"readonly:True" }}</h1>
+                    <h1 id="descTienda" data-placeholder='Descripcion tienda'>
+                        {% render_field form.desc_tienda rows="4" cols="25" readonly=True class="form_perfil" %}
+                    </h1>
                 </div>
             </div>
             <!-- cuerpo -->
