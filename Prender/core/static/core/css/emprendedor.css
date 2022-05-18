@@ -201,3 +201,10 @@ h1[data-placeholder]:not([data-placeholder=""]):empty::before {
 h1:empty::before {
     content: 'fallback placeholder';
   }
+
+.textarea{
+    border: none;
+}
+.textarea:focus{
+    outline: none;
+}

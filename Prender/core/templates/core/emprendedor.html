@@ -69,10 +69,10 @@
                 <div class="col-md-8">
                     {% csrf_token %}    
                     <br>                
-                    <h1 id="nomTienda" data-placeholder='Nombre tienda'>{{ form.nom_tienda|attr:"readonly:True" }}</h1>  
+                    <h1 id="nomTienda" data-placeholder='Nombre tienda'>{{ form.nom_tienda|attr:"readonly:True"|add_class:"textarea"  }}</h1>  
                     <br>
                     <h1 id="descTienda" data-placeholder='Descripcion tienda'>
-                        {% render_field form.desc_tienda rows="4" cols="25" readonly=True class="form_perfil" %}
+                        {% render_field form.desc_tienda rows="4" cols="25" readonly=True class="textarea" %}
                     </h1>
                 </div>
             </div>
