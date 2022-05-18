@@ -1,5 +1,6 @@
 {% load static %}
 {% load bootstrap4 %}
+{% load widget_tweaks %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -65,11 +66,12 @@
                 <div class="col-md-4">
                     <img src="{% static 'core/img/baner-prender.jpg' %}" id="fotoPerfil" alt="Foto perfil">
                 </div>
-                <div class="col-md-8">    
+                <div class="col-md-8">
+                    {% csrf_token %}    
                     <br>                
-                    <h1 id="nomTienda" data-placeholder='Nombre tienda'>{{ perfil.nom_tienda }}</h1>  
+                    <h1 id="nomTienda" data-placeholder='Nombre tienda'>{{ form.nom_tienda|attr:"readonly:True" }}</h1>  
                     <br>
-                    <h1 id="descTienda" data-placeholder='Descripcion tienda'>{{ perfil.desc_tienda }}</h1>
+                    <h1 id="descTienda" data-placeholder='Descripcion tienda'>{{ form.desc_tienda|attr:"readonly:True" }}</h1>
                 </div>
             </div>
             <!-- cuerpo -->

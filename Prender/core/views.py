@@ -115,8 +115,15 @@ def producto(request):
 def carrito(request):
     return render(request, 'core/carrito.html')
 
-def emprendedor(request):
-    return render(request, 'core/emprendedor.html')
+def emprendedor(request,id):
+    perfil = Perfil.objects.get(user_id=id)
+
+    datos = {
+        'form': Perfil_mod_form(instance=perfil)
+    }
+    
+
+    return render(request, 'core/emprendedor.html',datos)
 
 def comprador(request):
     return render(request, 'core/comprador.html')
