@@ -20,3 +20,5 @@ sudo apt-get install libpq-dev
 pip install django-widget-tweaks
 
 pip install djangorestframework
+
+python -m pip install pillow
