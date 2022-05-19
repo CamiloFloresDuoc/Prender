@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
@@ -91,21 +91,23 @@ def crearPerfil(request):
 
     return render(request, 'core/crearPerfil.html', datos)
 
-def editarPerfilEmp(request):
+def editarPerfilEmp(request, id):
 
-    perfil = Perfil.objects.all()
+    perfil = get_object_or_404(Perfil, user_id=id)
 
     datos = {
         'perfil': perfil,
-        'form': Perfil_mod_form
+        'form': Perfil_mod_form(instance=perfil)
     }
 
     if request.method == 'POST':
-        formulario = Perfil_mod_form(request.POST, request.FILES)
+        formulario = Perfil_mod_form(request.POST, instance=perfil, files=request.FILES)
 
         if formulario.is_valid:
             formulario.save()
             datos['mensaje'] = "Modificado correctamenta"
+
+        datos["form"] = formulario
 
     return render(request, 'core/editarPerfilEmp.html', datos)
 

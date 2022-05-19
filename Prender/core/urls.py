@@ -26,6 +26,6 @@ urlpatterns = [
     path('adminPdcto/', adminPdcto, name="adminPdcto"),
     path('editarPdcto/', editarPdcto, name="editarPdcto"),
     path('eliminarPdcto/', eliminarPdcto, name="eliminarPdcto"),
-    path('editarPerfilEmp/', editarPerfilEmp, name="editarPerfilEmp"),
+    path('editarPerfilEmp/<id>', editarPerfilEmp, name="editarPerfilEmp"),
     path('crearPerfil/', crearPerfil, name="crearPerfil"),
 ]
