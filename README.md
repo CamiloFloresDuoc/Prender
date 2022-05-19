@@ -22,3 +22,5 @@ pip install django-widget-tweaks
 pip install djangorestframework
 
 python -m pip install pillow
+
+pip install djangorestframework
