@@ -63,17 +63,22 @@
     <!--perfil emprendedor-->
     <!-- cabecera -->
             <div class="row">
-                <div class="col-md-4">
-                    <img src="{% static 'core/img/baner-prender.jpg' %}" id="fotoPerfil" alt="Foto perfil">
+                <div class="col-md-4">  
+                        {% for n in perfil %}
+                            {% if n.user_id == user.id %}
+                                <img src="{{ n.foto_perf.url }}" height="250px" width="500px" alt="">
+                            {% endif %}
+                        {% endfor %}
                 </div>
-                <div class="col-md-8">
-                    {% csrf_token %}    
-                    <br>                
-                    <h1 id="nomTienda" data-placeholder='Nombre tienda'>{{ form.nom_tienda|attr:"readonly:True"|add_class:"textarea"  }}</h1>  
+                <div class="col-md-8">                      
                     <br>
-                    <h1 id="descTienda" data-placeholder='Descripcion tienda'>
-                        {% render_field form.desc_tienda rows="4" cols="25" readonly=True class="textarea" %}
-                    </h1>
+                    {% for n in perfil %}
+                        {% if n.user_id == user.id %}                
+                            <h1 id="nomTienda" data-placeholder='Nombre tienda'>{{ n.nom_tienda }}</h1>  
+                            <br>
+                            <h2 id="descTienda" data-placeholder='Descripcion tienda'>{{ n.desc_tienda }}</h2>
+                        {% endif %}
+                    {% endfor %}        
                 </div>
             </div>
             <!-- cuerpo -->

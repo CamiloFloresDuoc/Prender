@@ -115,11 +115,11 @@ def producto(request):
 def carrito(request):
     return render(request, 'core/carrito.html')
 
-def emprendedor(request,id):
-    perfil = Perfil.objects.get(user_id=id)
+def emprendedor(request):
+    perfil = Perfil.objects.all()
 
     datos = {
-        'form': Perfil_mod_form(instance=perfil)
+        'perfil': perfil
     }
     
 
