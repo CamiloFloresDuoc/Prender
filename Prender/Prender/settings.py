@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     #mis apps
     'core',
+    'rest_producto',
     #terceros
     'bootstrap4',
     'crispy_forms', 
