@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import CreateView
-from .models import User, Perfil, Emprendedor
+from .models import Contacto, Producto, User, Perfil, Emprendedor
 from .forms import CompradorRegister, ContactoForm, Crear_perfil_form, EmprendedorRegister, Perfil_mod_form
 from django.views.generic import TemplateView
 
@@ -12,23 +12,39 @@ from django.views.generic import TemplateView
 
 # Create your views here.
 
-def _get_form(request, formcls, prefix):
-        data = request.POST if prefix in request.POST else None
-        return formcls(data, prefix=prefix)
+# def _get_form(request, formcls, prefix):
+#         data = request.POST if prefix in request.POST else None
+#         return formcls(data, prefix=prefix)
 
-class Index(TemplateView):
-    template_name = 'core/index.html'
+# class Index(TemplateView):
+#     template_name = 'core/index.html'
 
-    def get(self, request, *args, **kwargs):
-        return self.render_to_response({'contactoform': ContactoForm(prefix='cform_pre')})
+#     def get(self, request, *args, **kwargs):
+#         return self.render_to_response({'contactoform': ContactoForm(prefix='cform_pre')})
 
-    def post(self, request, *args, **kwargs):
-        contactoform = _get_form(request, ContactoForm, 'cform_pre')
-        if contactoform.is_bound and contactoform.is_valid():
-            # Process contactoform and render response
-            contactoform.save()
-            return self.render_to_response({'contactoform': contactoform})
+#     def post(self, request, *args, **kwargs):
+#         contactoform = _get_form(request, ContactoForm, 'cform_pre')
+#         if contactoform.is_bound and contactoform.is_valid():
+#             # Process contactoform and render response
+#             contactoform.save()
+#             return self.render_to_response({'contactoform': contactoform})
 
+def index(request):
+
+    productos = Producto.objects.all()
+
+    datos = {
+        'form' : ContactoForm(),
+        'productos' : productos
+    }
+    
+    if request.method =='POST':
+        formulario = ContactoForm(request.POST)
+        
+        if formulario.is_valid():
+            formulario.save()
+
+    return render(request, 'core/index.html', datos)
 
 def login_request(request):
     if request.method=='POST':
@@ -78,7 +94,7 @@ class emprendedor_register(CreateView):
 
 def crearPerfil(request):
     datos = {
-        'form': Crear_perfil_form
+        'form': Crear_perfil_form()
     }
     perfil = None
     if request.method == 'POST':
