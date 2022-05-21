@@ -83,21 +83,25 @@
                     <table class="table table-hover">
                         <tr>
                             <td>Imagen</td>
-                            <td>Nombre Emprendimiento</td>
+                            <td>Nombre Producto</td>
                             <td>Descripcion</td>
                             <td>Acción</td>
+                            <td>Precio</td>
+                            <td>Stock</td>
                         </tr>
-                        <tr>
-                            <td><img src="{% static 'core/img/baner-prender.jpg'  %}" height="60px" width="80px" alt=""> </td>
-                            <!-- <td>{{ n.titulo }}</td>
-                            <td>{{ n.cuerpo }}</td> -->
-                            <td>Nombre Emprendimiento</td>
-                            <td>Descripcion</td>
+                        {% for n in productos %}
+                        <tr>                            
+                            <td><img src="{{ n.imagen.url }} " height="60px" width="80px" alt="">  </td>
+                            <td>{{ n.nom_prod }} </td>
+                            <td>{{ n.desc_prod }} </td>
+                            <td>${{ n.valor_prod }} </td>
+                            <td>{{ n.cantidad }} </td>
                             <td>
-                                <a href="{% url 'editarPdcto' %}" class='btn btn-info'>Editar</a>
-                                <a href="{% url 'eliminarPdcto' %}" class='btn btn-danger'>Eliminar</a>
+                                <a href="{% url 'editarPdcto' n.id %}" class='btn btn-info'>Editar</a>
+                                <a href="{% url 'eliminarPdcto' n.id %}" class='btn btn-danger'>Eliminar</a>
                             </td>
                         </tr>
+                        {% endfor %}
                     </table>
                     <br>
                     <br>

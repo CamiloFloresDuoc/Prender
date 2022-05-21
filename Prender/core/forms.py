@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django.db import transaction
 from django.db.models import fields
 from django.contrib.auth.forms import UserCreationForm
-from .models import Perfil, User, Comprador, Emprendedor, Contacto, Comuna
+from .models import Perfil, Producto, User, Comprador, Emprendedor, Contacto, Comuna
 
 
 
@@ -77,4 +77,9 @@ class Perfil_mod_form(forms.ModelForm):
     class Meta:
         model = Perfil
         fields = ['nom_tienda', 'desc_tienda','foto_perf']
+
+class ProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ['nom_prod', 'desc_prod', 'valor_prod', 'cantidad', 'categoria', 'imagen']
 

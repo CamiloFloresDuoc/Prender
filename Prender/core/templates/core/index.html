@@ -133,26 +133,28 @@
             <br>
             <br>
     <!--Contacto-->
-            <div class="titulo-seccion">
-                <div id="contacto" class="row">
-                    <h1>Contacto</h1>
+            <section>
+                <div class="titulo-seccion">
+                    <div id="contacto" class="row">
+                        <h1>Contacto</h1>
+                    </div>
                 </div>
-            </div>
-            <br>
-            <div class="row justify-content-center">
-                <form method="POST" class="contacto" id="contactForm">
-                    {% csrf_token %}
-                    {% for field in form.visible_fields %}
-                        <div class="form-group">
-                            {{ field.label_tag }}
-                                {% render_field field class="form-control" %}
-                    {% endfor %}
-                            <br>   
-                            <input type="submit" value="Enviar" class="btn btn-outline-dark send">
-                            <button type="reset" class="btn btn-dark">Limpiar</button>                                             
-                        </div>                        
-                </form>
-            </div>
+                <br>
+                <div class="row justify-content-center">
+                    <form method="POST" class="contacto" id="contactForm">
+                        {% csrf_token %}
+                        {% for field in form.visible_fields %}
+                            <div class="form-group">
+                                {{ field.label_tag }}
+                                    {% render_field field class="form-control" %}
+                        {% endfor %}
+                                <br>   
+                                <input type="submit" value="Enviar" class="btn btn-outline-dark send">
+                                <button type="reset" class="btn btn-dark">Limpiar</button>                                             
+                            </div>                        
+                    </form>
+                </div>
+            </section>            
             <br>
             <br>
         </div>

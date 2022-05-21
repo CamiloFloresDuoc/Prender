@@ -78,6 +78,7 @@ class Producto(models.Model):
     cantidad = models.IntegerField()
     user = models.ForeignKey(Perfil, on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to="images")
 
     def __str__(self):
         return self.nom_prod

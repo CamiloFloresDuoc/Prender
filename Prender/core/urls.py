@@ -25,8 +25,8 @@ urlpatterns = [
     path('busqueda/', busqueda, name="busqueda"),
     path('empPublico/', empPublico, name="empPublico"),
     path('adminPdcto/', adminPdcto, name="adminPdcto"),
-    path('editarPdcto/', editarPdcto, name="editarPdcto"),
-    path('eliminarPdcto/', eliminarPdcto, name="eliminarPdcto"),
-    path('editarPerfilEmp/<id>', editarPerfilEmp, name="editarPerfilEmp"),
+    path('editarPdcto/<id>/', editarPdcto, name="editarPdcto"),
+    path('eliminarPdcto/<id>/', eliminarPdcto, name="eliminarPdcto"),
+    path('editarPerfilEmp/<id>/', editarPerfilEmp, name="editarPerfilEmp"),
     path('crearPerfil/', crearPerfil, name="crearPerfil"),
 ]

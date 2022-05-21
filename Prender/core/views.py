@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import CreateView
 from .models import Contacto, Producto, User, Perfil, Emprendedor
-from .forms import CompradorRegister, ContactoForm, Crear_perfil_form, EmprendedorRegister, Perfil_mod_form
+from .forms import CompradorRegister, ContactoForm, Crear_perfil_form, EmprendedorRegister, Perfil_mod_form, ProductoForm
 from django.views.generic import TemplateView
 
 
@@ -147,7 +147,24 @@ def comprador(request):
     return render(request, 'core/comprador.html')
 
 def ingPdcto(request):
-    return render(request, 'core/ingPdcto.html')
+
+    perfil = Perfil.objects.get(user_id=request.user.id).id 
+    #perfil especifico logeado que quedara como clave foranea del producto
+
+    datos = {
+        'form' : ProductoForm()
+    }
+    producto = None
+    if request.method == 'POST':
+        formulario = ProductoForm(request.POST, request.FILES)
+
+        if formulario.is_valid():
+            producto = formulario.save(commit=False)
+            producto.user_id = perfil
+            producto.save()
+            datos['mensaje'] = "Producto creado correctamenta"
+
+    return render(request, 'core/ingPdcto.html', datos)
 
 def gestionEmp(request):
     return render(request, 'core/gestionEmp.html')
@@ -162,14 +179,35 @@ def empPublico(request):
     return render(request, 'core/empPublico.html')
 
 def adminPdcto(request):
-    return render(request, 'core/adminPdcto.html')
 
-def editarPdcto(request):
-    return render(request, 'core/editarPdcto.html')
+    perfil = Perfil.objects.get(user_id=request.user.id).id 
+    productos = Producto.objects.all().filter(user_id = perfil)
 
-def eliminarPdcto(request, pdcto_id):
-    producto = Producto.objects.get(pdcto_id=pdcto_id)
+    datos ={
+        'productos' : productos
+    }
+
+    return render(request, 'core/adminPdcto.html', datos)
+
+def editarPdcto(request, id):
+
+    productos = get_object_or_404(Producto, id=id)
+
+    datos = {
+        'form' : ProductoForm(instance=productos)
+    }
+    
+    if request.method == 'POST':
+        formulario = ProductoForm(request.POST, instance=productos, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+
+        datos['form'] = formulario
+
+    return render(request, 'core/editarPdcto.html', datos)
+
+def eliminarPdcto(request, id):
+    producto = Producto.objects.get(id=id)
     producto.delete()
-    messages.success(request, "Producto eliminado Exitosamente!")
     return redirect(to="adminPdcto")
 

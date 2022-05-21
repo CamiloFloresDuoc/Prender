@@ -208,3 +208,13 @@ h1:empty::before {
 .textarea:focus{
     outline: none;
 }
+.btn-light{
+    background-color: #f69a40;
+    color: #fff;
+}
+.btn-light:hover{
+    background-color: #fff;
+    color: #000;
+    border-color: #f69a40;
+    border-width: 3px;
+}
