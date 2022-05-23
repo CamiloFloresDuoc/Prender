@@ -102,30 +102,25 @@
                 </div>
                 <!-- productos -->
                 {% for n in productos %}
-                <div class="col-md-3">
-                    <div class="card mb-4" style="max-width: 100%;">
+                <div class="col-md-4 prod_espacio">
+                    <div class="card mb-3" style="max-width: 100%; max-height: 100%;">
                         <div class="row no-gutters">
-                        <div class="col-md-3">
-                            <img src="{{ n.imagen.url }}" height="100%" width="100%" alt="..."
+                            <img src="{{ n.imagen.url }}" class="card-img-top"  width="100%" alt="..."
                             style="object-fit: cover;" >
-                        </div>
-                        <div class="col-md-8">
                             <div class="card-body">
                             <h5 class="card-title">{{ n.nom_prod }}</h5>
                             <p class="card-text"> {{ n.desc_prod }}</p>
-                            <a href="" class="btn btn-outline-dark">Ver Producto</a>
+                            <a href="" class="btn btn-outline-dark">Ver producto</a>
                             </div>
-                        </div>
                         </div>
                     </div>
                 </div>
-                <br>
                 {% endfor %}
-                <br>
-                <br>
-                <br>
                 
             </div>
+            <br>
+                <br>
+                <br>
 
         </div>
         

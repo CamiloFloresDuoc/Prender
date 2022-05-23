@@ -33,7 +33,11 @@ body{
 .card{
     box-shadow: 4px 4px 8px black;
     max-width: 100%;
+    height: 100%;
     margin: 15px;
+}
+.prod_espacio{
+    margin-top: 1rem;
 }
 
 .lista-categoria ul{
