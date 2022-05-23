@@ -1,3 +1,4 @@
 1.- categorias en tiendas para filtrado
 2.- edicion campo nombre en tienda hacere READONLY
 
+{% url 'notiId' n.noticia_id %}

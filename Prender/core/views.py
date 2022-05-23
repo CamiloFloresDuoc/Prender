@@ -31,7 +31,8 @@ from django.views.generic import TemplateView
 
 def index(request):
 
-    productos = Producto.objects.all()
+    #[:12] para cargar los ultimos 12
+    productos = Producto.objects.all()[:12]
     categorias = Categoria.objects.all()
 
     datos = {
