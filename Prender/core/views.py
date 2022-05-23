@@ -1,3 +1,4 @@
+from ast import Lambda
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -140,10 +141,14 @@ def emprendedor(request):
     perfil = Perfil.objects.all()
     perfil_actual = Perfil.objects.get(user_id=request.user.id).id 
     productos = Producto.objects.all().filter(user_id = perfil_actual)
+    #array de solo categorias que existan en los productos del perfil
+    categorias_id = set(map( lambda p : p.categoria_id ,productos))
+    categorias =  Categoria.objects.filter(id__in= categorias_id)
     
     datos = {
         'perfil': perfil,
-        'productos' : productos
+        'productos' : productos,
+        'categorias' : categorias
     }
     
 
