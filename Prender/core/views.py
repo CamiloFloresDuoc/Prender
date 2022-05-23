@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import CreateView
-from .models import Contacto, Producto, User, Perfil, Emprendedor
+from .models import Categoria, Contacto, Producto, User, Perfil, Emprendedor
 from .forms import CompradorRegister, ContactoForm, Crear_perfil_form, EmprendedorRegister, Perfil_mod_form, ProductoForm
 from django.views.generic import TemplateView
 
@@ -32,10 +32,12 @@ from django.views.generic import TemplateView
 def index(request):
 
     productos = Producto.objects.all()
+    categorias = Categoria.objects.all()
 
     datos = {
         'form' : ContactoForm(),
-        'productos' : productos
+        'productos' : productos,
+        'categorias' : categorias
     }
     
     if request.method =='POST':
@@ -135,9 +137,12 @@ def carrito(request):
 
 def emprendedor(request):
     perfil = Perfil.objects.all()
-
+    perfil_actual = Perfil.objects.get(user_id=request.user.id).id 
+    productos = Producto.objects.all().filter(user_id = perfil_actual)
+    
     datos = {
-        'perfil': perfil
+        'perfil': perfil,
+        'productos' : productos
     }
     
 
@@ -163,6 +168,7 @@ def ingPdcto(request):
             producto.user_id = perfil
             producto.save()
             datos['mensaje'] = "Producto creado correctamenta"
+            return redirect(to="adminPdcto")
 
     return render(request, 'core/ingPdcto.html', datos)
 

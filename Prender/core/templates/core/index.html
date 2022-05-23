@@ -33,9 +33,9 @@
                                         Categorias
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        {% for n in categorias %}
+                                        <a class="dropdown-item" href="#">{{ n.nom_categoria }} </a>
+                                        {% endfor %}
                                         </div>
                                     </div>
                                 </li>                            
