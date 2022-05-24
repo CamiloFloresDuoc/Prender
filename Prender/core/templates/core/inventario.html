@@ -35,7 +35,7 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                           <a class="dropdown-item" href="{% url 'emprendedor' %}">Perfil</a>
-                                          <a class="dropdown-item" href="{% url 'inventario' %} ">Inventario</a>
+                                          <a class="dropdown-item" href="{% url 'adminPdcto' %}">Administrar Productos</a>
                                           <a class="dropdown-item" href="#">Balance</a>
                                           <a class="dropdown-item" href="#">Recetas</a>
                                           <a class="dropdown-item" href="{% url 'editarPerfilEmp' user.id %} ">Editar perfil</a>
@@ -59,12 +59,12 @@
             <br>
             <br>
             <br>
-            <br>
     <!-- admin productos -->
+    <br>
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col">
-                    <h1>Productos</h1>
+                    <h1>Inventario existencias</h1>
                 </div>
                 <div class="col-1"></div>
             </div>
@@ -72,7 +72,18 @@
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col">
-                    <a href="{% url 'ingPdcto' %}"><button type="button" class="btn btn-outline-dark agreg">+ Agregar Producto</button></a>
+                    <p>Acá puedes guardar todos los implementos utilizados por tu negocio.
+                        Tener un inventario te será util al momento de legalizar tu emprendimiento!
+                    </p>
+                    <p style="font-weight: bold;">Sólo tu puedes ver este inventario ;)</p>
+                </div>
+                <div class="col-1"></div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col">
+                    <a href="{% url 'agInventario' %}"><button type="button" class="btn btn-outline-dark agreg">+ Agregar al Inventario</button></a>
                 </div>
                 <div class="col-1"></div>
             </div>
@@ -83,20 +94,16 @@
 
                     <table class="table table-hover">
                         <tr>
-                            <td>Imagen</td>
-                            <td>Nombre Producto</td>
-                            <td>Descripcion</td>
-                            <td>Precio</td>
-                            <td>Stock</td>
+                            <td>Nombre</td>
+                            <td>Cantidad</td>
+                            <td>Valor</td>
                             <td>Acción</td>
                         </tr>
-                        {% for n in productos %}
-                        <tr>                            
-                            <td><img src="{{ n.imagen.url }} " height="60px" width="80px" alt="">  </td>
-                            <td>{{ n.nom_prod }} </td>
-                            <td>{{ n.desc_prod }} </td>
-                            <td>${{ n.valor_prod }} </td>
-                            <td>{{ n.cantidad }} </td>
+                        {% for n in inventario %}
+                        <tr> 
+                            <td>{{ n.nom_ingred }} </td>
+                            <td>{{ n.cant_ingre }} </td>
+                            <td>${{ n.valor_ingre }} </td>
                             <td>
                                 <a href="{% url 'editarPdcto' n.id %}" class='btn btn-info'>Editar</a>
                                 <a href="{% url 'eliminarPdcto' n.id %}" class='btn btn-danger'>Eliminar</a>

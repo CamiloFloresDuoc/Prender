@@ -59,7 +59,10 @@
                                     <a href="{% url 'comprador' %}"><button type="button" class="btn btn-dark">Mi Perfil</button></a>
                                 </li> 
                                     {% endif %}    
-                                {% endif %}                                                  
+                                {% endif %}  
+                                <li class="nav-item">
+                                    <a class="nav-link contac" href="#alContacto">Contacto </a> 
+                                </li>                                                  
                             </ul>
                                 {% if user.is_comprador %}
                             <div class="shopCart">
@@ -102,6 +105,7 @@
     <!--seccion destacados: carrusel con publicidad pagada-->
 
     <!--Recientes cards-->
+    <br>
             <div class="titulo-seccion">
                 <div class="row">
                     <h1>Descubre Nuevos Sabores!!</h1>
@@ -135,7 +139,7 @@
             <br>
             <hr>
             <br>
-            <br>
+            <br id="alContacto">
     <!--Contacto-->
             <section>
                 <div class="titulo-seccion">

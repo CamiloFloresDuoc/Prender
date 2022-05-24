@@ -1,9 +1,9 @@
 from ast import Index
 from cgi import test
 from django.urls import path
-from .views import (aTienda, adminPdcto, busqueda, carrito, comprador, comprador_register, crearPerfil, 
+from .views import (aTienda, adminPdcto, agInventario, busqueda, carrito, comprador, comprador_register, crearPerfil, eliminarDelInventario, 
 emprendedor_register, editarPdcto, eliminarPdcto, emprendedor, empPublico, gestionEmp, 
-index, ingPdcto, login_request, logout_view, producto, regCompras, register,
+index, ingPdcto, inventario, login_request, logout_view, producto, regCompras, register,
 editarPerfilEmp
 )
 
@@ -27,7 +27,10 @@ urlpatterns = [
     path('adminPdcto/', adminPdcto, name="adminPdcto"),
     path('editarPdcto/<id>/', editarPdcto, name="editarPdcto"),
     path('eliminarPdcto/<id>/', eliminarPdcto, name="eliminarPdcto"),
+    path('eliminarDelInventario/<id>/', eliminarDelInventario, name="eliminarDelInventario"),
     path('editarPerfilEmp/<id>/', editarPerfilEmp, name="editarPerfilEmp"),
     path('crearPerfil/', crearPerfil, name="crearPerfil"),
     path('aTienda/<id>/', aTienda, name="aTienda"),
+    path('inventario/', inventario, name="inventario"),
+    path('agInventario/', agInventario, name="agInventario"),
 ]

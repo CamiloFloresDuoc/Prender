@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import CreateView
-from .models import Categoria, Contacto, Producto, User, Perfil, Emprendedor
-from .forms import CompradorRegister, ContactoForm, Crear_perfil_form, EmprendedorRegister, Perfil_mod_form, ProductoForm
+from .models import Categoria, Contacto, Inventario, Producto, User, Perfil, Emprendedor
+from .forms import CompradorRegister, ContactoForm, Crear_perfil_form, EmprendedorRegister, InventarioForm, Perfil_mod_form, ProductoForm
 from django.views.generic import TemplateView
 
 
@@ -258,3 +258,38 @@ def eliminarPdcto(request, id):
     producto.delete()
     return redirect(to="adminPdcto")
 
+def eliminarDelInventario(request, id):
+    inventario = Inventario.objects.get(id=id)
+    inventario.delete()
+    return redirect(to="inventario")
+
+def inventario(request):
+
+    perfil = Perfil.objects.get(user_id=request.user.id).id 
+    inventario = Inventario.objects.all().filter(user_id= perfil)
+
+    datos = {
+        'inventario': inventario
+    }
+
+    return render(request, 'core/inventario.html', datos)
+
+def agInventario(request):
+
+    perfil = Perfil.objects.get(user_id=request.user.id).id 
+
+    datos = {
+        'form' : InventarioForm()
+    }
+    inventario = None
+    if request.method == 'POST':
+        formulario = InventarioForm(request.POST, request.FILES)
+
+        if formulario.is_valid():
+            inventario = formulario.save(commit=False)
+            inventario.user_id = perfil
+            inventario.save()
+            datos['mensaje'] = "Producto creado correctamenta"
+            return redirect(to="inventario")
+
+    return render(request, 'core/agInventario.html', datos)

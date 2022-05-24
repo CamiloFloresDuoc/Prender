@@ -2,13 +2,9 @@
 
 2.- edicion campo nombre en tienda hacere READONLY
 
-3.- enlaces a productos desde el index, agregar nombre de tienda en producto
+5.- hacer funcionar input de barra de busqueda y enlaces categorias
 
-4.- if user is comprador mostrar carro sino no
-
-5.- hacer funcionar input de barra d busqueda y enlaces categorias
-
-6.- min width cards
+6.- min-width cards
 
 7.- crud gestion
 

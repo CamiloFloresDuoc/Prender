@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django.db import transaction
 from django.db.models import fields
 from django.contrib.auth.forms import UserCreationForm
-from .models import Perfil, Producto, User, Comprador, Emprendedor, Contacto, Comuna
+from .models import Inventario, Perfil, Producto, User, Comprador, Emprendedor, Contacto, Comuna
 
 
 
@@ -82,4 +82,9 @@ class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
         fields = ['nom_prod', 'desc_prod', 'valor_prod', 'cantidad', 'categoria', 'imagen']
+
+class InventarioForm(forms.ModelForm):
+    class Meta:
+        model = Inventario
+        fields = ['nom_ingred', 'cant_ingre','valor_ingre']
 

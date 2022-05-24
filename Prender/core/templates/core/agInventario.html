@@ -36,15 +36,15 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a class="dropdown-item" href="{% url 'emprendedor' %}">Perfil</a>
-                                            <a class="dropdown-item" href="{% url 'inventario' %}">Inventario</a>
+                                            <a class="dropdown-item" href="{% url 'adminPdcto' %}">Administrar Productos</a>
                                             <a class="dropdown-item" href="#">Balance</a>
                                             <a class="dropdown-item" href="#">Recetas</a>
-                                            <a class="dropdown-item" href="#">Configuración Cuenta</a>
+                                            <a class="dropdown-item" href="{% url 'editarPerfilEmp' user.id %} ">Editar perfil</a>
                                         </div>
                                       </div>
                                 </li>     
                                 <li class="nav-item alHome">
-                                    <a class="nav-link" href="{% url 'adminPdcto' %}">Volver</a> 
+                                    <a class="nav-link" href="{% url 'inventario' %}">Volver</a> 
                                 </li>                                               
                             </ul>
                             {% if user.is_authenticated %}
@@ -70,28 +70,29 @@
                         <div class="col-md-8 mx-auto">
                             <div class="card">
                                 <div class="card-header text-black">
-                                    <h2>Agregar producto</h2>
+                                    <h2>Agregar al inventario</h2>
                                 </div>
                                 <div class="card-body">
-                                    <form action="" method="POST" enctype="multipart/form-data">
+                                    <form action="" method="POST">
                                         {% csrf_token %}
-                                            {% for field in form.visible_fields %}
-                                                <div class="form-group">
-                                                    {{ field.label_tag }}
-                                                        {% render_field field class="form-control" %}
-                                                            {% if messages%}
-                                                                {% for message in messages %}
-                                                                    <span style="color:red">{{ message }}</span>
-                                                                {% endfor %}
-                                                            {% endif %}
-                                            {% endfor %}
-                                            <br>
-                                                    <input type="submit" value="Guardar" class="btn btn-block btn-light">
-                                                    <br>
-                                                    <div class="row-lg-6">
-                                                        <button type="reset" class="btn btn-block btn-dark">Limpiar</button> 
-                                                    </div>
-                                                </div>
+                                        <div class="form-group">
+                                            <label for="nom_ingred">Nombre:</label>
+                                             <div class="form_control">{{ form.nom_ingred|add_class:"control" }}</div> 
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cant_ingre">Cantidad:</label>
+                                             <div class="form_control">{{ form.cant_ingre|add_class:"control" }}</div> 
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="valor_ingre">Valor:</label>
+                                             <div class="form_control">{{ form.valor_ingre|add_class:"control" }}</div> 
+                                        </div>
+                                        <br>
+                                        <input type="submit" value="Guardar" class="btn btn-block btn-light">
+                                        <br>
+                                        <div class="row-lg-6">
+                                            <button type="reset" class="btn btn-block btn-dark">Limpiar</button> 
+                                        </div>
                                     </form>
                                 </div>
                             </div>   
