@@ -1,12 +1,87 @@
+{% load static %}
+{% load bootstrap4 %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Prender</title>
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'core/css/comprador.css' %} ">
 </head>
 <body>
-    
+    <div class="container-fluid">
+        <!--Nav-->
+                <div class="allButFooter">
+                    <nav class="row" id="navi">
+                        <div class="col">
+                            <nav class="navbar navbar-expand-lg navbar-light">
+                                <img src="{% static 'core/img/logo-prender.png' %}" height="45px" class="navbar-brand" alt="">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNav">
+                                    <ul class="navbar-nav mr-auto">  
+                                        <li class="nav-item alHome">
+                                            <a class="nav-link" href="{% url 'index' %}">Inicio <span class="sr-only">(current)</span></a> 
+                                        </li>                                                
+                                    </ul>
+                                    <div id="nomUser">
+                                        <p>User</p>
+                                    </div>
+                                    <div class="reglog">                                
+                                        <a href="{% url 'register' %}"><button type="button" class="btn btn-dark">Cerrar Sesión</button></a>
+                                    </div>                    
+                                </div>
+                            </nav>
+                        </div>
+                    </nav>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+            <!--perfil emprendedor-->
+                    <div class="row">
+                        <div class="col-4">
+                            <img src="{% static 'core/img/defaultPic.png' %}" id="profilePic">
+                        </div>
+                        <div class="col-4">
+                            <h3 id="nombreUser">Nombre</h3>
+                            <input type="text" name="inputNomUser" size="30" placeholder="{user}" class="form-control" id="edit_nombreUser" disabled>
+                            <br>
+                            <h3 id="emailUser">Email</h3>
+                            <input type="text" name="inputEmail" size="50" placeholder="logged_user@gmail.com" class="form-control" id="edit_emailUser" disabled>
+                            <br>
+                            <h3 id="contrasennaUser">Contraseña</h3>
+                            <input type="password" name="inputPassword" size="50" placeholder="************" class="form-control" id="edit_nombreUser" disabled>
+                            <br>
+                            <button type="button" class="btn btn-outline-dark">Editar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <a href="{% url 'regCompras' %}"><button type="button" class="btn btn-outline-dark" id="btn_registroCompras">Registro de Compras</button></a>
+                    </div>
+                    <div class="col-1">
+                        <button type="button" class="btn btn-dark">Volver</button>
+                    </div>
+                    <br><br>
+                </div>
+        <!--footer-->
+                <footer class="row">
+                    <div class="col-8">
+                    <span><p>Lleva tu emprendimiento al siguiente nivel en PRENDER</p></span>
+                    </div>
+                    <div class="col-2">
+                    <p>®Prender</p>
+                    </div>
+                </footer>
+            </div>
+
+            {% bootstrap_javascript jquery='full' %}
+            <script src="{% static 'core/js/validacionFormIndex.js'%}"></script>        
 </body>
 </html>

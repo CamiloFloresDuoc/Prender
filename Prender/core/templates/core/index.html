@@ -53,13 +53,19 @@
                                     {% if user.is_emprendedor %}
                                 <li class="nav-item">
                                     <a href="{% url 'emprendedor' %}"><button type="button" class="btn btn-dark">Mi Perfil</button></a>
+                                </li>
+                                    {% elif user.is_comprador %}
+                                <li class="nav-item">
+                                    <a href="{% url 'comprador' %}"><button type="button" class="btn btn-dark">Mi Perfil</button></a>
                                 </li> 
                                     {% endif %}    
                                 {% endif %}                                                  
                             </ul>
+                                {% if user.is_comprador %}
                             <div class="shopCart">
                                 <a href=""><i class="fas fa-shopping-cart" aria-hidden="true"></i></a>                            
                             </div>
+                                {% endif %}
                             <div class="row reglog">
                                 {% if user.is_authenticated%}
                                 <div class="col nombreUsuario"> 
@@ -115,7 +121,8 @@
                             <div class="card-body">
                             <h5 class="card-title">{{ n.nom_prod }}</h5>
                             <p class="card-text"> {{ n.desc_prod }}</p>
-                            <a href="" class="btn btn-outline-dark">Ver producto</a>
+                            <h4 class="card-text"> ${{ n.valor_prod }} </h4>
+                            <a href="{% url 'producto' n.id %}" class="btn btn-outline-dark">Ver producto</a>
                             </div>
                         </div>
                     </div>

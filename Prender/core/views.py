@@ -131,8 +131,22 @@ def editarPerfilEmp(request, id):
 
     return render(request, 'core/editarPerfilEmp.html', datos)
 
-def producto(request):
-    return render(request, 'core/producto.html')
+
+
+def producto(request, id):
+
+    prod = Producto.objects.get(id=id).user_id
+    tienda = Perfil.objects.get(id=prod)
+    producto = Producto.objects.filter(id=id)
+
+    datos = {
+        'producto': producto,
+        'id' : id,
+        'tienda': tienda
+    }
+    return render(request, 'core/producto.html', datos)
+
+
 
 def carrito(request):
     return render(request, 'core/carrito.html')
@@ -154,8 +168,27 @@ def emprendedor(request):
 
     return render(request, 'core/emprendedor.html',datos)
 
+
 def comprador(request):
     return render(request, 'core/comprador.html')
+
+def aTienda(request, id):
+
+    perfil = Perfil.objects.get(id=id)
+    tienda = Perfil.objects.filter(id=id)
+    productos = Producto.objects.all().filter(user_id = id)
+    categorias_id = set(map( lambda p : p.categoria_id ,productos))
+    categorias =  Categoria.objects.filter(id__in= categorias_id)
+
+    datos = {
+        'tienda' : tienda,
+        'id': id,
+        'productos': productos,
+        'categorias': categorias,
+        'perfil': perfil
+    }
+
+    return render(request, 'core/aTienda.html', datos)
 
 def ingPdcto(request):
 
@@ -177,6 +210,8 @@ def ingPdcto(request):
             return redirect(to="adminPdcto")
 
     return render(request, 'core/ingPdcto.html', datos)
+
+
 
 def gestionEmp(request):
     return render(request, 'core/gestionEmp.html')

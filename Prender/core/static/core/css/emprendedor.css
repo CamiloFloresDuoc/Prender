@@ -39,6 +39,9 @@ body{
 .prod_espacio{
     margin-top: 1rem;
 }
+.nombreUsuario h6{
+    margin-top: 0.7rem;
+}
 
 .lista-categoria ul{
     list-style-type: none;

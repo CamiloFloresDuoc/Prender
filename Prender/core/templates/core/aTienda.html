@@ -29,24 +29,45 @@
                                 <li class="nav-item alHome">
                                     <a class="nav-link" href="{% url 'index' %}">Inicio <span class="sr-only">(current)</span></a> 
                                 </li>   
-                                {% if user.is_authenticated %} 
-                                    {% if user.is_emprendedor %}                       
-                                        <li class="nav-item">
-                                            <div class="dropdown">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                                                Herramientas Gestión
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="{% url 'adminPdcto' %}">Administrar Productos</a>
-                                                <a class="dropdown-item" href="#">Inventario</a>
-                                                <a class="dropdown-item" href="#">Balance</a>
-                                                <a class="dropdown-item" href="#">Recetas</a>
-                                                <a class="dropdown-item" href="{% url 'editarPerfilEmp' user.id %} ">Editar perfil</a>
-                                                </div>
-                                            </div>
-                                        </li> 
-                                    {% endif %}
-                                {% endif %}                                                
+                            {% if user.is_authenticated %} 
+                                {% if user.is_emprendedor %}                       
+                                <li class="nav-item">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                                        Herramientas Gestión
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="{% url 'adminPdcto' %}">Administrar Productos</a>
+                                        <a class="dropdown-item" href="#">Inventario</a>
+                                        <a class="dropdown-item" href="#">Balance</a>
+                                        <a class="dropdown-item" href="#">Recetas</a>
+                                        <a class="dropdown-item" href="{% url 'editarPerfilEmp' user.id %} ">Editar perfil</a>
+                                        </div>
+                                    </div>
+                                </li>                                    
+                                {% endif %}
+                            {% else %}
+                                <li class="nav-item">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                                        Categorias
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </li>                            
+                                <li class="nav-item">
+                                    <div class="input-group mb-3">
+                                        <form class="form-inline my-2 my-lg-0">
+                                            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+                                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
+                                        </form>
+                                    </div>
+                                </li>  
+                            {% endif %}                                                
                             </ul>
                             {% if user.is_authenticated %}
                                 <div id="nombreUsuario">
@@ -55,6 +76,9 @@
                                 <div class="reglog">                                
                                     <a href="{% url 'logout' %}"><button type="button" class="btn btn-dark">Cerrar Sesión</button></a>
                                 </div>
+                            {% else %}                                
+                                <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-light">Login</button></a>
+                                <a href="{% url 'register' %}"><button type="button" class="btn btn-dark">Registrate</button></a>
                             {% endif %}                    
                         </div>
                     </nav>
@@ -68,22 +92,14 @@
     <!-- cabecera -->
             <div class="row">
                 <div class="col-md-4">  
-                        {% for n in perfil %}
-                            {% if n.user_id == user.id %}
-                                <img src="{{ n.foto_perf.url }}" height="250px" width="500px" alt="">
-                            {% endif %}
-                        {% endfor %}
+                    <img src="{{ perfil.foto_perf.url }}" height="250px" width="500px" alt="">
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-6">                      
+                    <br>          
+                    <h1 id="nomTienda" data-placeholder='Nombre tienda'>{{ perfil.nom_tienda }}</h1>  
                     <br>
-                    {% for n in perfil %}
-                        {% if n.user_id == user.id %}                
-                            <h1 id="nomTienda" data-placeholder='Nombre tienda'>{{ n.nom_tienda }}</h1>  
-                            <br>
-                            <h2 id="descTienda" data-placeholder='Descripcion tienda'>{{ n.desc_tienda }}</h2>
-                        {% endif %}
-                    {% endfor %}        
+                    <h2 id="descTienda" data-placeholder='Descripcion tienda'>{{ perfil.desc_tienda }}</h2>
                 </div>
             </div>
             <!-- cuerpo -->

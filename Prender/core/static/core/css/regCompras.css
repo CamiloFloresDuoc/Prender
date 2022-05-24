@@ -49,9 +49,6 @@ body{
     
     
 }
-.nombreUsuario h6{
-    margin-top: 0.7rem;
-}
 .contacto{
     width: 80%;
 }
@@ -90,9 +87,6 @@ footer p {
     padding: 5px;
     border-radius: 2px;
 }
-.tamanonoticia img{
-    width: 100%;
-}
 nav {
     position: fixed;
     z-index: 999;
@@ -117,13 +111,6 @@ nav {
     justify-content: right;
     margin: 5px 10px 5px 15px;
     padding-left: 5px;
-    min-width: 250px;
-}
-
-
-#busqueda {
-    float: right;
-    justify-content: right;
 }
 
 .baner {
@@ -132,48 +119,6 @@ nav {
     overflow: hidden;
     background-position: center;
 }
-.baner img {
-    object-fit: cover;
-}
-#leban {
-    z-index: -99999;
-}
-
-#leban .text{
-    position: absolute;
-    z-index: 99;
-    margin: 0 0 0 50px;
-    left: 0;
-    right: 0;
-    top: 30%;
-    text-align: left;
-    width: 50%;
-    height: 28%;
-}
-#leban .p1{
-    padding: 5px;
-    background-color: #f69a40;
-    color: black;
-    font-size: 48px;
-    font-weight: bold;
-    font-style: italic;
-}
-#leban .p2{
-    padding: 5px;
-    background-color: #f69a40;
-    color: black;
-    font-size: 24px;
-    font-weight: bold;
-    font-style: italic;
-}
-
-/* .bannerImg {
-    background-image: url('../img/baner-prender.jpg');
-    height: 720px;
-    width: 1200px;
-    background-size: cover; 
-} */
-
 .navbar-collapse, .dropdown{
     background-color: #f69a40;
 }
@@ -202,16 +147,6 @@ nav {
     color: #fff !important;
     border-color: #fff !important;
 }
-.shopCart a{
-    padding: 8px;
-    border: solid #fff;
-    border-radius: 8px;
-}
-.shopCart a:hover{
-    padding: 10px;
-    background-color: #fff !important;
-    color: #000 !important;
-}
 .alHome{
     padding-top: 17px;
 }
@@ -223,11 +158,32 @@ button.carousel-control-next, button.carousel-control-prev {
     color: transparent !important;
     border: none;
 }
-.alCart{
-    background-color: #f69a40;
-    color: #fff;
-}
 .precioCard{
     font-size: 22px;
     font-weight: bold;
+}
+#nomUser{
+    margin: 15px 20px 0 10px;
+    color: #fff;
+}
+#profilePic{
+    display: flex;
+    width: 70%;
+    height: auto;
+    margin: 25px 25px 35px 40px;
+}
+#btn_registroCompras{
+    margin-left: 12%;
+}
+#fondo-balance{
+    border-color: #000;
+    background-color: #4f4f4f;
+}
+
+#tabla-balance{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
 }

@@ -1,4 +1,15 @@
-1.- categorias en tiendas para filtrado
+1.- categorias en tiendas para filtrado funcionen para mostrar
+
 2.- edicion campo nombre en tienda hacere READONLY
 
-{% url 'notiId' n.noticia_id %}
+3.- enlaces a productos desde el index, agregar nombre de tienda en producto
+
+4.- if user is comprador mostrar carro sino no
+
+5.- hacer funcionar input de barra d busqueda y enlaces categorias
+
+6.- min width cards
+
+7.- crud gestion
+
+8.- traer todas las categorias para la barra nav, reemplazar por barras de usuario dependiendo su tipo
