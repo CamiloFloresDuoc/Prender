@@ -44,7 +44,7 @@
                                       </div>
                                 </li>     
                                 <li class="nav-item alHome">
-                                    <a class="nav-link" href="{% url 'inventario' %}">Volver</a> 
+                                    <a class="nav-link" href="{% url 'recetas' %}">Volver</a> 
                                 </li>                                               
                             </ul>
                             {% if user.is_authenticated %}
@@ -63,37 +63,22 @@
             <br>
             <br>
             <br>
-<!-- Formulario -->
+<!-- body -->
             <section>
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8 mx-auto">
                             <div class="card">
-                                <div class="card-header text-black">
-                                    <h2>Editar inventario</h2>
+                                <br>
+                                <div class="card-title">
+                                {% for n in receta %}
+                                    <h2>{{ n.nom_receta }} </h2>
+                                {% endfor %}
                                 </div>
                                 <div class="card-body">
-                                    <form action="" method="POST">
-                                        {% csrf_token %}
-                                        <div class="form-group">
-                                            <label for="nom_ingred">Nombre:</label>
-                                             <div class="form_control">{{ form.nom_ingred|add_class:"control" }}</div> 
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="cant_ingre">Cantidad:</label>
-                                             <div class="form_control">{{ form.cant_ingre|add_class:"control" }}</div> 
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="valor_ingre">Valor:</label>
-                                             <div class="form_control">{{ form.valor_ingre|add_class:"control" }}</div> 
-                                        </div>
-                                        <br>
-                                        <input type="submit" value="Guardar" class="btn btn-block btn-light">
-                                        <br>
-                                        <div class="row-lg-6">
-                                            <button type="reset" class="btn btn-block btn-dark">Limpiar</button> 
-                                        </div>
-                                    </form>
+                                {% for n in receta %}
+                                    <p>{{ n.desc_receta }} </p>
+                                {% endfor %}
                                 </div>
                             </div>   
                         </div>

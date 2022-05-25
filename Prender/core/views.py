@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import CreateView
-from .models import Categoria, Contacto, Inventario, Producto, User, Perfil, Emprendedor
-from .forms import CompradorRegister, ContactoForm, Crear_perfil_form, EmprendedorRegister, InventarioForm, Perfil_mod_form, ProductoForm
+from .models import Categoria, Contacto, Inventario, Producto, Receta, User, Perfil, Emprendedor
+from .forms import CompradorRegister, ContactoForm, Crear_perfil_form, EmprendedorRegister, InventarioForm, Perfil_mod_form, ProductoForm, RecetaForm
 from django.views.generic import TemplateView
 
 
@@ -131,8 +131,6 @@ def editarPerfilEmp(request, id):
 
     return render(request, 'core/editarPerfilEmp.html', datos)
 
-
-
 def producto(request, id):
 
     prod = Producto.objects.get(id=id).user_id
@@ -167,7 +165,6 @@ def emprendedor(request):
     
 
     return render(request, 'core/emprendedor.html',datos)
-
 
 def comprador(request):
     return render(request, 'core/comprador.html')
@@ -210,8 +207,6 @@ def ingPdcto(request):
             return redirect(to="adminPdcto")
 
     return render(request, 'core/ingPdcto.html', datos)
-
-
 
 def gestionEmp(request):
     return render(request, 'core/gestionEmp.html')
@@ -263,6 +258,11 @@ def eliminarDelInventario(request, id):
     inventario.delete()
     return redirect(to="inventario")
 
+def eliminarReceta(request, id):
+    receta = Receta.objects.get(id=id)
+    receta.delete()
+    return redirect(to="recetas")
+
 def inventario(request):
 
     perfil = Perfil.objects.get(user_id=request.user.id).id 
@@ -310,3 +310,62 @@ def editInventario(request,id):
             return redirect(to="inventario")
 
     return render(request, 'core/editInventario.html', datos)
+
+def recetas(request):
+
+    perfil = Perfil.objects.get(user_id=request.user.id).id 
+    receta = Receta.objects.all().filter(user_id= perfil)
+
+    datos = {
+        'receta': receta
+    }
+
+    return render(request, 'core/recetas.html', datos)
+
+def agReceta(request):
+
+    perfil = Perfil.objects.get(user_id=request.user.id).id 
+
+    datos = {
+        'form' : RecetaForm()
+    }
+    receta = None
+    if request.method == 'POST':
+        formulario = RecetaForm(request.POST, request.FILES)
+
+        if formulario.is_valid():
+            receta = formulario.save(commit=False)
+            receta.user_id = perfil
+            receta.save()
+            datos['mensaje'] = "Receta creada correctamenta"
+            return redirect(to="recetas")
+    return render(request, 'core/agReceta.html', datos)
+
+def verReceta(request, id):
+
+    rece = Receta.objects.get(id=id).user_id
+    tienda = Perfil.objects.get(id=rece)
+    receta = Receta.objects.filter(id=id)
+
+    datos = {
+        'receta': receta,
+        'id' : id,
+        'tienda': tienda
+    }
+    return render(request, 'core/verReceta.html', datos)
+
+def editarReceta(request, id):
+
+    recetas = get_object_or_404(Receta, id=id)
+
+    datos = {
+        'form' : RecetaForm(instance=recetas)
+    }
+
+    if request.method == 'POST':
+        formulario = RecetaForm(request.POST, instance=recetas)
+        if formulario.is_valid():
+            formulario.save()
+            datos['form'] = formulario
+            return redirect(to="recetas")
+    return render(request, 'core/editarReceta.html',datos)

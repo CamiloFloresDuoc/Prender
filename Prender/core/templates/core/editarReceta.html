@@ -44,7 +44,7 @@
                                       </div>
                                 </li>     
                                 <li class="nav-item alHome">
-                                    <a class="nav-link" href="{% url 'inventario' %}">Volver</a> 
+                                    <a class="nav-link" href="{% url 'recetas' %}">Volver</a> 
                                 </li>                                               
                             </ul>
                             {% if user.is_authenticated %}
@@ -70,22 +70,18 @@
                         <div class="col-md-8 mx-auto">
                             <div class="card">
                                 <div class="card-header text-black">
-                                    <h2>Editar inventario</h2>
+                                    <h2>Editar la receta</h2>
                                 </div>
                                 <div class="card-body">
                                     <form action="" method="POST">
                                         {% csrf_token %}
                                         <div class="form-group">
                                             <label for="nom_ingred">Nombre:</label>
-                                             <div class="form_control">{{ form.nom_ingred|add_class:"control" }}</div> 
+                                             <div class="form_control">{{ form.nom_receta|add_class:"control" }}</div> 
                                         </div>
                                         <div class="form-group">
-                                            <label for="cant_ingre">Cantidad:</label>
-                                             <div class="form_control">{{ form.cant_ingre|add_class:"control" }}</div> 
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="valor_ingre">Valor:</label>
-                                             <div class="form_control">{{ form.valor_ingre|add_class:"control" }}</div> 
+                                            <label for="cant_ingre">Descripción:</label>
+                                             <div class="form_control">{{ form.desc_receta|add_class:"control" }}</div> 
                                         </div>
                                         <br>
                                         <input type="submit" value="Guardar" class="btn btn-block btn-light">

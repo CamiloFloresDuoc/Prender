@@ -36,8 +36,8 @@
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                           <a class="dropdown-item" href="{% url 'emprendedor' %}">Perfil</a>
                                           <a class="dropdown-item" href="{% url 'adminPdcto' %}">Administrar Productos</a>
+                                          <a class="dropdown-item" href="{% url 'inventario' %} ">Inventario</a>
                                           <a class="dropdown-item" href="#">Balance</a>
-                                          <a class="dropdown-item" href="{% url 'recetas' %}">Recetas</a>
                                           <a class="dropdown-item" href="{% url 'editarPerfilEmp' user.id %} ">Editar perfil</a>
                                         </div>
                                       </div>
@@ -64,7 +64,7 @@
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col">
-                    <h1>Inventario existencias</h1>
+                    <h1>Recetario</h1>
                 </div>
                 <div class="col-1"></div>
             </div>
@@ -72,10 +72,9 @@
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col">
-                    <p>Acá puedes guardar todos los implementos utilizados por tu negocio.
-                        Tener un inventario te será util al momento de legalizar tu emprendimiento!
+                    <p>Acá puedes guardar todas tus recetas para que no las olvides.
                     </p>
-                    <p style="font-weight: bold;">Sólo tu puedes ver este inventario ;)</p>
+                    <p style="font-weight: bold;">Sólo tu puedes ver tus Recetas, asi que no estaras revelando tus secretos ;)</p>
                 </div>
                 <div class="col-1"></div>
             </div>
@@ -83,7 +82,7 @@
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col">
-                    <a href="{% url 'agInventario' %}"><button type="button" class="btn btn-outline-dark agreg">+ Agregar al Inventario</button></a>
+                    <a href="{% url 'agReceta' %}"><button type="button" class="btn btn-outline-dark agreg">+ Agregar al Recetario</button></a>
                 </div>
                 <div class="col-1"></div>
             </div>
@@ -95,18 +94,15 @@
                     <table class="table table-hover">
                         <tr>
                             <td>Nombre</td>
-                            <td>Cantidad</td>
-                            <td>Valor</td>
                             <td>Acción</td>
                         </tr>
-                        {% for n in inventario %}
+                        {% for n in receta %}
                         <tr> 
-                            <td>{{ n.nom_ingred }} </td>
-                            <td>{{ n.cant_ingre }} </td>
-                            <td>${{ n.valor_ingre }} </td>
+                            <td>{{ n.nom_receta }} </td>
                             <td>
-                                <a href="{% url 'editInventario' n.id %}" class='btn btn-info'>Editar</a>
-                                <a href="{% url 'eliminarDelInventario' n.id %}" class='btn btn-danger'>Eliminar</a>
+                                <a href="{% url 'verReceta' n.id %}" class='btn btn-info'>Ver receta</a>
+                                <a href="{% url 'editarReceta' n.id %}" class='btn btn-info'>Editar</a>
+                                <a href="{% url 'eliminarReceta' n.id %}" class='btn btn-danger'>Eliminar</a>
                             </td>
                         </tr>
                         {% endfor %}

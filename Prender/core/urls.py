@@ -1,10 +1,10 @@
 from ast import Index
 from cgi import test
 from django.urls import path
-from .views import (aTienda, adminPdcto, agInventario, busqueda, carrito, comprador, comprador_register, crearPerfil, editInventario, eliminarDelInventario, 
+from .views import (aTienda, adminPdcto, agInventario, agReceta, busqueda, carrito, comprador, comprador_register, crearPerfil, editInventario, editarReceta, eliminarDelInventario, eliminarReceta, 
 emprendedor_register, editarPdcto, eliminarPdcto, emprendedor, empPublico, gestionEmp, 
-index, ingPdcto, inventario, login_request, logout_view, producto, regCompras, register,
-editarPerfilEmp
+index, ingPdcto, inventario, login_request, logout_view, producto, recetas, regCompras, register,
+editarPerfilEmp, verReceta
 )
 
 urlpatterns = [
@@ -28,10 +28,15 @@ urlpatterns = [
     path('editarPdcto/<id>/', editarPdcto, name="editarPdcto"),
     path('eliminarPdcto/<id>/', eliminarPdcto, name="eliminarPdcto"),
     path('eliminarDelInventario/<id>/', eliminarDelInventario, name="eliminarDelInventario"),
+    path('eliminarReceta/<id>/', eliminarReceta, name="eliminarReceta"),
     path('editarPerfilEmp/<id>/', editarPerfilEmp, name="editarPerfilEmp"),
     path('crearPerfil/', crearPerfil, name="crearPerfil"),
     path('aTienda/<id>/', aTienda, name="aTienda"),
     path('inventario/', inventario, name="inventario"),
     path('agInventario/', agInventario, name="agInventario"),
     path('editInventario/<id>/', editInventario, name="editInventario"),
+    path('recetas/', recetas, name="recetas"),
+    path('agReceta/', agReceta, name="agReceta"),
+    path('verReceta/<id>/', verReceta, name="verReceta"),
+    path('editarReceta/<id>/', editarReceta, name="editarReceta"),
 ]
