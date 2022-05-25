@@ -105,8 +105,8 @@
                             <td>{{ n.cant_ingre }} </td>
                             <td>${{ n.valor_ingre }} </td>
                             <td>
-                                <a href="{% url 'editarPdcto' n.id %}" class='btn btn-info'>Editar</a>
-                                <a href="{% url 'eliminarPdcto' n.id %}" class='btn btn-danger'>Eliminar</a>
+                                <a href="{% url 'editInventario' n.id %}" class='btn btn-info'>Editar</a>
+                                <a href="{% url 'eliminarDelInventario' n.id %}" class='btn btn-danger'>Eliminar</a>
                             </td>
                         </tr>
                         {% endfor %}

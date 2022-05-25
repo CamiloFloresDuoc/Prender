@@ -248,8 +248,8 @@ def editarPdcto(request, id):
         formulario = ProductoForm(request.POST, instance=productos, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
-
-        datos['form'] = formulario
+            datos['form'] = formulario
+            return redirect(to="adminPdcto")
 
     return render(request, 'core/editarPdcto.html', datos)
 
@@ -293,3 +293,20 @@ def agInventario(request):
             return redirect(to="inventario")
 
     return render(request, 'core/agInventario.html', datos)
+
+def editInventario(request,id):
+
+    inventario = get_object_or_404(Inventario, id=id)
+
+    datos = {
+        'form' : InventarioForm(instance=inventario)
+    }
+
+    if request.method == 'POST':
+        formulario = InventarioForm(request.POST, instance=inventario)
+        if formulario.is_valid():
+            formulario.save()
+            datos['form'] = formulario
+            return redirect(to="inventario")
+
+    return render(request, 'core/editInventario.html', datos)
