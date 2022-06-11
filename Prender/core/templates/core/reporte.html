@@ -1,0 +1,167 @@
+{% load static %}
+{% load bootstrap4 %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prender</title>
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'core/css/nuestroestilo.css' %} ">
+    <link rel="icon" type="image/png" href="{% static 'core/img/mini-flecha.png' %}" />
+    <style>
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Nav -->
+        <div class="allButFooter">
+            <nav class="row" id="navi">
+                <div class="col">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <img src="{% static 'core/img/logo-prender.png' %}" height="45px" class="navbar-brand" alt="">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav mr-auto">  
+                                <li class="nav-item alHome">
+                                    <a class="nav-link" href="{% url 'index' %}">Inicio <span class="sr-only">(current)</span></a> 
+                                </li>
+                                <li class="nav-item alHome">
+                                    <a class="nav-link" href="{% url 'regCompras' %}">Volver</a> 
+                                </li>                                                  
+                            </ul>
+                            {% if user.is_comprador %}
+                            <div class="shopCart">
+                                <a href="{% url 'cart' %}"><i class="fas fa-shopping-cart" aria-hidden="true"></i></a>                            
+                            </div>
+                                {% endif %}
+                            <div class="row reglog">
+                                {% if user.is_authenticated%}
+                                <div class="col nombreUsuario"> 
+                                    <h6>Hola {{ user.username }}</h6>
+                                </div>
+                                <div class="col">
+                                    <a href="{% url 'logout' %}"><button type="button" class="btn btn-dark">Logout</button></a>
+                                </div>                                    
+                                {% else %}                                
+                                    <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-light">Login</button></a>
+                                    <a href="{% url 'register' %}"><button type="button" class="btn btn-dark">Registrate</button></a>
+                                {% endif %}
+                            </div>                    
+                        </div>
+                    </nav>
+                </div>
+            </nav>
+            <br>
+            <br><br><br>
+        <!-- formulario reporte -->
+            <section>
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 mx-auto">
+                            <div class="card">
+                                <div class="card-header text-black">
+                                    <h2>Reportar</h2>
+                                </div>
+                                <div class="card-body">
+                                    <form action="" method="POST">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="nom_ingred">Nombre:</label>
+                                             <div class="form_control">{{ form.nombre|add_class:"control1" }}</div> 
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cant_ingre">Correo:</label>
+                                             <div class="form_control">{{ form.correo|add_class:"control1" }}</div> 
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cant_ingre">Asunto:</label>                                            
+                                             <div class="form_control">{{ form.asunto|add_class:"control1"|attr:"value: REPORTE"|attr:"Readonly: True"  }}</div> 
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cant_ingre">Mensaje:</label>
+                                            
+                                            <div class="form_control">{{ form.mensaje|add_class:"control1"|attr:"placeholder: Informacion entregada a tu derecha + detalle de tu situacion particular (ej: producto no entregado, etc.)" }}</div> 
+                                        </div>
+                                        <br>
+                                        <input type="submit" value="Enviar" class="btn btn-block btn-light">
+                                        <br>
+                                        <div class="row-lg-6">
+                                            <button type="reset" class="btn btn-block btn-dark">Limpiar</button> 
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>   
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header text-black">
+                                    <h2>Recuerda</h2>
+                                </div>
+                                <div class="card-body">
+                                    <h3>En tu mensaje ingresa PRIMERO:</h3><br>
+                                    <p style="font-weight: bold;">Número de orden: {{ orders.id }}</p>
+                                    <p style="font-weight: bold;">Productos:</p>
+                                    {% for item in orders.items.all %}
+                                                    {% if item.vendor == request.user.vendor %}
+                                                        {{ item.producto.nom_prod }} -
+                                                    {% endif %}
+                                    {% endfor %} 
+                                    <br><br><p style="font-weight: bold;">Valor total compra:</p>
+                                    ${{orders.vendor_amount}}
+
+                                    <br><br><p style="font-weight: bold;">Nombre Vendedores:</p>
+                                    {% for n in orders.nombres_vendedores %}
+                                            - {{ n }} 
+                                    {% endfor %}
+
+                                    <br><br><p style="font-weight: bold;">*puedes copiar y pegar los datos*</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    {% if messages %}
+                        {% for message in messages %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+            </section>
+            <br>
+            <br>
+        
+    </div>
+    <!-- Footer -->
+            <footer class="row">
+                <div class="col-8">
+                    <span><p>Lleva tu emprendimiento al siguiente nivel en PRENDER</p></span>
+                </div>
+                <div class="col-2">
+                    <p>®Prender</p>
+                </div>
+            </footer>
+        {% bootstrap_javascript jquery='full' %}
+        <script src="{% static 'core/js/validacionFormIndex.js'%}"></script>        
+</body>
+</html>

@@ -236,6 +236,36 @@ def ingPdcto(request):
 
     return render(request, 'core/ingPdcto.html', datos)
 
+def reporte(request,id):
+    comprador = request.user.comprador   
+    orders = comprador.orden.get(id=id)
+
+    datos = {
+        'form' : ContactoForm(),
+        'id': id,
+        'orders': orders,
+    }
+
+    orders.nombres_vendedores = list()
+    orders.vendor_amount = 0
+
+    for emprendedor in orders.vendedor.all():
+            perfil = emprendedor.perfil_set.first()
+            orders.nombres_vendedores.append(perfil)
+
+    for item in orders.items.all():
+            orders.vendor_amount += item.get_total_price()
+    
+    if request.method =='POST':
+        formulario = ContactoForm(request.POST)
+        
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, 'Se envio correctamente su reporte')
+            return redirect(to=".")
+
+    return render(request, 'core/reporte.html', datos)
+
 def regCompras(request):
     comprador = request.user.comprador   
     orders = comprador.orden.all()

@@ -5,7 +5,7 @@ from .views import (aTienda, adminPdcto, administrador1, agInventario, agReceta,
 crearPerfil, editInventario, editarReceta, eliminarDelInventario, eliminarMsj, eliminarReceta, eliminarUsuario, empPedidos, 
 emprendedor_register, editarPdcto, eliminarPdcto, emprendedor, empPublico, 
 index, ingPdcto, inventario, login_request, logout_view, producto, recetas, regCompras, register,
-editarPerfilEmp, verReceta
+editarPerfilEmp, reporte, verReceta
 )
 
 urlpatterns = [
@@ -43,4 +43,5 @@ urlpatterns = [
     path('agReceta/', agReceta, name="agReceta"),
     path('verReceta/<id>/', verReceta, name="verReceta"),
     path('editarReceta/<id>/', editarReceta, name="editarReceta"),
+    path('reporte/<id>/', reporte, name="reporte"),
 ]

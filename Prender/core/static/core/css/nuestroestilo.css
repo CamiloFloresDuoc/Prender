@@ -144,6 +144,10 @@ a .contac:hover{
     z-index: -99999;
 }
 
+.control1{
+    width: 100%;
+}
+
 #leban .text{
     position: absolute;
     z-index: 99;
