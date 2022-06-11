@@ -24,3 +24,5 @@ pip install djangorestframework
 python -m pip install pillow
 
 pip install djangorestframework
+
+pip install stripe
