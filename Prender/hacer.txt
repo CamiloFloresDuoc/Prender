@@ -1,11 +1,32 @@
-1.- categorias en tiendas para filtrado funcionen para mostrar
 
-2.- edicion campo nombre en tienda hacere READONLY
+14.- boton eliminar cuenta 
 
-5.- hacer funcionar input de barra de busqueda y enlaces categorias
+16.- recuperar contraseña? mailto? / tambien para responder mensajes 
 
-6.- min-width cards
+18.- mesajes al cliente 
 
-7.- crud gestion
+19.- hacer reporte
 
-8.- traer todas las categorias para la barra nav, reemplazar por barras de usuario dependiendo su tipo
+para reseñas generar modelo y llamar un crud desde registro de compras para dejar una reseña 
+
+ver si se agrega disponibilidad de producto por stock 
+
+
+
+-- UNA VEZ IMPLEMENTADO POBLAR BD CON --
+
+- categorias
+- regiones
+- comuna
+- hacer minimo unas 5 tiendas (emprendedor) y 2 compradores
+- productos minimo 6 por tienda, con descripciones reales
+
+
+
+
+--STRIPE
+para tarjeta y probar el pago TEST
+nro: 4242 4242 4242 
+fecha: cualquiera del futuro
+cvc: 123
+zip 12341

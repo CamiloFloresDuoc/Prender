@@ -12,6 +12,7 @@
     <title>Prender</title>
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'core/css/emprendedor.css' %} ">
+    <link rel="icon" type="image/png" href="{% static 'core/img/mini-flecha.png' %}" />
 </head>
 <body>
     <div class="container-fluid">
@@ -38,23 +39,14 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="{% url 'adminPdcto' %}">Administrar Productos</a>
-                                        <a class="dropdown-item" href="#">Inventario</a>
+                                        <a class="dropdown-item" href="{% url 'inventario' %}">Inventario</a>
                                         <a class="dropdown-item" href="#">Balance</a>
-                                        <a class="dropdown-item" href="#">Recetas</a>
+                                        <a class="dropdown-item" href="{% url 'recetas' %}">Recetas</a>
                                         <a class="dropdown-item" href="{% url 'editarPerfilEmp' user.id %} ">Editar perfil</a>
                                         </div>
                                     </div>
                                 </li>                                    
-                                {% endif %}
-                            {% else %}                          
-                                <li class="nav-item">
-                                    <div class="input-group mb-3">
-                                        <form class="form-inline my-2 my-lg-0">
-                                            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-                                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
-                                        </form>
-                                    </div>
-                                </li>  
+                                {% endif %}                          
                             {% endif %}                                                
                             </ul>
                             {% if user.is_authenticated %}
@@ -80,38 +72,24 @@
     <!-- cabecera -->
             <div class="row">
                 <div class="col-md-4">  
-                    <img src="{{ perfil.foto_perf.url }}" height="250px" width="500px" alt="">
+                    <img src="{{ perfil.foto_perf.url }}" height="300px" width="500px" style="object-fit: cover;" alt="">
                 </div>
-                <div class="col-md-1"></div>
-                <div class="col-md-6">                      
+                <div class="col-md-1" style="min-width: 100px;"></div>
+                <div class="col-md-7">                      
                     <br>          
                     <h1 id="nomTienda" data-placeholder='Nombre tienda'>{{ perfil.nom_tienda }}</h1>  
                     <br>
                     <h2 id="descTienda" data-placeholder='Descripcion tienda'>{{ perfil.desc_tienda }}</h2>
                 </div>
             </div>
+            <br><hr><br>
             <!-- cuerpo -->
 
             <!-- categorias -->
             <div class="row">
-                <div class="col-3 cate">
-                    <div class="row no-gutters"></div>
-                    <div class="card ">
-                        <div class="card-body">
-                            <h5 class="card-title">Categorias</h5>
-                            <br>
-                            <ul>
-                                {% for n in categorias %}
-                                    <li>{{ n.nom_categoria }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>                        
-                    </div>
-                    
-                </div>
                 <!-- productos -->
                 {% for n in productos %}
-                <div class="col-md-3 prod_espacio">
+                <div class="col-md-4 prod_espacio">
                     <div class="card mb-3" style="max-width: 100%; max-height: 100%;">
                         <div class="row no-gutters">
                             <img src="{{ n.imagen.url }}" class="card-img-top"  width="100%" alt="..."

@@ -82,6 +82,10 @@ class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
         fields = ['nom_prod', 'desc_prod', 'valor_prod', 'cantidad', 'categoria', 'imagen']
+#carrito
+
+class AgregarCarritoForm(forms.Form):
+    quantity = forms.IntegerField()
 
 class InventarioForm(forms.ModelForm):
     class Meta:

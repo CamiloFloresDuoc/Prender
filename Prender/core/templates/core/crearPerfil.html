@@ -13,7 +13,7 @@
     <title>Editar Perfil</title>
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'core/css/estilologin.css' %}">
-    <link rel="icon" type="image/png" href="{% static 'core/img/l-redondo.png' %}" />
+    <link rel="icon" type="image/png" href="{% static 'core/img/mini-flecha.png' %}" />
 
 </head>
 
@@ -48,7 +48,7 @@
 
                                 </div>
                                 <div class="card-body">
-                                    <h6>*Se debe crear el perfil de la tienda para acceder, datos pueden ser modificados posteriormente.</h6>
+                                    <h6>*Se debe crear el perfil de la tienda para acceder, El NOMBRE de tu emprendiemiento NO PUEDE SER MODIFICADO una vez creado, todos los demás datos pueden ser modificados posteriormente.</h6>
                                     <br>
                                     <form action="" method="POST" enctype="multipart/form-data">
                                         {% csrf_token %}

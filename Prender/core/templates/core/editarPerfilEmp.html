@@ -13,7 +13,7 @@
     <title>Editar Perfil</title>
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'core/css/estilologin.css' %}">
-    <link rel="icon" type="image/png" href="{% static 'core/img/l-redondo.png' %}" />
+    <link rel="icon" type="image/png" href="{% static 'core/img/mini-flecha.png' %}" />
 
 </head>
 
@@ -57,26 +57,32 @@
                                     <h2>Editar Perfil</h2>
                                 </div>
                                 <div class="card-body">
+                                    <h6>Por motivos de seguridad y evitar fraudes, NO es posible cambiar el nombre de tu emprendimiento</h6>
+                                    <br>
                                     <form action="" method="POST" enctype="multipart/form-data">
                                         {% csrf_token %}
-                                            {% for field in form.visible_fields %}
-                                                <div class="form-group">
-                                                    {{ field.label_tag }}
-                                                        {% render_field field class="form-control" %}
-                                                            {% if messages%}
-                                                                {% for message in messages %}
-                                                                    <span style="color:red">{{ message }}</span>
-                                                                {% endfor %}
-                                                            {% endif %}
-                                            {% endfor %}
+                                        <div class="form-group">
+                                            <label for="nom_ingred">Nombre Tienda:</label>
+                                             <div class="form_control">{{ form.nom_tienda|add_class:"control"|attr:"readonly:True" }}</div> 
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nom_ingred">Descripción tienda:</label>
+                                             <div class="form_control">{{ form.desc_tienda|add_class:"control" }}</div> 
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nom_ingred">Foto de perfil:</label>
+                                             <div class="form_control">{{ form.foto_perf|add_class:"control" }}</div> 
+                                        </div>
                                             <br>
                                                     <input type="submit" value="Modificar" class="btn btn-block btn-primary">
                                                 </div>
                                     </form>
+                                    
                                     <div class="alert alert-success" role="alert">
                                         {{ mensaje }}
                                     </div>
                                 </div>
+                                <br><br>
                             </div>   
                         </div>
                     </div>

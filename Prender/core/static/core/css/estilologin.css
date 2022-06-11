@@ -21,6 +21,9 @@ html {
     padding: 0;
     width: 100%;
 }
+.control{
+    width: 100%;
+}
 .link {
     color: black;
     font-size: 10pt;

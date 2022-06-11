@@ -42,6 +42,10 @@ class Emprendedor(models.Model):
     numero_telefono = models.CharField(max_length=20)
     direccion = models.CharField(max_length=100)
     comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE, default=False)
+
+    def get_total_ventas(self):
+        items = self.items.all()
+        return sum((item.producto.valor_prod * item.cantidad) for item in items)
     
 
 #modelo formulario de contacto
@@ -59,7 +63,7 @@ class Perfil(models.Model):
     nom_tienda = models.CharField(max_length=50)
     desc_tienda = models.TextField()
     foto_perf = models.ImageField(upload_to="images")
-    user = models.ForeignKey(Emprendedor, on_delete=models.CASCADE)
+    user = models.ForeignKey(Emprendedor ,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nom_tienda
@@ -144,6 +148,41 @@ class RegCompra(models.Model):
     iva = models.IntegerField()
     total = models.IntegerField()
     user = models.ForeignKey(Comprador, on_delete= models.CASCADE)
+
+
+# pedido real
+
+class Order(models.Model):
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+    email = models.EmailField()
+    numero_telefono = models.CharField(max_length=20)
+    direccion = models.CharField(max_length=100)
+    comuna = models.CharField(max_length=100)
+    fecha = models.DateTimeField(auto_now_add=True)
+    total = models.IntegerField()
+    vendedor = models.ManyToManyField(Emprendedor, related_name='ordenes')
+    comprador = models.ForeignKey(Comprador,related_name='orden', on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['-fecha']
+
+    def __str__(self):
+        return self.nombre
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, related_name='items', on_delete=models.CASCADE)
+    vendedor = models.ForeignKey(Emprendedor, related_name='items', on_delete=models.CASCADE)
+    pagado = models.BooleanField(default=False)
+    precio = models.IntegerField()
+    cantidad = models.IntegerField(default=1)
+
+    def __str__(self):
+        return '%s' % self.id
+
+    def get_total_price(self):
+        return self.precio * self.cantidad
 
 
 

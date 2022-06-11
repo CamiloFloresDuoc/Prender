@@ -1,0 +1,166 @@
+{% load static %}
+{% load bootstrap4 %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prender</title>
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'core/css/emprendedor.css' %} ">
+    <link rel="icon" type="image/png" href="{% static 'core/img/mini-flecha.png' %}" />
+</head>
+<body>
+    <div class="container-fluid">
+<!--Nav-->
+        <div class="allButFooter">
+            <nav class="row" id="navi">
+                <div class="col">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <img src="{% static 'core/img/logo-prender.png' %}" height="45px" class="navbar-brand" alt="">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav mr-auto">  
+                                <li class="nav-item alHome">
+                                    <a class="nav-link" href="{% url 'index' %}">Inicio <span class="sr-only">(current)</span></a> 
+                                </li>                           
+                                <li class="nav-item">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                                          Herramientas Gestión
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" href="{% url 'emprendedor' %}">Perfil</a>
+                                          <a class="dropdown-item" href="{% url 'inventario' %}">Inventario</a>
+                                          <a class="dropdown-item" href="{% url 'adminPdcto' %}">Administrar Productos</a>
+                                          <a class="dropdown-item" href="{% url 'recetas' %}">Recetas</a>
+                                          <a class="dropdown-item" href="{% url 'editarPerfilEmp' user.id %}">Configuración Cuenta</a>
+                                        </div>
+                                      </div>
+                                </li> 
+                                <li class="nav-item alHome">
+                                    <a class="nav-link" href="{% url 'adminPdcto' %}">Volver</a> 
+                                </li>                                                   
+                            </ul>
+                            {% if user.is_authenticated %}
+                                <div id="nomUser">
+                                    <h6>Hola {{ user.username }}</h6>
+                                </div>
+                            {% endif %}
+                            <div class="reglog">                                
+                                <a href="{% url 'logout' %}"><button type="button" class="btn btn-dark">Cerrar Sesión</button></a>
+                            </div>                    
+                        </div>
+                    </nav>
+                </div>
+            </nav>
+            <br>
+            <br>
+            <br>
+            <br>
+    <!-- admin productos -->
+            <section>
+                
+                <div class="box">
+                    <h1 class="title">Emprendimiento - {{ vendedor.nom_tienda }}</h1>
+            
+                    <strong>Balance Total: </strong>${{ emprendedor.get_total_ventas }}<br>
+            
+                    <hr>
+                </div>
+            
+            
+                <div class="box">
+                    <h2 class="is-size-3 mb-4">Mis Pedidos</h2>
+                
+                    {% if orders %}
+                        {% for order in orders %}
+                            <div class="mb-2 p-4">
+                                <div class="columns is-multiline">
+                                    <div class="column is-6">
+                                        <h3 class="is-size-4">#{{ order.id }} </h3>
+                                    </div>
+                
+                                    <div class="column is-12">
+                                        <b>Nombre:</b> {{ order.nombre }} {{ order.apellido }}<br>
+                                        <b>Dirección:</b> {{ order.direccion }}<br>
+                                        <b>Comuna:</b> {{ order.comuna }} <br>
+                                        <b>Email:</b> {{ order.email }}<br>
+                                        <b>Teléfono:</b> {{ order.numero_telefono }}
+                
+                                        <table class="table is-fullwidth mt-4">
+                                            <thead>
+                                                <tr>
+                                                    <th>Producto</th>
+                                                    <th>Precio</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Total Producto</th>
+                                                </tr>
+                                            </thead>
+                
+                                            <tbody>
+                                                {% for item in order.items.all %}
+                                                    {% if item.vendor == request.user.vendor %}
+                                                        <tr>
+                                                            <td>{{ item.producto.nom_prod }}</td>
+                                                            <td>${{ item.producto.valor_prod }}</td>
+                                                            <td>{{ item.cantidad }}</td>
+                                                            <td>${{ item.get_total_price }}</td>
+                                                        </tr>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tbody>
+
+                                            <tfoot>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <th>Total</th>
+                                                    <td style="font-weight: bold;">${{ order.vendor_amount }} </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+            </section>
+                
+            
+                <br>
+                <br>
+                <br>
+                
+        </div>
+
+<!--footer-->
+        <footer class="row">
+            <div class="col-8">
+            <span><p>Lleva tu emprendimiento al siguiente nivel en PRENDER</p></span>
+            </div>
+            <div class="col-2">
+            <p>®Prender</p>
+            </div>
+        </footer>
+    </div>
+    
+    
+    
+
+
+    {% bootstrap_javascript jquery='full' %}
+    <script src="{% static 'core/js/validacionFormIndex.js'%}"></script>
+
+
+</body>
+</html>

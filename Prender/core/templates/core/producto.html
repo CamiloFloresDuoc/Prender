@@ -11,6 +11,7 @@
     <title>Prender</title>
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'core/css/producto.css' %} ">
+    <link rel="icon" type="image/png" href="{% static 'core/img/mini-flecha.png' %}" />
 </head>
 <body>
     <div class="container-fluid">
@@ -38,7 +39,7 @@
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item" href="{% url 'adminPdcto' %}">Administrar Productos</a>
                                                 <a class="dropdown-item" href="{% url 'inventario' %}">Inventario</a>
-                                                <a class="dropdown-item" href="#">Balance</a>
+                                                <a class="dropdown-item" href="{% url 'empPedidos' %}">Balance</a>
                                                 <a class="dropdown-item" href="{% url 'recetas' %}">Recetas</a>
                                                 <a class="dropdown-item" href="{% url 'editarPerfilEmp' user.id %} ">Editar perfil</a>
                                                 </div>
@@ -48,16 +49,22 @@
                                 {% endif %}                             
                                 <li class="nav-item">
                                     <div class="input-group mb-3">
-                                        <form class="form-inline my-2 my-lg-0">
-                                            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-                                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
-                                          </form>
-                                    </div>
+                                        <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'busqueda' %} ">
+                                            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" name="query" autocomplete="false">
+                                            <div class="control">
+                                                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
+                                            </div>
+                                        </form>
+                                      </div>
                                 </li>                                                    
                             </ul>
                             {% if user.is_comprador %}
                             <div class="shopCart">
-                                <a href=""><i class="fas fa-shopping-cart" aria-hidden="true"></i></a>                            
+                                <a href="{% url 'cart' %} ">
+                                    <i class="fas fa-shopping-cart" aria-hidden="true">
+                                        {% if cart %} ({{ cart|length }}) {% endif %}
+                                    </i>
+                                </a>                            
                             </div>
                             {% endif %}
                             <div class="row reglog">
@@ -83,7 +90,8 @@
             <br>
     <!--card producto-->
             <div class="row">
-                <div class="col-8">
+                <div class="col-2"></div>
+                <div class="col-md-8">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
@@ -96,21 +104,25 @@
                             </div>
                             <hr>
                             <div class="row">
-                                <div class="col">
+                                <div class="col-md-6">
                                     {% for n in producto %}
-                                    <img src="{{ n.imagen.url }} " class="d-block w-100" alt="">
+                                    <img src="{{ n.imagen.url }} " class="d-block w-100" alt="" >
                                     {% endfor %}                                    
                                 </div>
-                                <div class="col">
+                                <div class="col-6">
                                     <div class="card-body">
                                         <div class="card-title">
                                             <h4>Descripción:</h4>
                                             {% for n in producto %}
-                                            <p>{{ n.desc_prod }} </p>
-                                            <p>stock: {{ n.cantidad }} </p>                                            
-                                            <p>Disponibilidad</p>                                            
+                                            <p>{{ n.desc_prod }} </p><hr>
+                                            <!-- <p>stock: {{ n.cantidad }} </p>                                             -->
+                                            <!-- <p>Disponibilidad</p>                                             -->
                                             <p>Envio: A convenir</p>
+                                            <p>categoria: {{ n.categoria }}</p>
+                                            <p>{{cate}} </p>
+                                            {% if user.is_authenticated %}
                                             <p class="precioCard">Precio: ${{ n.valor_prod }} </p>
+                                            {% endif %}
                                             {% endfor %}
                                         </div>
                                     </div>
@@ -119,19 +131,26 @@
                             <div class="row">
                                 <div class="col"></div>
                                 <div class="col">
-                                    <button class="btn alCart" id="anadirCarrito">Añadir a Carrito</button>
+                                    <form method="post" action=".">
+                                        {% csrf_token %}
+                                        <input type="number" name="quantity" value="1" min="1" hidden>
+                                        {% if user.is_authenticated %}
+                                        <button class="btn alCart" id="anadirCarrito">Añadir a Carrito</button>
+                                        {% else %}
+                                        <p style="font-weight: bold;">Debes tener una cuenta para poder comprar!!</p>
+                                        {% endif %}
+                                    </form>
                                 </div>
                             </div>                       
                         </div>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-2"></div>
+                <!-- <div class="col">
                     <div class="card">
                         <div class="card-body">
                             <h2 class="card-title">Calificación</h2>
                             <h2 class="card-title">Reseñas </h2>
-                            <hr>
-                            <!--el for para repetir y traer de bd-->
                             <h6 id="usrResena">Nombre usuario reseña</h6>
                             <p id="resena">blasblaslbalsblalsblablabllablalblablablabllabçaalblablalb
                                 ablalbalblalblablablballbal
@@ -149,8 +168,43 @@
                             <hr>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
+            <br>
+            <div class="row titulo-seccion">
+                <h1>Productos similares</h1>
+            </div>
+            <div class="row">
+                <div class="col-1"></div>
+                {% for n in similar %}
+                <div class="col-md-2 prod_espacio">
+                    <div class="card mb-3" style="max-width: 100%; max-height: 100%;">
+                        <div class="row no-gutters">
+                            <img src="{{ n.imagen.url }}" class="card-img-top"  width="100%" alt="..."
+                            style="object-fit: cover;" >
+                            <div class="card-body">
+                            <h5 class="card-title">{{ n.nom_prod }}</h5>
+                            <p class="card-text"> {{ n.desc_prod }}</p>
+                            <h4 class="card-text"> ${{ n.valor_prod }} </h4>
+                            <a href="{% url 'producto' n.id %}" class="btn btn-outline-dark">Ver producto</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="col-1"></div>
+              </div>
+            <hr>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
 <!--footer-->
         <footer class="row">

@@ -9,7 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prender</title>
     {% bootstrap_css %}
-    <link rel="stylesheet" href="{% static 'core/css/comprador.css' %} ">
+    <link rel="stylesheet" href="{% static 'core/css/nuestroestilo.css' %} ">
+    <link rel="icon" type="image/png" href="{% static 'core/img/mini-flecha.png' %}" />
 </head>
 <body>
     <div class="container-fluid">
@@ -26,14 +27,29 @@
                                     <ul class="navbar-nav mr-auto">  
                                         <li class="nav-item alHome">
                                             <a class="nav-link" href="{% url 'index' %}">Inicio <span class="sr-only">(current)</span></a> 
-                                        </li>                                                
+                                        </li> 
+                                        <li class="nav-item">
+                                            <a href="{% url 'regCompras' %}"><button type="button" class="btn btn-dark">Registro Compras</button></a>
+                                        </li>                                               
                                     </ul>
-                                    <div id="nomUser">
-                                        <p>User</p>
+                                    {% if user.is_comprador %}
+                                    <div class="shopCart">
+                                        <a href="{% url 'cart' %}"><i class="fas fa-shopping-cart" aria-hidden="true"></i></a>                            
                                     </div>
-                                    <div class="reglog">                                
-                                        <a href="{% url 'register' %}"><button type="button" class="btn btn-dark">Cerrar Sesión</button></a>
-                                    </div>                    
+                                        {% endif %}
+                                    <div class="row reglog">
+                                        {% if user.is_authenticated%}
+                                        <div class="col nombreUsuario"> 
+                                            <h6>Hola {{ user.username }}</h6>
+                                        </div>
+                                        <div class="col">
+                                            <a href="{% url 'logout' %}"><button type="button" class="btn btn-dark">Logout</button></a>
+                                        </div>                                    
+                                        {% else %}                                
+                                            <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-light">Login</button></a>
+                                            <a href="{% url 'register' %}"><button type="button" class="btn btn-dark">Registrate</button></a>
+                                        {% endif %}
+                                    </div>                     
                                 </div>
                             </nav>
                         </div>
@@ -44,32 +60,24 @@
                     <br>
             <!--perfil emprendedor-->
                     <div class="row">
-                        <div class="col-4">
-                            <img src="{% static 'core/img/defaultPic.png' %}" id="profilePic">
+                        <div class="col-2"></div>
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-body">
+                                <h3 id="nombreUser">Nombre:</h3>
+                                <h5>{{ user.username }} </h5>
+                                <br>
+                                <h3 id="emailUser">Email:</h3>
+                                <h5>{{ user.email }} </h5>
+                                <br>
+                                <button type="button" class="btn btn-outline-dark">Editar</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-4">
-                            <h3 id="nombreUser">Nombre</h3>
-                            <input type="text" name="inputNomUser" size="30" placeholder="{user}" class="form-control" id="edit_nombreUser" disabled>
-                            <br>
-                            <h3 id="emailUser">Email</h3>
-                            <input type="text" name="inputEmail" size="50" placeholder="logged_user@gmail.com" class="form-control" id="edit_emailUser" disabled>
-                            <br>
-                            <h3 id="contrasennaUser">Contraseña</h3>
-                            <input type="password" name="inputPassword" size="50" placeholder="************" class="form-control" id="edit_nombreUser" disabled>
-                            <br>
-                            <button type="button" class="btn btn-outline-dark">Editar</button>
-                        </div>
+                        <div class="col-2"></div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-3">
-                        <a href="{% url 'regCompras' %}"><button type="button" class="btn btn-outline-dark" id="btn_registroCompras">Registro de Compras</button></a>
-                    </div>
-                    <div class="col-1">
-                        <button type="button" class="btn btn-dark">Volver</button>
-                    </div>
-                    <br><br>
-                </div>
+                
         <!--footer-->
                 <footer class="row">
                     <div class="col-8">

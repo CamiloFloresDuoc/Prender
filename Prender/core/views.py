@@ -1,34 +1,19 @@
-from ast import Lambda
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import CreateView
-from .models import Categoria, Contacto, Inventario, Producto, Receta, User, Perfil, Emprendedor
-from .forms import CompradorRegister, ContactoForm, Crear_perfil_form, EmprendedorRegister, InventarioForm, Perfil_mod_form, ProductoForm, RecetaForm
-from django.views.generic import TemplateView
-
+from .models import Categoria, Contacto, Inventario, Order, Producto, Receta, User, Perfil, Emprendedor
+from .forms import (CompradorRegister, ContactoForm, Crear_perfil_form, EmprendedorRegister, 
+    InventarioForm, Perfil_mod_form, ProductoForm, RecetaForm, AgregarCarritoForm)
+from cart.cart import Cart
+from django.forms.models import model_to_dict
 
 
 
 # Create your views here.
 
-# def _get_form(request, formcls, prefix):
-#         data = request.POST if prefix in request.POST else None
-#         return formcls(data, prefix=prefix)
-
-# class Index(TemplateView):
-#     template_name = 'core/index.html'
-
-#     def get(self, request, *args, **kwargs):
-#         return self.render_to_response({'contactoform': ContactoForm(prefix='cform_pre')})
-
-#     def post(self, request, *args, **kwargs):
-#         contactoform = _get_form(request, ContactoForm, 'cform_pre')
-#         if contactoform.is_bound and contactoform.is_valid():
-#             # Process contactoform and render response
-#             contactoform.save()
-#             return self.render_to_response({'contactoform': contactoform})
 
 def index(request):
 
@@ -94,8 +79,6 @@ class emprendedor_register(CreateView):
         login(self.request, user)
         return redirect('../crearPerfil/')
 
-
-
 def crearPerfil(request):
     datos = {
         'form': Crear_perfil_form()
@@ -133,21 +116,52 @@ def editarPerfilEmp(request, id):
 
 def producto(request, id):
 
+    cart = Cart(request)    
+    # id del usuario
     prod = Producto.objects.get(id=id).user_id
+    # tienda del ususario
     tienda = Perfil.objects.get(id=prod)
+    # producto clickeado
     producto = Producto.objects.filter(id=id)
+    # producto completo del id request
+    prod_id = Producto.objects.get(id=id)
+    # para busqueda searchbar
+    query = request.GET.get('query', '')
+    productos = Producto.objects.filter(Q(nom_prod__icontains=query) | Q(desc_prod__icontains=query))
+    # categoria del objeto
+    cate = Producto.objects.get(id=id).categoria
+    # todos los productos de la categoria
+    prodCat = Producto.objects.filter(categoria_id=cate)
+    # productos similares
+    similar = list(prodCat.exclude(id=prod_id.id))[:6] 
+    #se excluye el id especifico del producto visto y muestra los ultimos 6 similares
 
-    datos = {
+    if request.method == 'POST':
+        form = AgregarCarritoForm(request.POST)
+
+        if form.is_valid():
+            quantity = form.cleaned_data['quantity']
+
+            cart.add(product_id=prod_id.id, quantity=quantity, update_quantity=False)
+
+            messages.success(request, 'Se agrego producto al carrito')
+
+            return redirect(to=".")
+    else:
+        form = AgregarCarritoForm()
+
+    return render(request, 'core/producto.html',
+        {
+        'form':form, 
         'producto': producto,
         'id' : id,
-        'tienda': tienda
-    }
-    return render(request, 'core/producto.html', datos)
-
-
-
-def carrito(request):
-    return render(request, 'core/carrito.html')
+        'tienda': tienda,
+        'query':query,
+        'productos': productos,
+        #'prodCat': prodCat
+        'similar': similar,
+        'prod_id': prod_id
+        })
 
 def emprendedor(request):
     perfil = Perfil.objects.all()
@@ -156,18 +170,32 @@ def emprendedor(request):
     #array de solo categorias que existan en los productos del perfil
     categorias_id = set(map( lambda p : p.categoria_id ,productos))
     categorias =  Categoria.objects.filter(id__in= categorias_id)
+    vendedor = request.user.emprendedor.perfil_set.first()
     
     datos = {
         'perfil': perfil,
         'productos' : productos,
-        'categorias' : categorias
+        'categorias' : categorias,
+        'vendedor': vendedor
     }
     
 
     return render(request, 'core/emprendedor.html',datos)
 
 def comprador(request):
-    return render(request, 'core/comprador.html')
+    return render(request, 'core/comprador.html' )
+
+def administrador1(request):
+    usuarios = User.objects.all()
+    productos = Producto.objects.all()
+    mensajes = Contacto.objects.all()
+
+    datos = {
+        'usuarios': usuarios,
+        'productos' : productos,
+        'mensajes' : mensajes
+    }
+    return render(request, 'core/administrador1.html', datos)
 
 def aTienda(request, id):
 
@@ -208,17 +236,73 @@ def ingPdcto(request):
 
     return render(request, 'core/ingPdcto.html', datos)
 
-def gestionEmp(request):
-    return render(request, 'core/gestionEmp.html')
-
 def regCompras(request):
-    return render(request, 'core/regCompras.html')
+    comprador = request.user.comprador   
+    orders = comprador.orden.all()
+    datos = { 
+        'orders': orders,
+        'comprador': comprador
+    }
 
+    for order in orders:
+        order.nombres_vendedores = list()
+        order.vendor_amount = 0
+        for emprendedor in order.vendedor.all():
+            perfil = emprendedor.perfil_set.first()
+            order.nombres_vendedores.append(perfil)
+        
+        for item in order.items.all():
+            order.vendor_amount += item.get_total_price()
+    return render(request, 'core/regCompras.html', datos)
+    
 def busqueda(request):
-    return render(request, 'core/busqueda.html')
+    categorias = Categoria.objects.all()
+    query = request.GET.get('query', '')
+    productos = Producto.objects.filter(Q(nom_prod__icontains=query) | Q(desc_prod__icontains=query))
+
+    datos = {
+        'productos': productos,
+        'query': query,
+        'categorias': categorias
+    }
+
+    return render(request, 'core/busqueda.html', datos)
+
+def busqueda_cate(request, id):
+    categorias = Categoria.objects.all()
+    query = request.GET.get('query', '')
+    productos = Producto.objects.filter(categoria_id=id)
+    nombre_catego = Categoria.objects.get(id=id)
+
+    datos = {
+        'productos': productos,
+        'query': query,
+        'categorias': categorias,
+        'id': id,
+        'nombre_catego': nombre_catego
+    }
+    return render(request, 'core/busqueda_cate.html',datos)
 
 def empPublico(request):
     return render(request, 'core/empPublico.html')
+
+def empPedidos(request):
+    emprendedor = request.user.emprendedor
+    vendedor = emprendedor.perfil_set.first() #objeto completo
+    orders = emprendedor.ordenes.all()
+
+    datos = {
+        'vendedor': vendedor, 
+        'orders': orders,
+        'emprendedor': emprendedor
+    }
+    for order in orders:
+        order.vendor_amount = 0
+
+        for item in order.items.all():
+            if item.vendedor == emprendedor:
+                order.vendor_amount += item.get_total_price()
+    return render(request, 'core/empPedidos.html', datos)
 
 def adminPdcto(request):
 
@@ -247,6 +331,16 @@ def editarPdcto(request, id):
             return redirect(to="adminPdcto")
 
     return render(request, 'core/editarPdcto.html', datos)
+
+def eliminarUsuario(request, id):
+    usuario = User.objects.get(id=id)
+    usuario.delete()
+    return redirect(to="administrador1")
+
+def eliminarMsj(request, id):
+    mensaje = Contacto.objects.get(id=id)
+    mensaje.delete()
+    return redirect(to="administrador1")
 
 def eliminarPdcto(request, id):
     producto = Producto.objects.get(id=id)
@@ -369,3 +463,4 @@ def editarReceta(request, id):
             datos['form'] = formulario
             return redirect(to="recetas")
     return render(request, 'core/editarReceta.html',datos)
+

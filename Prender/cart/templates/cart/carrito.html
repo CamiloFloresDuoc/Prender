@@ -1,0 +1,311 @@
+{% load static %}
+{% load bootstrap4 %}
+{% load widget_tweaks %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prender</title>
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'core/css/nuestroestilo.css' %} ">
+    <link rel="icon" type="image/png" href="{% static 'core/img/mini-flecha.png' %}" />
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="allButFooter">
+            <nav class="row" id="navi">
+                <div class="col">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <img src="{% static 'core/img/logo-prender.png' %}" height="45px" class="navbar-brand" alt="">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav mr-auto">                            
+                                <li class="nav-item alHome">
+                                    <a class="nav-link" href="{% url 'index' %}">Inicio <span class="sr-only">(current)</span></a> 
+                                </li>                           
+                                <li class="nav-item">
+                                    <div class="input-group mb-3">
+                                        <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'busqueda' %} ">
+                                            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" name="query" autocomplete="false">
+                                            <div class="control">
+                                                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </li> 
+                                {% if user.is_authenticated %}
+                                    {% if user.is_emprendedor %}
+                                <li class="nav-item">
+                                    <a href="{% url 'emprendedor' %}"><button type="button" class="btn btn-dark">Mi Perfil</button></a>
+                                </li>
+                                    {% elif user.is_comprador %}
+                                <li class="nav-item">
+                                    <a href="{% url 'comprador' %}"><button type="button" class="btn btn-dark">Mi Perfil</button></a>
+                                </li> 
+                                    {% endif %}    
+                                {% endif %}  
+                                                                               
+                            </ul>
+                                {% if user.is_comprador %}
+                            <div class="shopCart">
+                                <a href="{% url 'cart' %}">                                    
+                                    <i class="fas fa-shopping-cart" aria-hidden="true">
+                                        {% if cart %} ({{ cart|length }}) {% endif %} 
+                                    </i>
+                                </a>                            
+                            </div>
+                                {% endif %}
+                            <div class="row reglog">
+                                {% if user.is_authenticated%}
+                                <div class="col nombreUsuario"> 
+                                    <h6>Hola {{ user.username }}</h6>
+                                </div>
+                                <div class="col">
+                                    <a href="{% url 'logout' %}"><button type="button" class="btn btn-dark">Logout</button></a>
+                                </div>                                    
+                                {% else %}                                
+                                    <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-light">Login</button></a>
+                                    <a href="{% url 'register' %}"><button type="button" class="btn btn-dark">Registrate</button></a>
+                                {% endif %}
+                            </div>                    
+                        </div>
+                    </nav>
+                </div>
+            </nav>
+            <br>
+<!-- carro -->
+            <section>
+                <form method="post" action="." id="payment-form">
+                    {% csrf_token %} 
+                <br><br><br>
+                <h1 class="">Carro</h1>
+                <br>
+                {% if cart %}
+                <div class="card">
+                    <div class="card-body mb-6">
+                        <div class="table">
+                            <table class="table is-fullwidth is-striped">
+                                <thead>
+                                    <th>Imagen</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio</th>
+                                    <th>Acción</th>
+                                </thead>
+        
+                                <tbody>
+                                    {% for item in cart %}
+                                        <tr>
+                                            <td>
+                                                <img src="{{ item.product.imagen.url }}" width="64px" height="64px">
+                                            </td>
+                                            <td>
+                                                <a href="">{{ item.product.nom_prod }}</a>
+                                            </td>
+                                            <td>
+                                                {{ item.quantity }}
+        
+                                                <a href="?change_quantity={{ item.id }}&quantity=-1"> -</a>
+                                                <a href="?change_quantity={{ item.id }}&quantity=1"> +</a>
+                                            </td>
+                                            <td>${{ item.valor_prod }}</td>
+                                            <td><a href="?remove_from_cart={{ item.id }}" class="delete">Eliminar</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+        
+                                <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td><strong>Precio total</strong></td>
+                                        <td><strong>{{ cart|length}}</strong></td>
+                                        <td colspan="2"><strong>${{ cart.get_total_cost }}</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+    <!-- info random -->
+                <hr>
+
+                <h2 class="">Information de contacto</h2>
+
+
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                  
+                                    
+                                    {% if form.non_field_errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ form.non_field_errors }}
+                                        </div>
+                                    {% endif %}
+                
+                                    {% if form.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            <ul>
+                                                {% for field in form %}
+                                                    {% for error in field.errors %}
+                                                        <li><strong>{{ field.label }}: </strong>{{ error }}</li>
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+                
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="field">
+                                                <label>Nombre</label>
+                
+                                                <div class="control">
+                                                    <input class="input" type="text" name="nombre">
+                                                </div>
+                                            </div> <br>
+                
+                                            <div class="field">
+                                                <label> Apellido</label>
+                
+                                                <div class="control">
+                                                    <input class="input" type="text" name="apellido">
+                                                </div>
+                                            </div><br>
+                
+                                            <div class="field">
+                                                <label>Email</label>
+                
+                                                <div class="control">
+                                                    <input class="input" type="email" name="email">
+                                                </div>
+                                            </div>
+                
+                                        </div>
+                
+                                        <div class="col-md-6">
+                                            <div class="field">
+                                                <label>Teléfono</label>
+                
+                                                <div class="control">
+                                                    <input class="input" type="text" name="numero_telefono">
+                                                </div>
+                                            </div><br>
+
+                                            <div class="field">
+                                                <label>Dirección</label>
+                
+                                                <div class="control">
+                                                    <input class="input" type="text" name="direccion">
+                                                </div>
+                                            </div><br>
+                
+                                            <div class="field">
+                                                <label>Comuna</label>
+                
+                                                <div class="control">
+                                                    <input class="input" type="text" name="comuna">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+
+
+
+                
+                <br><hr><br>
+                    <h2 class="">Information de Pago</h2>
+                    <br>
+                    <div id="card-element">
+                        <!-- A Stripe Element will be inserted here -->
+                    </div>
+                
+                
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger" role="alert">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                    <br>
+                    <div class="field">
+                        <div class="control">
+                            <button type="submit" class="btn btn-dark">Pagar</button>
+                        </div>
+                    </div>
+                
+                {% else %}
+                <p>No tienes ningún producto en tu carro!</p>
+                {% endif %}
+                </form>
+            </section>
+            <br>
+            <br>
+        </div>
+            
+        <footer class="row">
+            <div class="col-8">
+            <span><p>Lleva tu emprendimiento al siguiente nivel en PRENDER</p></span>
+            </div>
+            <div class="col-4">
+            <p>®Prender</p>
+            </div>
+        </footer>          
+    </div>
+    
+
+    {% bootstrap_javascript jquery='full' %}
+    {% block scripts %}
+        <script src="https://js.stripe.com/v3/"></script>
+        <script>
+            var stripe = Stripe('{{ stripe_pub_key }}');
+            var elements = stripe.elements();
+
+            var card = elements.create('card');
+
+            card.mount('#card-element');
+
+            var form = document.getElementById('payment-form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                stripe.createToken(card).then(function(result) {
+                    if (result.error) {
+                        var errorElement = document.getElementById('card-errors');
+                        errorElement.textContent = result.error.message;
+                    } else {
+                        stripeTokenHandler(result.token);
+                    }
+                });
+            });
+
+            function stripeTokenHandler(token) {
+                var form = document.getElementById('payment-form');
+                var hiddenInput = document.createElement('input');
+                hiddenInput.setAttribute('type', 'hidden');
+                hiddenInput.setAttribute('name', 'stripe_token');
+                hiddenInput.setAttribute('value', token.id);
+                form.appendChild(hiddenInput);
+
+                form.submit();
+            }
+        </script>
+    {% endblock %}
+</body>
+
+</html>

@@ -13,6 +13,7 @@
     <title>Prender</title>
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'core/css/nuestroestilo.css' %} ">
+    <link rel="icon" type="image/png" href="{% static 'core/img/mini-flecha.png' %}" />
 </head>
 <body>
 
@@ -34,18 +35,18 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         {% for n in categorias %}
-                                        <a class="dropdown-item" href="#">{{ n.nom_categoria }} </a>
+                                        <a class="dropdown-item" href="{% url 'busqueda_cate' n.id %}">{{ n.nom_categoria }}</a>
                                         {% endfor %}
                                         </div>
                                     </div>
                                 </li>                            
                                 <li class="nav-item">
                                     <div class="input-group mb-3">
-                                        <form class="form-inline my-2 my-lg-0">
-                                            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-                                            <a href="{% url 'busqueda' %}"> 
-                                                <button class="btn btn-outline-light my-2 my-sm-0" type="button">Buscar</button>
-                                            </a>
+                                        <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'busqueda' %} ">
+                                            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" name="query" autocomplete="false">
+                                            <div class="control">
+                                                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
+                                            </div>
                                         </form>
                                     </div>
                                 </li> 
@@ -57,16 +58,21 @@
                                     {% elif user.is_comprador %}
                                 <li class="nav-item">
                                     <a href="{% url 'comprador' %}"><button type="button" class="btn btn-dark">Mi Perfil</button></a>
+                                </li>   
+                                    {% endif %}                                
+                                {% endif %} 
+                                {% if user.is_admin %}
+                                <li class="nav-item">
+                                    <a href="{% url 'administrador1' %}"><button type="button" class="btn btn-dark">Panel Administración</button></a>
                                 </li> 
-                                    {% endif %}    
-                                {% endif %}  
+                                    {% endif %}   
                                 <li class="nav-item">
                                     <a class="nav-link contac" href="#alContacto">Contacto </a> 
                                 </li>                                                  
                             </ul>
                                 {% if user.is_comprador %}
                             <div class="shopCart">
-                                <a href=""><i class="fas fa-shopping-cart" aria-hidden="true"></i></a>                            
+                                <a href="{% url 'cart' %} "><i class="fas fa-shopping-cart" aria-hidden="true"></i></a>                            
                             </div>
                                 {% endif %}
                             <div class="row reglog">
@@ -87,16 +93,16 @@
                 </div>
             </nav>
             <br>
-            <br>
+            <br id="alTop">
     <!-- jumbotron bienvenida -->
             <div class="row" id="leban">
                 <div class="col lepopo" style="padding: 0;">
                     <div class="bannerImg"></div>
-                    <img class="baner" src="{% static 'core/img/baner-prender.jpg' %}" class="img-fluid" alt="..." 
+                    <img class="baner" src="{% static 'core/img/banner-prender34.jpg' %}" class="img-fluid" alt="..." 
                     style="position:relative;margin-left: 0px;margin-right: 0px; object-fit: cover;">
                 </div>
                 <div class="text ">
-                    <p class="p1" style="min-width: 496px;">Mejora la exposición de tu emprendimiento</p>
+                    <p class="p1" style="min-width: 496px;">Mejora la exposición de tu emprendimiento gastronómico</p>
                     <br>
                     <p class="p2" style="min-width: 496px;">Te ayudamos con la gestión de tu negocio</p>
                 </div>
@@ -106,6 +112,7 @@
 
     <!--Recientes cards-->
     <br>
+        <div class="container-fluid">
             <div class="titulo-seccion">
                 <div class="row">
                     <h1>Descubre Nuevos Sabores!!</h1>
@@ -115,7 +122,6 @@
             <br>
             
             <div class="row">
-                <div class="col-1"></div>
                 {% for n in productos %}
                 <div class="col-md-4 prod_espacio">
                     <div class="card mb-3" style="max-width: 100%; max-height: 100%;">
@@ -132,14 +138,14 @@
                     </div>
                 </div>
                 {% endfor %}
-                <div class="col-1"></div>
             </div>
+        </div>
             <br>            
             <br>
             <br>
-            <hr>
+            <hr id="alContacto">
             <br>
-            <br id="alContacto">
+            <br>
     <!--Contacto-->
             <section>
                 <div class="titulo-seccion">
@@ -165,6 +171,14 @@
             </section>            
             <br>
             <br>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col arrow">
+                    <a href="#alTop"><i class="fas fa-arrow-up" aria-hidden="true"></i></a>
+                </div>                
+                <div class="col-1"></div>
+            </div>
+            <br>
         </div>
         <footer class="row">
             <div class="col-8">
@@ -173,7 +187,7 @@
             <div class="col-4">
             <p>®Prender</p>
             </div>
-        </footer>  
+        </footer>          
     </div>
     
 

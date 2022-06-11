@@ -10,163 +10,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prender</title>
     {% bootstrap_css %}
-    <link rel="stylesheet" href="{% static 'core/css/busqueda.css' %} ">
+    <link rel="stylesheet" href="{% static 'core/css/nuestroestilo.css' %} ">
+    <link rel="icon" type="image/png" href="{% static 'core/img/mini-flecha.png' %}" />
 </head>
 <body>
     <div class="container-fluid">
-<!--Nav-->
+      <div class="allButFooter">
         <nav class="row" id="navi">
-            <div class="col">
-                <nav class="navbar navbar-expand-lg navbar-light">
-                    <img src="{% static 'core/img/logo-prender.png' %}" height="45px" class="navbar-brand" alt="">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav mr-auto">    
-                            <li class="nav-item active ">
-                                <a class="nav-link" href="{% url 'index' %}">Inicio <span class="sr-only">(current)</span></a> 
-                            </li>                         
-                            <li class="nav-item">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                                      Categorias
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <a class="dropdown-item" href="#">Action</a>
-                                      <a class="dropdown-item" href="#">Another action</a>
-                                      <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
-                                  </div>
-                            </li>                            
-                            <li class="nav-item">
-                                <div class="input-group mb-3">
-                                    <form class="form-inline my-2 my-lg-0">
-                                        <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-                                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
-                                      </form>
+          <div class="col">
+              <nav class="navbar navbar-expand-lg navbar-light">
+                  <img src="{% static 'core/img/logo-prender.png' %}" height="45px" class="navbar-brand" alt="">
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                      <ul class="navbar-nav mr-auto">    
+                          <li class="nav-item active ">
+                              <a class="nav-link" href="{% url 'index' %}">Inicio <span class="sr-only">(current)</span></a> 
+                          </li>                         
+                          <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                                Categorias
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                  {% for n in categorias %}
+                                  <a class="dropdown-item" href="{% url 'busqueda_cate' n.id %}">{{ n.nom_categoria }}</a>
+                                  {% endfor %}
                                 </div>
-                                <!-- forma con icon -->
-                                <!-- <div class="input-group mb-3">
-                                    <input type="input" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                      <span class="input-group-text" id="basic-addon2"><i class="fas fa-search"></i></span>
-                                    </div>
-                                </div> -->
-                            </li>                                                    
-                        </ul>
-                        <div class="shopCart">
-                            <a href=""><i class="fas fa-shopping-cart" aria-hidden="true"></i></a>                            
-                        </div>
-                        <div class="reglog">
-                            <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-light">Login</button></a>
-                            <a href="{% url 'register' %}"><button type="button" class="btn btn-dark">Registrate</button></a>
-                        </div>                    
+                            </div>
+                          </li>                            
+                          <li class="nav-item">
+                            <div class="input-group mb-3">
+                              <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'busqueda' %} ">
+                                  <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" name="query" autocomplete="false">
+                                  <div class="control">
+                                      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
+                                  </div>
+                              </form>
+                            </div>
+                          </li>                                                    
+                      </ul>
+                      <div class="shopCart">
+                        <a href="{% url 'cart' %} ">
+                            <i class="fas fa-shopping-cart" aria-hidden="true">
+                                {% if cart %} ({{ cart|length }}) {% endif %}
+                            </i>
+                        </a>                            
                     </div>
-                </nav>
-            </div>
-        </nav>
-        <br>
-        <br>
-        <br>
-<!--seccion destacados: carrusel con publicidad pagada-->
-
-<!--Recientes cards-->
-        <div class="titulo-seccion">
-            <div class="row">
-                <h1>Descubre Nuevos Sabores!!</h1>
-            </div>
-            <div class="row"></div>
-        </div>
-        <br>
-        <div class="card-group">
-            <div class="card">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-            <div class="card">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-            <div class="card">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                <a href="{% url 'producto' %}" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-            <div class="card">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                  <a href="{% url 'producto' %}" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-              <div class="card">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                  <a href="{% url 'producto' %}" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-              <div class="card">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                  <a href="{% url 'producto' %}" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
+                      <div class="reglog">
+                          <a href="{% url 'login' %}"><button type="button" class="btn btn-outline-light">Login</button></a>
+                          <a href="{% url 'register' %}"><button type="button" class="btn btn-dark">Registrate</button></a>
+                      </div>                    
+                  </div>
+              </nav>
           </div>
+        </nav>
+        <section>
+          <br>
+          <br>
+          <br>
+  <!--seccion destacados: carrusel con publicidad pagada-->
 
-<!--productos cards-->
-<!-- {% for n in producto %} -->
-<!-- <div class="row">
-    <div class="col-1"></div>
-    <div class="col">
-        <div class="card mb-3" style="max-width: 100%;">
-            <div class="row no-gutters">
-            <div class="col-md-4">
-                <img src="{{ n.imagen.url }}" height="100%" width="100%" alt="...">
+  <!--Recientes cards-->
+          <div class="titulo-seccion">
+              <div class="row">
+                <div class="col">
+                  <h1>Busqueda de sabores!</h1>
+                </div>                
+              </div>            
+          </div>
+          <br>
+          <div class="titulo-seccion">
+            <div class="row">
+              <div class="col" >
+                <h3> Palabra buscada: " {{ query }} "</h3>
+              </div>            
             </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                <h5 class="card-title">{{ n.titulo }}</h5>
-                <p class="card-text"> {{ n.cuerpo }}</p>
-                <a href="{% url 'notiId' n.noticia_id %}" class="btn btn-outline-dark">Leer más ...</a>
-                <p class="card-text"><small class="text-muted">{{ n.fecha }}</small></p>
+          </div>        
+          <br>
+          <br>
+          <div class="row espacio"></div>
+          <div class="row">
+            <div class="col-1"></div>
+            {% for n in productos %}
+            <div class="col-md-4 prod_espacio">
+                <div class="card mb-3" style="max-width: 100%; max-height: 100%;">
+                    <div class="row no-gutters">
+                        <img src="{{ n.imagen.url }}" class="card-img-top"  width="100%" alt="..."
+                        style="object-fit: cover;" >
+                        <div class="card-body">
+                        <h5 class="card-title">{{ n.nom_prod }}</h5>
+                        <p class="card-text"> {{ n.desc_prod }}</p>
+                        <h4 class="card-text"> ${{ n.valor_prod }} </h4>
+                        <a href="{% url 'producto' n.id %}" class="btn btn-outline-dark">Ver producto</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-1"></div>
-</div>
-<br> -->
-<!-- {% endfor %} -->
-        <br>
-        <br>
-        <div class="row espacio"></div>
-        <br>
-        <br>
-<!--footer-->
+            {% endfor %}
+            <div class="col-1"></div>
+          </div>
+          <br>
+          <br>
+        </section>
+      </div>
         <footer class="row">
             <div class="col-8">
               <span><p>Lleva tu emprendimiento al siguiente nivel en PRENDER</p></span>
@@ -175,6 +123,7 @@
               <p>®Prender</p>
             </div>
         </footer>
+      
     </div>
     
 

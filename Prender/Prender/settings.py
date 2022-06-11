@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+STRIPE_PUB_KEY = 'pk_test_51L7Sa6CTqw6mmZvRdBJeg6G8vKGkupEhucrV203PwMbPIJhKbIwG3rdIMC9e1uOhmA1FG31iavgy4q2VRNdOyqtG00Mby1S1i3'
+STRIPE_SECRET_KEY = 'sk_test_51L7Sa6CTqw6mmZvRsI7PpAFPybVmb1W3cDEzJRtpJ5bRbLmy3lmllH1wttqXXjqENcB8ly7TalwvcdTO0W5ekGNZ00cvN9Sfkn'
+
+SESSION_COOKIE_AGE = 86400
+CART_SESSION_ID ='cart'
 
 # Application definition
 
@@ -34,6 +39,7 @@ INSTALLED_APPS = [
     #mis apps
     'core',
     'rest_producto',
+    'cart',
     #terceros
     'bootstrap4',
     'crispy_forms', 
@@ -73,6 +79,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',
             ],
         },
     },

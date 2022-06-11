@@ -13,6 +13,9 @@ body{
 .allButFooter{
     min-height: calc(100vh - 80px);
 }
+a{
+    color: #000;
+}
 #logreg{
     display: flex;
     align-items: flex-end;
@@ -147,7 +150,7 @@ a .contac:hover{
     margin: 0 0 0 50px;
     left: 0;
     right: 0;
-    top: 30%;
+    top: 20%;
     text-align: left;
     width: 50%;
     height: 28%;
@@ -206,6 +209,25 @@ a .contac:hover{
     padding: 10px;
     background-color: #fff !important;
     color: #000 !important;
+}
+.arrow{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.arrow a{
+    padding: 20px;
+    background-color: #f69a40 !important;
+    color: #fff !important;
+    border-radius: 8px;
+    
+}
+.arrow a:hover{
+    padding: 18px;
+    background-color: #4f4f4f !important;
+    border: solid #4f4f4f;
+    border-radius: 8px;
+    color: #4f4f4f;
 }
 .alHome{
     padding-top: 17px;

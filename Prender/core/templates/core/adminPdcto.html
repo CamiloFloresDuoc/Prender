@@ -11,6 +11,7 @@
     <title>Prender</title>
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'core/css/emprendedor.css' %} ">
+    <link rel="icon" type="image/png" href="{% static 'core/img/mini-flecha.png' %}" />
 </head>
 <body>
     <div class="container-fluid">
@@ -37,7 +38,7 @@
                                           <a class="dropdown-item" href="{% url 'emprendedor' %}">Perfil</a>
                                           <a class="dropdown-item" href="{% url 'inventario' %} ">Inventario</a>
                                           <a class="dropdown-item" href="#">Balance</a>
-                                          <a class="dropdown-item" href="#">Recetas</a>
+                                          <a class="dropdown-item" href="{% url 'recetas' %}">Recetas</a>
                                           <a class="dropdown-item" href="{% url 'editarPerfilEmp' user.id %} ">Editar perfil</a>
                                         </div>
                                       </div>

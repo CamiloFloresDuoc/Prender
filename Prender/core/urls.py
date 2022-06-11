@@ -1,8 +1,9 @@
 from ast import Index
 from cgi import test
 from django.urls import path
-from .views import (aTienda, adminPdcto, agInventario, agReceta, busqueda, carrito, comprador, comprador_register, crearPerfil, editInventario, editarReceta, eliminarDelInventario, eliminarReceta, 
-emprendedor_register, editarPdcto, eliminarPdcto, emprendedor, empPublico, gestionEmp, 
+from .views import (aTienda, adminPdcto, administrador1, agInventario, agReceta, busqueda, busqueda_cate, comprador, comprador_register, 
+crearPerfil, editInventario, editarReceta, eliminarDelInventario, eliminarMsj, eliminarReceta, eliminarUsuario, empPedidos, 
+emprendedor_register, editarPdcto, eliminarPdcto, emprendedor, empPublico, 
 index, ingPdcto, inventario, login_request, logout_view, producto, recetas, regCompras, register,
 editarPerfilEmp, verReceta
 )
@@ -16,17 +17,20 @@ urlpatterns = [
     path('comprador_register/', comprador_register.as_view(), name="comprador_register"),
     path('emprendedor_register/', emprendedor_register.as_view(), name="emprendedor_register"),
     path('producto/<id>/', producto, name="producto"),
-    path('carrito/', carrito, name="carrito"),
     path('emprendedor/', emprendedor, name="emprendedor"),
     path('comprador/', comprador, name="comprador"),
+    path('administrador1/', administrador1, name="administrador1"),
     path('ingPdcto/', ingPdcto, name="ingPdcto"),
-    path('gestionEmp/', gestionEmp, name="gestionEmp"),
     path('regCompras', regCompras, name="regCompras"),
     path('busqueda/', busqueda, name="busqueda"),
+    path('busqueda_cate/<id>', busqueda_cate, name="busqueda_cate"),
     path('empPublico/', empPublico, name="empPublico"),
+    path('empPedidos/', empPedidos, name="empPedidos"),
     path('adminPdcto/', adminPdcto, name="adminPdcto"),
     path('editarPdcto/<id>/', editarPdcto, name="editarPdcto"),
     path('eliminarPdcto/<id>/', eliminarPdcto, name="eliminarPdcto"),
+    path('eliminarUsuario/<id>/', eliminarUsuario, name="eliminarUsuario"),
+    path('eliminarMsj/<id>/', eliminarMsj, name="eliminarMsj"),
     path('eliminarDelInventario/<id>/', eliminarDelInventario, name="eliminarDelInventario"),
     path('eliminarReceta/<id>/', eliminarReceta, name="eliminarReceta"),
     path('editarPerfilEmp/<id>/', editarPerfilEmp, name="editarPerfilEmp"),

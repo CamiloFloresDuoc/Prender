@@ -1,0 +1,195 @@
+{% load static %}
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prender</title>
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'core/css/emprendedor.css' %} ">
+    <link rel="icon" type="image/png" href="{% static 'core/img/mini-flecha.png' %}" />
+</head>
+<body>
+    <div class="container-fluid">
+<!--Nav-->
+        <div class="allButFooter">
+            <nav class="row" id="navi">
+                <div class="col">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <img src="{% static 'core/img/logo-prender.png' %}" height="45px" class="navbar-brand" alt="">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav mr-auto">  
+                                <li class="nav-item alHome">
+                                    <a class="nav-link" href="{% url 'index' %}">Inicio <span class="sr-only">(current)</span></a> 
+                                </li>                                                
+                            </ul>
+                            {% if user.is_authenticated %}
+                                <div id="nomUser">
+                                    <h6>Hola administrador {{ user.username }}</h6>
+                                </div>
+                            {% endif %}
+                            <div class="reglog">                                
+                                <a href="{% url 'logout' %}"><button type="button" class="btn btn-dark">Cerrar Sesión</button></a>
+                            </div>                    
+                        </div>
+                    </nav>
+                </div>
+            </nav>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+    <!-- admin productos -->
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col">
+                    <h1>Usuarios</h1>
+                </div>
+                <div class="col-1"></div>
+            </div>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-10">
+
+                    <table class="table table-hover">
+                        <tr>
+                            <td>Nombre</td>
+                            <td>Apellido</td>
+                            <td>Email</td>
+                            <td>Admin</td>
+                            <td>Emprendedor</td>
+                            <td>Comprador</td>                            
+                        </tr>
+                        {% for n in usuarios %}
+                        <tr> 
+                            <td>{{ n.nombre }} </td>
+                            <td>{{ n.apellido }} </td>
+                            <td>{{ n.email }} </td>                           
+                            <td>{{ n.is_admin}}  </td>
+                            <td>{{ n.is_emprendedor}}  </td>
+                            <td>{{ n.is_comprador }} </td>                            
+                            <td>
+                                <a href="" class='btn btn-secondary'>Contactar</a>
+                                <a href="{% url 'eliminarUsuario' n.id %}" class='btn btn-danger'>Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <br>
+                    <br>
+                </div>
+                <div class="col"></div>
+            </div>
+            <hr><br>
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col">
+                    <h1>Productos</h1>
+                </div>
+                <div class="col-1"></div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-10">
+
+                    <table class="table table-hover">
+                        <tr>
+                            <td>Imagen</td>
+                            <td>Nombre Producto</td>
+                            <td>Descripcion</td>
+                            <td>Precio</td>
+                            <td>Acción</td>
+                        </tr>
+                        {% for n in productos %}
+                        <tr>                            
+                            <td><img src="{{ n.imagen.url }} " height="60px" width="80px" alt="">  </td>
+                            <td>{{ n.nom_prod }} </td>
+                            <td>{{ n.desc_prod }} </td>
+                            <td>${{ n.valor_prod }} </td>
+                            <td>
+                                <a href="{% url 'eliminarPdcto' n.id %}" class='btn btn-danger'>Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <br>
+                    <br>
+                </div>
+                <div class="col"></div>
+            </div>
+            <hr><br>
+            <!-- contacto -->
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col">
+                    <h1>Mensajes</h1>
+                </div>
+                <div class="col-1"></div>
+            </div>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-10">
+
+                    <table class="table table-hover">
+                        <tr>
+                            <td>Nombre</td>
+                            <td>Email</td>
+                            <td>Asunto</td>
+                            <td>Mensaje</td> 
+                            <td>Acción</td>                           
+                        </tr>
+                        {% for n in mensajes %}
+                        <tr> 
+                            <td>{{ n.nombre }} </td>
+                            <td>{{ n.correo }} </td>                           
+                            <td>{{ n.asunto}}  </td>
+                            <td>{{ n.mensaje}}  </td>                          
+                            <td>
+                                <a href="" class='btn btn-secondary'>Contactar</a>
+                                <a href="{% url 'eliminarUsuario' n.id %}" class='btn btn-danger'>Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <br>
+                    <br>
+                </div>
+                <div class="col"></div>
+            </div>
+            
+                <br>
+                <br>
+                <br>
+                
+        </div>
+
+<!--footer-->
+        <footer class="row">
+            <div class="col-8">
+            <span><p>Lleva tu emprendimiento al siguiente nivel en PRENDER</p></span>
+            </div>
+            <div class="col-2">
+            <p>®Prender</p>
+            </div>
+        </footer>
+    </div>
+    
+    
+    
+
+
+    {% bootstrap_javascript jquery='full' %}
+    <script src="{% static 'core/js/validacionFormIndex.js'%}"></script>
+
+
+</body>
+</html>
