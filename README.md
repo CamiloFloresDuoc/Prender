@@ -11,6 +11,8 @@ pip install django-crispy-forms
 
 -m pip install bootstrap4
 
+pip install django-bootstrap4
+
 pip install psycopg2-binary
 
 sudo apt-get install libpq-dev
