@@ -33,6 +33,16 @@ STRIPE_SECRET_KEY = 'sk_test_51L7Sa6CTqw6mmZvRsI7PpAFPybVmb1W3cDEzJRtpJ5bRbLmy3l
 SESSION_COOKIE_AGE = 86400
 CART_SESSION_ID ='cart'
 
+#mail sender
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'prender.soporte@gmail.com'
+EMAIL_HOST_PASSWORD = 'qbnnfbnuvgmxmuvs'
+DEFAULT_EMAIL_FROM = 'Prender <prender.soporte@gmail.com>'
+
 # Application definition
 
 INSTALLED_APPS = [

@@ -8,7 +8,9 @@ from django.shortcuts import render, redirect
 from .cart import Cart
 from .forms import CheckoutForm
 
-from core.utilities import checkout
+from core.utilities import checkout, notify_customer, notify_vendor
+
+
 
 def cart_detalle(request):
 
@@ -40,7 +42,11 @@ def cart_detalle(request):
                 order = checkout(request, nombre, apellido, email, numero_telefono, direccion, comuna, cart.get_total_cost())
                 cart.clear()
 
+                notify_customer(order)
+                notify_vendor(order)
+
                 return redirect('success')
+                
             except Exception:
                 traceback.print_exc()
                 messages.error(request, 'Algo fallo con el pago')

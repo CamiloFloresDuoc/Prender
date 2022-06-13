@@ -5,8 +5,6 @@
 
 18.- mesajes al cliente 
 
-19.- hacer reporte
-
 para reseñas generar modelo y llamar un crud desde registro de compras para dejar una reseña 
 
 ver si se agrega disponibilidad de producto por stock 
