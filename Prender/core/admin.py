@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Comprador, Emprendedor, Administrador, Contacto, Order, OrderItem, Region, Comuna
+from .models import User, Comprador, Emprendedor, Administrador, Contacto, Order, OrderItem, Region, Comuna, Categoria
 
 
 # Register your models here. todos!
@@ -15,3 +15,5 @@ admin.site.register(Order)
 admin.site.register(OrderItem)
 admin.site.register(Region)
 admin.site.register(Comuna)
+admin.site.register(Categoria)
+
