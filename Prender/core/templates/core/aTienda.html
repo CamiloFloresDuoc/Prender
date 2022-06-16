@@ -40,7 +40,7 @@
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="{% url 'adminPdcto' %}">Administrar Productos</a>
                                         <a class="dropdown-item" href="{% url 'inventario' %}">Inventario</a>
-                                        <a class="dropdown-item" href="#">Balance</a>
+                                        <a class="dropdown-item" href="{% url 'empPedidos' %}">Balance</a>
                                         <a class="dropdown-item" href="{% url 'recetas' %}">Recetas</a>
                                         <a class="dropdown-item" href="{% url 'editarPerfilEmp' user.id %} ">Editar perfil</a>
                                         </div>
@@ -71,11 +71,11 @@
     <!--perfil emprendedor-->
     <!-- cabecera -->
             <div class="row">
-                <div class="col-md-4">  
-                    <img src="{{ perfil.foto_perf.url }}" height="300px" width="500px" style="object-fit: cover;" alt="">
+                <div class="col-md-3">  
+                    <img src="{{ perfil.foto_perf.url }}" height="250px" width="mr-auto" style="object-fit: cover;" alt="">
                 </div>
-                <div class="col-md-1" style="min-width: 100px;"></div>
-                <div class="col-md-7">                      
+                <div class="col-md-0.5" style="min-width: 100px;"></div>
+                <div class="col-md-8">                      
                     <br>          
                     <h1 id="nomTienda" data-placeholder='Nombre tienda'>{{ perfil.nom_tienda }}</h1>  
                     <br>

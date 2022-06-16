@@ -151,12 +151,12 @@ a .contac:hover{
 #leban .text{
     position: absolute;
     z-index: 99;
-    margin: 0 0 0 50px;
+    margin: 2em 1em 0 2em;
     left: 0;
     right: 0;
-    top: 20%;
+    top: 15%;
     text-align: left;
-    width: 50%;
+    width: 60%;
     height: 28%;
 }
 #leban .p1{

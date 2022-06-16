@@ -1,15 +1,4 @@
 
-14.- boton eliminar cuenta 
-
-16.- recuperar contraseña? mailto? / tambien para responder mensajes 
-
-18.- mesajes al cliente 
-
-para reseñas generar modelo y llamar un crud desde registro de compras para dejar una reseña 
-
-ver si se agrega disponibilidad de producto por stock 
-
-
 
 -- UNA VEZ IMPLEMENTADO POBLAR BD CON --
 
@@ -19,7 +8,7 @@ ver si se agrega disponibilidad de producto por stock
 - hacer minimo unas 5 tiendas (emprendedor) y 2 compradores
 - productos minimo 6 por tienda, con descripciones reales
 
-
+****emprendedor cambiarle las columnas a  las de atienda
 
 
 --STRIPE

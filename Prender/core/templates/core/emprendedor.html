@@ -68,15 +68,15 @@
     <!--perfil emprendedor-->
     <!-- cabecera -->
             <div class="row">
-                <div class="col-md-4">  
+                <div class="col-md-3">  
                         {% for n in perfil %}
                             {% if n.user_id == user.id %}
-                                <img src="{{ n.foto_perf.url }}" height="300px" width="500px" style="object-fit: cover;" alt="">
+                                <img src="{{ n.foto_perf.url }}" height="250px" width="mr-auto" style="object-fit: cover;display: flex; align-items: center; justify-content: center;" alt="">
                             {% endif %}
                         {% endfor %}
                 </div>
-                <div class="col-md-1" style="min-width: 10px;"></div>
-                <div class="col-md-7">                      
+                <div class="col-md-0.5" style="min-width: 100px;"></div>
+                <div class="col-md-8">                      
                     <br>
                     {% for n in perfil %}
                         {% if n.user_id == user.id %}                
