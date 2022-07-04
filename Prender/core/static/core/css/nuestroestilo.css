@@ -165,7 +165,7 @@ a .contac:hover{
     padding: 5px;
     background-color: #f69a40;
     color: black;
-    font-size: 30px;
+    font-size: 1.8em;
     font-weight: bold;
     font-style: italic;
 }
@@ -173,7 +173,7 @@ a .contac:hover{
     padding: 5px;
     background-color: #f69a40;
     color: black;
-    font-size: 18px;
+    font-size: 1.125em;
     font-weight: bold;
     font-style: italic;
 }
