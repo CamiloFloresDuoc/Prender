@@ -100,10 +100,10 @@
                     <img class="baner" src="{% static 'core/img/banner-prender34.jpg' %}" class="img-fluid" alt="..." 
                     style="position:relative;margin-left: 0px;margin-right: 0px; object-fit: cover;">
                 </div>
-                <div class="text ">
-                    <p class="p1" style="min-width: 414px;">Mejora la exposición de tu emprendimiento gastronómico</p>
+                <div class="text">
+                    <p class="p1" style="min-width: 250px;">Mejora la exposición de tu emprendimiento gastronómico</p>
                     <br>
-                    <p class="p2" style="min-width: 300px;">Te entregamos herramientas para la gestión de tu negocio</p>
+                    <p class="p2" style="min-width: 150px;">Te entregamos herramientas para la gestión de tu negocio</p>
                 </div>
             </div>
             
@@ -130,7 +130,9 @@
                             <div class="card-body">
                             <h5 class="card-title">{{ n.nom_prod }}</h5>
                             <p class="card-text"> {{ n.desc_prod }}</p>
+                            {% if user.is_authenticated %}                                            
                             <h4 class="card-text"> ${{ n.valor_prod }} </h4>
+                            {% endif %}
                             <a href="{% url 'producto' n.id %}" class="btn btn-outline-dark">Ver producto</a>
                             </div>
                         </div>

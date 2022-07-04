@@ -102,7 +102,9 @@
                         <div class="card-body">
                         <h5 class="card-title">{{ n.nom_prod }}</h5>
                         <p class="card-text"> {{ n.desc_prod }}</p>
+                        {% if user.is_authenticated %}                                            
                         <h4 class="card-text"> ${{ n.valor_prod }} </h4>
+                        {% endif %}
                         <a href="{% url 'producto' n.id %}" class="btn btn-outline-dark">Ver producto</a>
                         </div>
                     </div>

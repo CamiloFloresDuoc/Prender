@@ -1,4 +1,4 @@
-
+en el buscador el boton de login cambiarlo a si esta autenticado en el de cate y en el de busqueda prod
 
 -- UNA VEZ IMPLEMENTADO POBLAR BD CON --
 

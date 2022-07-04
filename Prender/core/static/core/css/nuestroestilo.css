@@ -5,6 +5,8 @@
     margin: 0;
 }
 html{
+    padding: 0;
+    margin: 0;
     scroll-behavior: smooth;
 }
 body{
@@ -151,19 +153,19 @@ a .contac:hover{
 #leban .text{
     position: absolute;
     z-index: 99;
-    margin: 2em 1em 0 2em;
+    margin: 2em 2em 0 1em;
     left: 0;
     right: 0;
-    top: 15%;
+    top: 20%;
     text-align: left;
-    width: 60%;
+    width: 50%;
     height: 28%;
 }
 #leban .p1{
     padding: 5px;
     background-color: #f69a40;
     color: black;
-    font-size: 48px;
+    font-size: 30px;
     font-weight: bold;
     font-style: italic;
 }
@@ -171,7 +173,7 @@ a .contac:hover{
     padding: 5px;
     background-color: #f69a40;
     color: black;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
     font-style: italic;
 }
